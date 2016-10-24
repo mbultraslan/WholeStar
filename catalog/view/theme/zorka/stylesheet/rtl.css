@@ -1,0 +1,245 @@
+/*********************************
+RIGHT TO LEFT support
+/*********************************/
+/*----------------------
+Combo CSS
+----------------------*/
+.text-left {
+  text-align: start !important;
+}
+.text-right {
+  text-align: end !important;
+}
+.radio input[type=radio],
+.radio-inline input[type=radio],
+.checkbox input[type=checkbox],
+.checkbox-inline input[type=checkbox] {
+  float: right;
+  margin-left: 0;
+  margin-right: -20px;
+}
+/*----------------------
+Elements
+----------------------*/
+.row-heading:before {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.modal .close {
+  float: left;
+}
+.form-horizontal .control-label {
+  text-align: end;
+}
+#notification {
+  right: auto;
+  left: 20px;
+}
+.alert button.close {
+  right: auto;
+  left: 15px;
+}
+/*--------------------------------------------------------------
+Header Block
+--------------------------------------------------------------*/
+.extra span:after {
+  margin-left: 0;
+  margin-right: 5px;
+}
+.extra .dropdown-toggle.open span,
+.extra .dropdown-toggle:hover span,
+.extra .dropdown-toggle:focus span {
+  -webkit-transform: translate(-10px, 0);
+  -moz-transform: translate(-10px, 0);
+  -ms-transform: translate(-10px, 0);
+  -o-transform: translate(-10px, 0);
+}
+.extra .dropdown-toggle.open span:after,
+.extra .dropdown-toggle:hover span:after,
+.extra .dropdown-toggle:focus span:after {
+  -webkit-transform: translate(-20px, 0);
+  -moz-transform: translate(-20px, 0);
+  -ms-transform: translate(-20px, 0);
+  -o-transform: translate(-20px, 0);
+}
+.extra .dropdown-menu {
+  right: 0;
+}
+#search .button-search:before {
+  right: auto;
+  left: 1px;
+}
+@media only screen and (min-width: 992px) {
+  #search {
+    right: auto;
+    left: 15px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  #search .kf_search {
+    background-position: 3% center;
+  }
+}
+/*--------------------------------------------------------------
+LEFT - RIGHT COLUMN
+--------------------------------------------------------------*/
+.side-bar .box-heading:before {
+  margin-right: 0;
+  margin-left: 10px;
+}
+/*--------------------------------------------------------------
+Navigation Block
+--------------------------------------------------------------*/
+@media (max-width: 992px) {
+  #btn-mobile-toggle:after {
+    content: '\f104';
+    right: auto;
+    left: 15px;
+  }
+  #btn-mobile-toggle.expand:after {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+  }
+  .main-nav__item .btn-expand-menu {
+    right: auto;
+    left: 0;
+  }
+}
+/*--------------------------------------------------------------
+TOPBAR BLOCK
+--------------------------------------------------------------*/
+@media only screen and (min-width: 992px) {
+  .mini-cart__info {
+    left: 0;
+    right: auto;
+  }
+}
+/*--------------------------------------------------------------
+Kuler Showcase Module
+--------------------------------------------------------------*/
+.kuler-showcase-module .nav span {
+  right: auto;
+  left: 35px;
+}
+.kuler-showcase-module .nav span.prev {
+  right: auto;
+  left: 0px;
+}
+.kuler-showcase-module .tab-heading span:before,
+.kuler-showcase-module .tab-heading span:after {
+  left: auto;
+  right: 0;
+}
+.kuler-showcase-module .tab-heading span:after {
+  margin-left: 0;
+  margin-right: 5px;
+}
+.kuler-showcase-module .tab-heading span:hover:before,
+.kuler-showcase-module .tab-heading span.active:before {
+  -webkit-transform: translate(-10px, 0);
+  -moz-transform: translate(-10px, 0);
+  -ms-transform: translate(-10px, 0);
+  -o-transform: translate(-10px, 0);
+}
+.kuler-showcase-module .tab-heading span:hover:after,
+.kuler-showcase-module .tab-heading span.active:after {
+  -webkit-transform: translate(-30px, 0);
+  -moz-transform: translate(-30px, 0);
+  -ms-transform: translate(-30px, 0);
+  -o-transform: translate(-30px, 0);
+}
+/*-------------------------------------
+KULER BLOG
+-------------------------------------*/
+.blog-feed {
+  right: auto;
+  left: 15px;
+}
+.article [class*="col-"]:first-child {
+  padding-left: 15px;
+  padding-right: 0;
+}
+.article-image {
+  float: right;
+  margin-right: 0;
+  margin-left: 10px;
+}
+.article__extra-info time,
+.article__extra-info a {
+  margin-right: 0;
+  margin-left: 5px;
+}
+.article__extra-info span:before,
+.article__extra-info time:before {
+  margin-right: 0;
+  margin-left: 15px;
+}
+.related-articles ul {
+  float: right !important;
+  margin-right: 0;
+  margin-left: 20px;
+}
+.comment .avatar {
+  float: right !important;
+}
+.comment .author,
+.comment .message {
+  margin-left: 0 !important;
+  margin-right: 130px !important;
+}
+.comment .date {
+  margin-left: 0 !important;
+  margin-right: 30px !important;
+}
+.reply-list {
+  margin-left: 0;
+  margin-right: 75px;
+}
+.side-bar .article__image {
+  float: right;
+  margin-right: 0;
+  margin-left: 10px;
+}
+.kbm-category .treemenu > li:before {
+  margin-right: 0;
+  margin-left: 10px;
+}
+/*--------------------------------------------
+Box category
+----------------------------------------------*/
+.box-category__item > .toggle {
+  float: right;
+  margin-right: 0;
+  margin-left: 10px;
+}
+/*--------------------------------------------------------------
+Kuler Live Search
+--------------------------------------------------------------*/
+@media only screen and (min-width: 992px) {
+  .live-search-container .dropdown-menu {
+    left: 0 !important;
+    right: auto;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .live-search-container.open .button-search:before,
+  .live-search-container:hover .button-search:before {
+    -webkit-transform: translate(400px, 0);
+    -moz-transform: translate(400px, 0);
+    -ms-transform: translate(400px, 0);
+    -o-transform: translate(400px, 0);
+  }
+}
+#search-close {
+  right: auto;
+  left: -15px;
+}
+/** Boxed Style **/
+.boxed #search-close {
+  right: auto;
+  left: -7px;
+}
+/*# sourceMappingURL=rtl.css.map */

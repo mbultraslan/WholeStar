@@ -1,0 +1,100 @@
+<modification>
+	<id>SEO Mega KIT - Microdata</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="after"><![CDATA[$this->model_catalog_product->getProduct($product_id);]]></search>
+			<add><![CDATA[
+				if( $product_info && $this->config->get( 'smp_at_is_install' ) ) {
+					$data['smp_is_product']	= true;
+					$data['smp_in_stock']	= $product_info['quantity'] ? true : false;
+					$data['smp_reviews']	= (int)$product_info['reviews'];
+					$data['smp_currency']	= version_compare( VERSION, '2.2.0.0', '>=' ) ? $this->session->data['currency'] : $this->currency->getCode();
+				}
+			]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');]]></search>
+			<add><![CDATA[$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'] . ( $this->config->get( 'smp_c_short_product_urls' ) ? '&path=0' : '' ) ), 'canonical');]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $content_top; ?>]]></search>
+			<add><![CDATA[
+				<?php echo $content_top; ?>
+				
+				<?php if( ! empty( $smp_is_product ) ) { ?>
+					<span itemscope itemtype="http://schema.org/Product">
+						<meta itemprop="name" content="<?php echo htmlspecialchars( str_replace( '&amp;', '&', $heading_title ), ENT_QUOTES ); ?>">
+
+						<?php if( ! empty( $breadcrumb ) ) { ?>
+							<meta itemprop="url" content="<?php echo htmlspecialchars( $breadcrumb['href'], ENT_QUOTES ); ?>">
+						<?php } ?>
+
+						<?php if( ! empty( $model ) ) { ?>
+							<meta itemprop="model" content="<?php echo htmlspecialchars( $model, ENT_QUOTES ); ?>">
+						<?php } ?>
+
+						<?php if( ! empty( $manufacturer ) ) { ?>
+							<meta itemprop="manufacturer" content="<?php echo htmlspecialchars( $manufacturer, ENT_QUOTES ); ?>">
+						<?php } ?>
+
+						<span itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+							<meta itemprop="price" content="<?php if( ! empty( $special ) ) { echo preg_replace( '/[^0-9.]/', '', $special ); } else { echo preg_replace( '/[^0-9.]/', '', $price ); } ?>">
+							<meta itemprop="priceCurrency" content="<?php echo $smp_currency; ?>">
+							<link itemprop="availability" href="http://schema.org/<?php if( $smp_in_stock ) { ?>InStock<?php } else { ?>OutOfStock<?php } ?>">
+						</span>
+
+						<?php if( $review_status && $smp_reviews ) { ?>
+							<span itemscope itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating">
+								<meta itemprop="reviewCount" content="<?php echo $smp_reviews; ?>">
+								<meta itemprop="ratingValue" content="<?php echo $rating; ?>">
+								<meta itemprop="bestRating" content="5">
+								<meta itemprop="worstRating" content="1">
+							</span>
+						<?php } ?>
+
+						<?php if( $thumb ) { ?>
+							<meta itemprop="image" content="<?php echo $thumb; ?>">
+						<?php } ?>
+
+						<?php foreach( $images as $image ) { ?>
+							<meta itemprop="image" content="<?php echo $image['popup']; ?>">
+						<?php } ?>
+					</span>
+				<?php } ?>
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/*/*.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $content_top; ?>]]></search>
+			<add><![CDATA[
+				<?php echo $content_top; ?>
+				
+				<?php if( ! empty( $breadcrumbs ) && is_array( $breadcrumbs ) ) { ?>
+					<ul style="display:none;">
+						<?php foreach( $breadcrumbs as $breadcrumb ) { ?>
+							<?php if( NULL != ( $smk_title = strip_tags( $breadcrumb['text'] ) ) ) { ?>
+								<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+									<a href="<?php echo $breadcrumb['href']; ?>" itemprop="url"><span itemprop="title"><?php echo strip_tags( $breadcrumb['text'] ); ?></span></a>
+								</li>
+							<?php } ?>
+						<?php } ?>
+					</ul>
+				<?php } ?>
+			]]>
+			</add>
+		</operation>
+	</file>
+
+</modification>

@@ -1,0 +1,355 @@
+<modification>
+	<id>SEO Mega KIT - Products - Titles Generator</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+	
+	<!-- // BACKEND //////////////////////////////////////////////////////// -->
+
+	<!-- Language -->
+	<file name="admin/language/*/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[<?php]]></search>
+			<add><![CDATA[
+				$_['entry_smp_seo_h1_title'] = 'SEO Heading Title:';
+				$_['entry_smp_alt_images'] = 'SEO ALT Images:';
+				$_['entry_smp_title_images'] = 'SEO Title Images:';
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Product -->
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-meta-description<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>]]></search>
+			<add><![CDATA[
+					<label class="col-sm-2 control-label" for="input-smp-seo-h1-title<?php echo $language['language_id']; ?>"><?php echo $entry_smp_seo_h1_title; ?></label>
+					<div class="col-sm-10">
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_h1_title-src]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_h1_title']) ? $product_description[$language['language_id']]['smp_h1_title'] : ''; ?>"
+						/>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_h1_title-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_h1_title_ag']) ? $product_description[$language['language_id']]['smp_h1_title_ag'] : ''; ?>"
+						/>
+						
+						<input 
+							type="text" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_h1_title]" 
+							class="form-control"
+							placeholder="<?php echo $entry_smp_seo_h1_title; ?>"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_h1_title']) ? $product_description[$language['language_id']]['smp_h1_title'] : ''; ?>" />
+							
+							
+						
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][tag-src]"
+							value="<?php echo isset($product_description[$language['language_id']]['tag']) ? $product_description[$language['language_id']]['tag'] : ''; ?>"
+						/>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][tag-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['tag_ag']) ? $product_description[$language['language_id']]['tag_ag'] : ''; ?>"
+						/>
+						
+						<textarea 
+							style="display:none" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_description-src]"
+						><?php echo isset($product_description[$language['language_id']]['meta_description']) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_description-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['meta_description_ag']) ? $product_description[$language['language_id']]['meta_description_ag'] : ''; ?>"
+						/>
+						
+						<textarea 
+							style="display:none" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_keyword-src]"
+						><?php echo isset($product_description[$language['language_id']]['meta_keyword']) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_keyword-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['meta_keyword_ag']) ? $product_description[$language['language_id']]['meta_keyword_ag'] : ''; ?>"
+						/>
+						
+						<textarea 
+							style="display:none" 
+							name="product_description[<?php echo $language['language_id']; ?>][description-src]"
+						><?php echo isset($product_description[$language['language_id']]['description']) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][description-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['description_ag']) ? $product_description[$language['language_id']]['description_ag'] : ''; ?>"
+						/>
+				
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_title-src]"
+							value="<?php echo isset($product_description[$language['language_id']]['meta_title']) ? $product_description[$language['language_id']]['meta_title'] : ''; ?>"
+						/>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][meta_title-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['meta_title_ag']) ? $product_description[$language['language_id']]['meta_title_ag'] : ''; ?>"
+						/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-smp-alt-images<?php echo $language['language_id']; ?>"><?php echo $entry_smp_alt_images; ?></label>
+					<div class="col-sm-10">
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_alt_images-src]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_alt_images']) ? $product_description[$language['language_id']]['smp_alt_images'] : ''; ?>"
+						/>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_alt_images-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_alt_images_ag']) ? $product_description[$language['language_id']]['smp_alt_images_ag'] : ''; ?>"
+						/>
+							
+						<input 
+							type="text" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_alt_images]" 
+							class="form-control"
+							placeholder="<?php echo $entry_smp_alt_images; ?>"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_alt_images']) ? $product_description[$language['language_id']]['smp_alt_images'] : ''; ?>" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-smp-title-images<?php echo $language['language_id']; ?>"><?php echo $entry_smp_title_images; ?></label>
+					<div class="col-sm-10">
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_title_images-src]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_title_images']) ? $product_description[$language['language_id']]['smp_title_images'] : ''; ?>"
+						/>
+						<input 
+							type="hidden" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_title_images-ag]"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_title_images_ag']) ? $product_description[$language['language_id']]['smp_title_images_ag'] : ''; ?>"
+						/>
+							
+						<input 
+							type="text" 
+							name="product_description[<?php echo $language['language_id']; ?>][smp_title_images]" 
+							class="form-control"
+							placeholder="<?php echo $entry_smp_title_images; ?>"
+							value="<?php echo isset($product_description[$language['language_id']]['smp_title_images']) ? $product_description[$language['language_id']]['smp_title_images'] : ''; ?>" />
+					</div>
+				</div>
+				<div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[$data['entry_name'] = $this->language->get('entry_name');]]></search>
+			<add><![CDATA[
+				$data['entry_smp_seo_title'] = $this->language->get('entry_smp_seo_title');
+				$data['entry_smp_seo_h1_title'] = $this->language->get('entry_smp_seo_h1_title');
+				$data['entry_smp_alt_images'] = $this->language->get('entry_smp_alt_images');
+				$data['entry_smp_title_images'] = $this->language->get('entry_smp_title_images');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');]]></search>
+			<add><![CDATA[/* $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title'); */]]></add>
+		</operation>
+	</file>
+
+	<!-- Model -->
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA['meta_keyword'     => $result['meta_keyword'],]]></search>
+			<add><![CDATA[
+				'meta_title' => isset( $result['meta_title'] ) ? $result['meta_title'] : '',
+				'smp_h1_title' => isset( $result['smp_h1_title'] ) ? $result['smp_h1_title'] : '',
+				'smp_alt_images' => isset( $result['smp_alt_images'] ) ? $result['smp_alt_images'] : '',
+				'smp_title_images' => isset( $result['smp_title_images'] ) ? $result['smp_title_images'] : '',
+				
+				'meta_keyword_ag' => empty( $result['meta_keyword_ag'] ) ? '0' : '1',
+				'meta_description_ag' => empty( $result['meta_description_ag'] ) ? '0' : '1',
+				'meta_title_ag' => empty( $result['meta_title_ag'] ) ? '0' : '1',
+				'smp_h1_title_ag' => empty( $result['smp_h1_title_ag'] ) ? '0' : '1',
+				'tag_ag' => empty( $result['tag_ag'] ) ? '0' : '1',
+				'description_ag' => empty( $result['description_ag'] ) ? '0' : '1',
+				'smp_alt_images_ag' => empty( $result['smp_alt_images_ag'] ) ? '0' : '1',
+				'smp_title_images_ag' => empty( $result['smp_title_images_ag'] ) ? '0' : '1',
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[if (isset($data['product_store'])) {]]></search>
+			<add><![CDATA[
+				foreach ($data['product_description'] as $language_id => $value) {
+					$this->db->query("
+						UPDATE 
+							" . DB_PREFIX . "product_description 
+						SET 
+							meta_keyword_ag = '" . ( ! isset( $value['meta_keyword-src'] ) || $value['meta_keyword'] != $value['meta_keyword-src'] ? '0' : $value['meta_keyword-ag'] ) . "',
+							meta_description_ag = '" . ( ! isset( $value['meta_description-src'] ) || $value['meta_description'] != $value['meta_description-src'] ? '0' : $value['meta_description-ag'] ) . "',
+							meta_title_ag = '" . ( ! isset( $value['meta_title-src'] ) || $value['meta_title'] != $value['meta_title-src'] ? '0' : $value['meta_title-ag'] ) . "',
+							smp_h1_title_ag = '" . ( ! isset( $value['smp_h1_title-src'] ) || $value['smp_h1_title'] != $value['smp_h1_title-src'] ? '0' : $value['smp_h1_title-ag'] ) . "',
+							tag_ag = '" . ( ! isset( $value['tag-src'] ) || ! isset( $value['tag'] ) || $value['tag'] != $value['tag-src'] ? '0' : $value['tag-ag'] ) . "',
+							description_ag = '" . ( ! isset( $value['description-src'] ) || $value['description'] != $value['description-src'] ? '0' : $value['description-ag'] ) . "',
+							smp_alt_images_ag = '" . ( ! isset( $value['smp_alt_images-src'] ) || $value['smp_alt_images'] != $value['smp_alt_images-src'] ? '0' : $value['smp_alt_images-ag'] ) . "',
+							smp_title_images_ag = '" . ( ! isset( $value['smp_title_images-src'] ) || $value['smp_title_images'] != $value['smp_title_images-src'] ? '0' : $value['smp_title_images-ag'] ) . "',
+							url_alias_exists = '" . ( ! empty( $data['keyword'][$language_id] ) ? $language_id : 0 ) . "',
+							meta_title='" . $this->db->escape($value['meta_title']) . "', 
+							smp_h1_title='" . $this->db->escape($value['smp_h1_title']) . "',
+							smp_alt_images='" . $this->db->escape($value['smp_alt_images']) . "',
+							smp_title_images='" . $this->db->escape($value['smp_title_images']) . "'
+						WHERE
+							product_id = '" . (int)$product_id . "' AND language_id = '" . (int)$language_id . "'
+						"
+					);
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id . "'");]]></search>
+			<add><![CDATA[
+				$productBy = array();
+				
+				foreach( $this->db->query("
+					SELECT
+						*
+					FROM
+						" . DB_PREFIX . "product_related
+					WHERE
+						product_id = " . (int) $product_id . "
+					AND
+						smp_ag = '1'
+				")->rows as $row ) {
+					$productBy[] = $row['related_id'];
+				}
+				
+				foreach( $this->db->query("
+					SELECT
+						*
+					FROM
+						" . DB_PREFIX . "product_related
+					WHERE
+						related_id = " . (int) $product_id . "
+					AND
+						smp_ag = '1'
+				")->rows as $row ) {
+					$productBy[] = $row['product_id'];
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[SET product_id = '" . (int)$product_id . "', related_id = '" . (int)$related_id . "']]></search>
+			<add><![CDATA[SET product_id = '" . (int)$product_id . "', related_id = '" . (int)$related_id . "', smp_ag = '" . ( isset( $productBy ) && in_array( $related_id, $productBy ) ? '1' : '0' ) . "']]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[SET product_id = '" . (int)$related_id . "', related_id = '" . (int)$product_id . "']]></search>
+			<add><![CDATA[SET product_id = '" . (int)$related_id . "', related_id = '" . (int)$product_id . "', smp_ag = '" . ( isset( $productBy ) && in_array( $related_id, $productBy ) ? '1' : '0' ) . "']]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->cache->delete('product');]]></search>
+			<add><![CDATA[
+				if( in_array( __FUNCTION__, array( 'addProduct', 'editProduct' ) ) ) {
+					$this->db->query("
+						UPDATE
+							" . DB_PREFIX . "product p
+						SET
+							p.smp_related_products = (
+								SELECT
+									COUNT(*)
+								FROM
+									" . DB_PREFIX . "product_related r
+								WHERE
+									r.product_id = p.product_id
+							)
+						WHERE
+							p.product_id = " . (int) $product_id . "
+					");
+				}
+			]]></add>
+		</operation>
+	</file>
+	
+	<!-- // FRONTEND /////////////////////////////////////////////////////// -->
+
+	<!-- Controller -->
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->document->setTitle($product_info['meta_title']);]]></search>
+			<add><![CDATA[$this->document->setTitle(empty($product_info['meta_title'])?$product_info['name']:$product_info['meta_title']);]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$data['heading_title'] = $product_info['name'];]]></search>
+			<add><![CDATA[
+				$data['heading_title'] = empty( $product_info['smp_h1_title'] ) ? $product_info['name'] : $product_info['smp_h1_title'];
+				$data['smp_alt_images'] = isset( $product_info['smp_alt_images'] ) ? $product_info['smp_alt_images'] : '';
+				$data['smp_title_images'] = isset( $product_info['smp_title_images'] ) ? $product_info['smp_title_images'] : '';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file path="catalog/controller/" name="module/bestseller.php,module/latest.php,module/special.php,product/product.php,product/category.php,product/manufacturer.php,product/search.php" error="skip">
+		<operation>
+			<search position="after"><![CDATA['product_id'  => $result['product_id'],]]></search>
+			<add><![CDATA[
+				'smp_alt_images' => empty( $result['smp_alt_images'] ) ? '' : $result['smp_alt_images'],
+				'smp_title_images' => empty( $result['smp_title_images'] ) ? '' : $result['smp_title_images'],
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/module/featured.php">
+		<operation>
+			<search position="after"><![CDATA['product_id'  => $product_info['product_id'],]]></search>
+			<add><![CDATA[
+				'smp_alt_images' => empty( $product_info['smp_alt_images'] ) ? '' : $product_info['smp_alt_images'],
+				'smp_title_images' => empty( $product_info['smp_title_images'] ) ? '' : $product_info['smp_title_images'],
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Model -->
+	<file name="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search position="after"><![CDATA['product_id'       => $query->row['product_id'],]]></search>
+			<add><![CDATA[
+				'smp_h1_title' => isset( $query->row['smp_h1_title'] ) ? $query->row['smp_h1_title'] : '',
+				'smp_alt_images' => empty( $query->row['smp_alt_images'] ) ? '' : $query->row['smp_alt_images'],
+				'smp_title_images' => empty( $query->row['smp_title_images'] ) ? '' : $query->row['smp_title_images'],
+			]]></add>
+		</operation>
+	</file>
+	
+	<!-- View -->
+	<file path="catalog/view/theme/*/template/" name="product/search.tpl,product/category.tpl,product/manufacturer_info.tpl,product/special.tpl,module/bestseller.tpl,module/latest.tpl,module/special.tpl,module/featured.tpl" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[alt="<?php echo $product['name']; ?>"]]></search>
+			<add><![CDATA[alt="<?php echo empty( $product['smp_alt_images'] ) ? $product['name'] : $product['smp_alt_images']; ?>"]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[title="<?php echo $product['name']; ?>"]]></search>
+			<add><![CDATA[title="<?php echo empty( $product['smp_title_images'] ) ? $product['name'] : $product['smp_title_images']; ?>"]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[alt="<?php echo $heading_title; ?>"]]></search>
+			<add><![CDATA[alt="<?php echo empty( $smp_alt_images ) ? $heading_title : $smp_alt_images; ?>"]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[title="<?php echo $heading_title; ?>"]]></search>
+			<add><![CDATA[title="<?php echo empty( $smp_title_images ) ? $heading_title : $smp_title_images; ?>"]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[alt="<?php echo $product['name']; ?>"]]></search>
+			<add><![CDATA[alt="<?php echo empty( $product['smp_alt_images'] ) ? $product['name'] : $product['smp_alt_images']; ?>"]]></add>
+		</operation>
+	</file>
+
+</modification>

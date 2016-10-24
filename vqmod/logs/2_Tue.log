@@ -1,0 +1,52 @@
+---------- Date: 2016-08-02 16:18:37 ~ IP : 80.44.163.199 ----------
+REQUEST URI : /admin/index.php?route=module/ebay_channel/jobs_service&token=412b4d42565fdf9ff802eee6da38aa45&type=GET_ALL
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-02 18:01:01 ~ IP : 66.249.79.180 ----------
+REQUEST URI : /index.php?route=product/product&product_id=441
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/0_out_of_stock_for_options_v2000_to_v2011.xml
+   id        : Out of Stock for Options v2.0.0.0 to v2.0.1.1
+   version   : 
+   vqmver    : 
+   author    : GoGo OpenCart
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(1)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <input type="_radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" />
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-02 18:07:03 ~ IP : 66.249.79.180 ----------
+REQUEST URI : /index.php?route=product/search&tag=3/4%20Sleeve%20Frill%20Bardot%20Grey%20Bodysuit
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/_seo_mega_pack.xml
+   id        : SEO Mega KIT
+   version   : 2.0.0.0
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);
+
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+----------------------------------------------------------------------
+
+

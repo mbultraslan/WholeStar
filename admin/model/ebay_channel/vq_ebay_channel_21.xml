@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <id><![CDATA[Ebay Channel]]></id>
+    <code>eBay-channel</code>
+    <name>Ebay Channel</name>
+    <version>1.0</version>
+    <author>Corcodel Ion</author>
+    <link><![CDATA[http://www.opencart.com]]></link>
+
+
+    <file path="admin/model/sale/order.php">
+        <operation error="log">
+            <search>
+                <![CDATA[$order_query->row['user_agent']]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+				'ebay_buyer_user_id' => $order_query->row['ebay_buyer_user_id'],
+				'ebay_country' => $order_query->row['ebay_country'],
+				'ebay_state_or_province' => $order_query->row['ebay_state_or_province'],
+				'ebay_address_owner' => $order_query->row['ebay_address_owner'],
+				'ebay_paid_time' => $order_query->row['ebay_paid_time'],
+				'ebay_shipped_time' => $order_query->row['ebay_shipped_time'],
+				'ebay_order_status' => $order_query->row['ebay_order_status'],
+				'ebay_order_id' => $order_query->row['ebay_order_id'],
+				'ebay_payment_method' => $order_query->row['ebay_payment_method'],
+				'ebay_shipping_service' => $order_query->row['ebay_shipping_service'],
+				'ebay_amount_paid' => $order_query->row['ebay_amount_paid'],
+				'currency_code' => $order_query->row['currency_code'],
+
+			]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[CONCAT(o.firstname, ' ', o.lastname) AS customer]]>
+            </search>
+            <add position="replace">
+                <![CDATA[CONCAT(o.firstname, ' ', o.lastname) AS customer, ebay_order_id]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[if (!empty($data['filter_order_id'])) {]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+                    if (!empty($data['filter_order_source'])) {
+                       if ($data['filter_order_source'] == 1) {
+                           $sql .= " AND (ebay_order_id is NULL OR  ebay_order_id = '')";
+                       } else if ($data['filter_order_source'] == 2) {
+                           $sql .= " AND (ebay_order_id is not null AND  ebay_order_id <> '')";
+                       }
+                    }
+                ]]>
+            </add>
+        </operation>
+
+    </file>
+
+    <file path="admin/controller/sale/order.php">
+        <operation error="log">
+            <search>
+                <![CDATA[$this->model_setting_store->getStores()]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+				if (!empty($order_info)) {
+					$data['ebay_buyer_user_id'] = $order_info['ebay_buyer_user_id'];
+					$data['ebay_country'] = $order_info['ebay_country'];
+					$data['ebay_state_or_province'] = $order_info['ebay_state_or_province'];
+					$data['ebay_address_owner'] = $order_info['ebay_address_owner'];
+					$data['ebay_paid_time'] = $order_info['ebay_paid_time'];
+					$data['ebay_shipped_time'] = $order_info['ebay_shipped_time'];
+					$data['ebay_order_status'] = $order_info['ebay_order_status'];
+					$data['ebay_order_id'] = $order_info['ebay_order_id'];
+					$data['ebay_payment_method'] = $order_info['ebay_payment_method'];
+					$data['ebay_shipping_service'] = $order_info['ebay_shipping_service'];
+					$data['ebay_amount_paid'] = $order_info['ebay_amount_paid'] . ' ' . $order_info['currency_code'];
+				} else {
+					$data['ebay_buyer_user_id'] = '';
+					$data['ebay_country'] = '';
+					$data['ebay_state_or_province'] = '';
+					$data['ebay_address_owner'] = '';
+					$data['ebay_paid_time'] = '';
+					$data['ebay_shipped_time'] = '';
+					$data['ebay_order_status'] = '';
+					$data['ebay_order_id'] = '';
+					$data['ebay_payment_method'] = '';
+					$data['ebay_shipping_service'] = '';
+					$data['ebay_amount_paid'] = '';
+				}
+			]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[$data['ip'] = $order_info['ip'];]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+				if (!empty($order_info)) {
+					$data['ebay_buyer_user_id'] = $order_info['ebay_buyer_user_id'];
+					$data['ebay_country'] = $order_info['ebay_country'];
+					$data['ebay_state_or_province'] = $order_info['ebay_state_or_province'];
+					$data['ebay_address_owner'] = $order_info['ebay_address_owner'];
+					$data['ebay_paid_time'] = $order_info['ebay_paid_time'];
+					$data['ebay_shipped_time'] = $order_info['ebay_shipped_time'];
+					$data['ebay_order_status'] = $order_info['ebay_order_status'];
+					$data['ebay_order_id'] = $order_info['ebay_order_id'];
+					$data['ebay_payment_method'] = $order_info['ebay_payment_method'];
+					$data['ebay_shipping_service'] = $order_info['ebay_shipping_service'];
+					$data['ebay_amount_paid'] = $order_info['ebay_amount_paid'] . ' ' . $order_info['currency_code'];
+				} else {
+					$data['ebay_buyer_user_id'] = '';
+					$data['ebay_country'] = '';
+					$data['ebay_state_or_province'] = '';
+					$data['ebay_address_owner'] = '';
+					$data['ebay_paid_time'] = '';
+					$data['ebay_shipped_time'] = '';
+					$data['ebay_order_status'] = '';
+					$data['ebay_order_id'] = '';
+					$data['ebay_payment_method'] = '';
+					$data['ebay_shipping_service'] = '';
+					$data['ebay_amount_paid'] = '';
+				}
+			]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[$this->load->controller('payment/' . $order_info['payment_code'] . '/order');]]>
+            </search>
+            <add position="before">
+                <![CDATA[$content = false; if(!empty($order_info['payment_code'])) ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {]]>
+            </search>
+            <add position="before">
+                <![CDATA[$data['complete_sale_url'] = $this->url->link('module/ebay_channel/complete_sale', 'token=' . $this->session->data['token'], 'SSL');]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA['order_product_id' => $product['order_product_id'],]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+                'ebay_order_line_item_id' => $product['ebay_order_line_item_id'],
+                'ebay_transaction_id' => $product['ebay_transaction_id'],
+                'ebay_shipment_tracking_number' => $product['ebay_shipment_tracking_number'],
+			]]>
+            </add>
+        </operation>
+
+
+        <operation error="log">
+            <search>
+                <![CDATA[$data['order_products'][]]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+				'ebay_order_line_item_id' => $product['ebay_order_line_item_id'],
+				'ebay_shipment_tracking_number' => $product['ebay_shipment_tracking_number'],
+			]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA['order_id'      => $result['order_id'],]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+				  'order_source_type'      => ((isset($result['ebay_order_id']) && !empty($result['ebay_order_id']))? '<b style="color: green;">eBay</b>' : 'Local' ),
+			    ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[$data['sort_order'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=o.order_id' . $url, 'SSL');]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+				  if (isset($this->request->get['filter_order_source'])) {
+			        $url .= '&filter_order_source=' . $this->request->get['filter_order_source'];
+		          }
+			    ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search>
+                <![CDATA[$pagination->url = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+				  if (isset($this->request->get['filter_order_source'])) {
+			        $url .= '&filter_order_source=' . $this->request->get['filter_order_source'];
+		          }
+			    ]]>
+            </add>
+        </operation>
+
+
+        <operation error="log">
+            <search>
+                <![CDATA[$order_total = $this->model_sale_order->getTotalOrders($data);]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+				  if (isset($this->request->get['filter_order_source'])) {
+				      $data['filter_order_source'] = $this->request->get['filter_order_source'];
+				      $data['filter_order_source'] = $this->request->get['filter_order_source'];
+		          } else {
+			          $data['filter_order_source'] = 0;
+		          }
+			    ]]>
+            </add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/sale/order_info.tpl">
+        <operation error="log">
+            <search>
+                <![CDATA[<div class="row">]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+                 <?php if(!empty($ebay_order_id)) {?>
+                 <div class="col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> eBay Details</h3>
+                      </div>
+                      <table class="table">
+                          <tr>
+                            <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Order ID"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
+                            <td><?php echo $ebay_order_id; ?></td>
+                          </tr>
+                          <tr>
+                            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Status"><i class="fa fa-compass fa-fw"></i></button></td>
+                            <td><?php echo $ebay_order_status; ?></td>
+                          </tr>
+                          <tr>
+                            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Payment Method"><i class="fa fa-user fa-fw"></i></button></td>
+                            <td><a href="http://www.ebay.com/usr/<?php echo $ebay_buyer_user_id; ?>" target="_blank"><?php echo $ebay_buyer_user_id; ?></a></td>
+                          </tr>
+                          <tr>
+                            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Location"><i class="fa fa-map-marker fa-fw"></i></button></td>
+                            <td><?php echo $ebay_country . ', ' . $ebay_state_or_province; ?></td>
+                          </tr>
+
+                          <tr>
+                            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Payment"><i class="fa fa-credit-card fa-fw"></i></button></td>
+                            <td><?php echo $ebay_payment_method; ?></td>
+                          </tr>
+                          <tr>
+                            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping"><i class="fa fa-truck fa-fw"></i></button></td>
+                            <td><?php echo $ebay_shipping_service; ?></td>
+                          </tr>
+
+
+                      </table>
+                    </div>
+                  </div>
+                 <?php } ?>
+			   ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search position="after">
+                <![CDATA[<td class="left"><?php echo $column_model; ?></td>]]>
+            </search>
+            <add>
+                <![CDATA[
+                 <?php if(!empty($ebay_order_id)) {?>
+                       <td class="left">eBay Order Line Item ID</td>
+                       <td class="left">eBay Shipment Tracking Number</td>
+	             <?php } ?>
+			   ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search position="after">
+                <![CDATA[<td class="left"><?php echo $product['model']; ?></td>]]>
+            </search>
+            <add>
+                <![CDATA[
+                 <?php if(!empty($ebay_order_id)) {?>
+                       <td class="left"><?php echo $product['ebay_order_line_item_id']; ?></td>
+                       <td class="left"><?php echo $product['ebay_shipment_tracking_number']; ?></td>
+	             <?php } ?>
+			   ]]>
+            </add>
+        </operation>
+
+        <operation error="log">
+            <search position="replace">
+                <![CDATA[<td colspan="4" class="right"><?php echo $totals['title']; ?>:</td>]]>
+            </search>
+            <add>
+                <![CDATA[
+                 <?php if(!empty($ebay_order_id)) {?>
+                        <td colspan="6" class="right"><?php echo $totals['title']; ?>:</td>
+	             <?php } else { ?>
+	                    <td colspan="4" class="right"><?php echo $totals['title']; ?>:</td>
+	             <?php }?>
+			   ]]>
+            </add>
+        </operation>
+
+
+
+    </file>
+
+
+
+
+
+    <file path="admin/view/template/common/menu.tpl">
+        <operation error="log">
+            <search>
+                <![CDATA[<li id="sale">]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+			 <li id="sale"><a class="parent"><i class="fa fa-sitemap fa-fw"></i> <span>Channels</span></a>
+        		<ul>
+          			<li><a href="<?php echo $channel_ebay; ?>">Sell on eBay</a></li>
+        		</ul>
+      		 </li>
+			]]>
+            </add>
+        </operation>
+    </file>
+
+    <file path="admin/view/template/common/stats.tpl">
+        <operation error="log">
+            <search>
+                <![CDATA[<div id="stats">]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+                    <script type="text/javascript" src="view/javascript/channels/jobs.js"></script>
+<style>
+#column-left.active #jobs_tab {
+    display: block;
+}
+#jobs_tab {
+    display: none;
+    border-radius: 2px;
+    color: #666666;
+    background: #2b2b2b;
+    margin: 15px 20px;
+    padding: 5px 0;
+}
+#jobs_tab ul, #jobs_tab li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#jobs_tab li {
+    font-size: 11px;
+    color: #9d9d9d;
+    padding: 5px 10px;
+    border-bottom: 1px dotted #373737;
+}
+#jobs_tab div:first-child {
+    margin-bottom: 4px;
+}
+#jobs_tab .progress {
+    height: 3px;
+    margin-bottom: 0;
+}
+
+#jobs_tab .th {
+font-size: 12px;
+font-weight: bold;
+}
+
+#jobs_tab .bt {
+font-size: 12px;
+}
+
+#jobs_tab li.job {
+padding-bottom: 15px;
+}
+
+
+
+</style>
+                    <div id="jobs_tab" data-action="<?php echo $jobs_service; ?>" class="hide">
+                        <ul>
+                            <li class="th"><span>Running now <b>0</b> job(s)</span></li>
+                        </ul>
+						<ul class="jobs"></ul>
+                    </div>
+			    ]]>
+            </add>
+        </operation>
+    </file>
+
+    <file path="admin/controller/common/stats.php">
+        <operation error="log">
+            <search>
+                <![CDATA[$this->load->model('sale/order')]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+                    $data['jobs_service'] = $this->url->link('module/ebay_channel/jobs_service', 'token=' . $this->session->data['token'], 'SSL');
+                ]]>
+            </add>
+        </operation>
+    </file>
+
+    <file path="admin/controller/common/menu.php">
+        <operation error="log">
+            <search>
+                <![CDATA[$data['home']]]>
+            </search>
+            <add position="before">
+                <![CDATA[$data['channel_ebay'] = $this->url->link('module/ebay_channel/dashboard', 'token=' . $this->session->data['token'], 'SSL');]]>
+            </add>
+        </operation>
+    </file>
+
+
+
+    <file path="admin/model/catalog/product.php">
+        <operation error="log">
+            <search>
+                <![CDATA[pre.admin.product.edit]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+				$this->load->model('ebay_channel/cron_dao');
+				$this->model_ebay_channel_cron_dao->updateProduct($product_id);
+			]]>
+            </add>
+        </operation>
+    </file>
+
+</modification>

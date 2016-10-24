@@ -1,0 +1,97 @@
+@import (reference) "_elements";
+/*--------------------------------------------------------------
+Topbar Block
+--------------------------------------------------------------*/
+.topbar{
+  z-index: 9;
+  padding: 8px 0;
+  text-align: center;
+  [class*='col-']{
+    vertical-align: middle;
+    font-size: @font-small;
+    text-transform: uppercase;
+  }
+  [class^="pe-7s-"],
+  [class*=" pe-7s-"]{
+    font-size: @font-normal + 10;
+    vertical-align: middle;
+  }
+  a,
+  .btn-link{
+    text-align: left;
+    font-size: @font-small;
+  }
+  .dropdown-toggle{
+    padding: 0;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  &__left{
+    text-align: center;
+    @media @md {
+      text-align: left;
+    }
+    a{
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+  &__right{
+    text-align: center;
+    @media @md {
+      text-align: right;
+    }
+  }
+  &__currency,
+  &__language{
+    .btn{
+      background: none;
+      &:hover{
+        background: none;
+      }
+    }
+  }
+  &__currency{
+  display: inline-block;
+  position: relative;
+  }
+  &__language {
+    display: inline-block;
+  }
+}
+
+/***************768px****************/
+@media @sm {
+
+}
+/***************1024px****************/
+@media @md {
+
+}
+/***************1200px****************/
+@media @lg {
+
+}
+/***************skin****************/
+.topbar--1{
+  .btn-link,
+  a{
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 600;
+  }
+  .topbar__right{
+	.list-inline{
+	  li{
+		position: relative;
+	  }
+	  a{
+		&:before{
+		  background: #212121;
+		}
+	  }
+	}
+  }
+}

@@ -1,0 +1,397 @@
+/* Layout */
+
+/* Custom Notification */
+
+
+/* Scroll up */
+
+.scrollup {
+z-index: 2;
+position: fixed;
+right: 50px;
+}
+
+
+/* Style Customization */
+
+.scrollup,
+.kuler-accordion .item-title.selected,
+button, .button, a.button,
+#header .checkout a,
+.cart-product-total-number,
+.kuler-showcase-module .tab-heading span:after,
+.kuler-filter .ui-widget-header,
+.btn-primary,
+.article__read-more .read-more,
+.dropdown-menu .live-search-load-more:hover,
+.product-info .product-detail-button--cart,
+#tabs a.selected,
+#top-bar .checkout .view:hover,
+#top-bar .checkout .check:hover,
+.product-tabs .nav-tabs>li.active>a,
+.product-tabs .nav>li>a:hover,
+.product-tabs .nav>li>a:focus,
+.pagination .links a:hover,
+.pagination .links b{
+background-color: #CA7379;
+}
+
+
+.alert.alert-success,
+a.articles__read-more,
+a:visited.articles__read-more,
+.product-name a:hover,
+.kuler-showcase-module .tab-heading span.active,
+.kuler-showcase-module .tab-heading span:hover{
+color: #CA7379;
+}
+
+
+
+#container{
+background-color: #fff;
+}
+
+
+
+a,a:visited,
+.mainmenu > li a,
+#top-bar a{
+color: #25282C;
+}
+
+
+
+
+a:hover,
+a:active{
+color: #CA7379;
+}
+
+.details .cart:hover,
+.details .quick-view a:hover:before,
+.details .cart a:hover:before,
+.details .compare a:hover:before,
+.details .wishlist a:hover:before{
+background-color: #CA7379;
+}
+
+
+
+body {
+
+font-family: Montserrat;
+
+
+
+
+
+
+color: #25282C;
+
+}
+.kuler-tabs,.kuler-slides,
+#header .checkout a,
+.cart-total + .buttons a,
+.ui-widget{
+
+font-family: Montserrat;
+
+}
+
+
+
+h1,h2,h3,h4,h5,h6,.box-heading {
+
+font-family: Montserrat;
+
+
+
+
+}
+
+
+
+
+
+
+.topbar{
+
+background-color: #FFFFFF;
+
+}
+
+
+
+.topbar a,
+.topbar li>a,
+.topbar button{
+
+color: #888888;
+
+}
+
+
+
+.topbar a:hover,
+.topbar button:hover{
+
+color: #666666;
+
+}
+
+
+
+.topbar span{
+
+color: #888888;
+
+}
+
+
+
+.topbar{
+
+border-bottom: 1px solid #EEEEEE;
+
+}
+
+
+
+.header{
+
+}
+
+
+
+
+
+
+.footer,.social-newsletter{
+
+background-color: #fafafa;
+
+}
+
+
+.social-newsletter .container,.footer{
+
+}
+
+.footer,.social-newsletter{
+
+
+color: #888888;
+
+}
+
+
+
+
+.footer h3, .footer .box-heading{
+
+color: #25282C;
+
+}
+.footer h3:after,
+.footer h3:after{
+background-color: #25282C;
+}
+
+
+
+.footer a{
+
+color: #888888;
+
+}
+
+
+
+.footer a:hover{
+
+color: #25292C;
+
+}
+.footer .contact li:hover{
+
+color: #25292C;
+
+}
+
+.social a:hover:before,
+.newsletter button:hover{
+
+background-color: #25292C;
+
+}
+
+
+#powered{
+
+background-color: #fafafa;
+
+
+}
+
+
+
+#powered{
+color: ;
+}
+#powered a{
+
+}
+
+
+
+
+
+.social-icons__item:before{
+
+
+color: #CCCCCC;
+
+}
+
+.social-icons__item:hover:before{
+
+
+color: #25292C;
+
+}
+
+.navigation--mega{
+
+
+}
+
+
+.main-nav__item a:hover{
+color: #25292C;
+
+}
+
+
+#menu,
+#megamenu{
+
+font-family: Montserrat;
+
+
+
+
+}
+
+
+@media (min-width: 992px){
+.main-nav__item a {
+color: #25292C;
+}
+}
+
+
+@media only screen and (min-width: 992px){
+.main-nav__item > a:before{
+background: #25292C;
+}
+}
+
+
+.product-price{
+color: #CA7379;
+}
+
+
+.product-price--old{
+color: #aaa;
+}
+
+
+.product-name a,
+.product-name a:visited{
+color: #1F1F1F;
+}
+
+
+.product-sale{
+
+background-color: #CA7379;
+
+
+
+color: #fff;
+
+}
+
+
+
+
+
+.product-detail-button--wishlist, .product-detail-button--compare, .product-detail-button--quick-view{
+
+background-color: #ffffff;
+
+}
+.product-detail-button--wishlist i, .product-detail-button--compare i, .product-detail-button--quick-view i{
+
+color: #25282c;
+
+}
+.product-detail-button--wishlist:hover, .product-detail-button--compare:hover, .product-detail-button--quick-view:hover{
+
+background-color: #ca7379;
+border: 1px solid #ca7379;
+
+}
+.product-detail-button--wishlist:hover i, .product-detail-button--compare:hover i, .product-detail-button--quick-view:hover i{
+
+color: #ffffff;
+
+}
+.product-detail-button--cart{
+
+background-color: #ffffff;
+
+}
+.product-detail-button--cart i, .product-detail-button--cart span{
+
+color: #25282C;
+
+}
+.product-detail-button--cart:hover{
+
+background-color: #CA7379;
+border: 1px solid #CA7379;
+
+}
+.product-detail-button--cart:hover i, .product-detail-button--cart:hover span{
+
+color: #fff;
+
+}
+
+
+}
+
+
+}
+
+.kt-module__item__testimonial{
+
+}
+
+.kt-module__item__writer{
+
+}
+.kt-module__item__information{
+
+}
+
+button, .button, a.button, #header .checkout a,.read-more{
+
+color: #fff;
+
+
+}
+

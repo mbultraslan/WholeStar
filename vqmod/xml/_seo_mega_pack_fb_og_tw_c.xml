@@ -1,0 +1,184 @@
+<modification>
+	<id>SEO Mega KIT - Facebook Open Graph/Twitter cart</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+
+	<!-- /////////////////////// PRODUCT /////////////////////// -->
+
+	<file name="catalog/language/*/product/product.php">
+		<operation>
+			<search position="after"><![CDATA[<?php]]></search>
+			<add><![CDATA[
+				$_['smp_text_price'] = 'Price';
+				$_['smp_text_currency'] = 'Currency';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[$this->load->controller('common/header');]]></search>
+			<add><![CDATA[
+				if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+					$config_image_popup_width = $this->config->get($this->config->get('config_theme') . '_image_popup_width');
+					$config_image_popup_height = $this->config->get($this->config->get('config_theme') . '_image_popup_height');
+				} else {
+					$config_image_popup_width = $this->config->get('config_image_popup_width');
+					$config_image_popup_height = $this->config->get('config_image_popup_height');
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_facebook_open_graph' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'og:type', 'og:product', 'property' )
+						->addMeta( 'og:title', ! empty( $product_info['smp_title'] ) ? $product_info['smp_title'] : $product_info['name'], 'property' )
+						->addMeta( 'og:url', $this->url->link( 'product/product', 'product_id=' . $product_info['product_id'], 'SSL' ), 'property' )
+						->addMeta( 'product:price:amount', $this->currency->format($this->tax->calculate( $product_info['special'] ? $product_info['special'] : $product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], '', false), 'property' )
+						->addMeta( 'product:price:currency', $this->config->get( 'config_currency' ), 'property' )
+						->addMeta( 'og:image', $this->model_tool_image->resize($product_info['image'], $config_image_popup_width, $config_image_popup_height), 'property' )
+						->addMeta( 'og:image:width', $this->config->get('config_image_popup_width'), 'property' )
+						->addMeta( 'og:image:height', $this->config->get('config_image_popup_height'), 'property' )
+						->addMeta( 'og:description', $product_info['meta_description'], 'property' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_cart' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'twitter:card', 'product' )
+						->addMeta( 'twitter:site', '' )
+						->addMeta( 'twitter:title', ! empty( $product_info['smp_title'] ) ? $product_info['smp_title'] : $product_info['name'] )
+						->addMeta( 'twitter:url', $this->url->link( 'product/product', 'product_id=' . $product_info['product_id'], 'SSL' ) )
+						->addMeta( 'twitter:data1', $this->currency->format($this->tax->calculate( $product_info['special'] ? $product_info['special'] : $product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], '', false) )
+						->addMeta( 'twitter:label1', $this->language->get( 'smp_text_price' ) )
+						->addMeta( 'twitter:data2', $this->config->get( 'config_currency' ) )
+						->addMeta( 'twitter:label2', $this->language->get( 'smp_text_currency' ) )
+						->addMeta( 'twitter:image:src', $this->model_tool_image->resize($product_info['image'], $config_image_popup_width, $config_image_popup_height) )
+						->addMeta( 'twitter:image:width', $this->config->get('config_image_popup_width') )
+						->addMeta( 'twitter:image:height', $this->config->get('config_image_popup_height') )
+						->addMeta( 'twitter:description', $product_info['meta_description'] )
+						->addMeta( 'twitter:site', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_site' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' )
+						->addMeta( 'twitter:creator', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_creator' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_googleplus_metadata' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {		
+					$this->load->model('tool/image');
+					
+					$this->document
+						->addMeta( 'name', ! empty( $product_info['smp_title'] ) ? $product_info['smp_title'] : $product_info['name'], 'itemprop' ) 
+						->addMeta( 'description', $product_info['meta_description'], 'itemprop' ) 
+						->addMeta( 'image', $this->model_tool_image->resize($product_info['image'], $config_image_popup_width, $config_image_popup_height), 'itemprop' ) 
+						->addMeta( 'price', $this->currency->format($this->tax->calculate( $product_info['special'] ? $product_info['special'] : $product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], '', false), 'itemprop' ) 
+						->addMeta( 'priceCurrency', $this->config->get( 'config_currency' ), 'itemprop' );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- /////////////////////// CATEGORY /////////////////////// -->
+
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<search position="before"><![CDATA[$this->document->setTitle($category_info['meta_title']);]]></search>
+			<add><![CDATA[
+				if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+					$config_image_popup_width = $this->config->get($this->config->get('config_theme') . '_image_category_width');
+					$config_image_popup_height = $this->config->get($this->config->get('config_theme') . '_image_category_height');
+				} else {
+					$config_image_popup_width = $this->config->get('config_image_category_width');
+					$config_image_popup_height = $this->config->get('config_image_category_height');
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_facebook_open_graph' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'og:type', 'og:website', 'property' )
+						->addMeta( 'og:title', $category_info['name'], 'property' )
+						->addMeta( 'og:url', $this->url->link('product/category', 'path=' . $this->request->get['path']), 'property' )
+						->addMeta( 'og:image', $this->model_tool_image->resize($category_info['image'], $config_image_popup_width, $config_image_popup_height), 'property' )
+						->addMeta( 'og:description', $category_info['meta_description'], 'property' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_cart' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'twitter:card', 'category' )
+						->addMeta( 'twitter:title', $category_info['name'] )
+						->addMeta( 'twitter:url', $this->url->link('product/category', 'path=' . $this->request->get['path']) )
+						->addMeta( 'twitter:image:src', $this->model_tool_image->resize($category_info['image'], $config_image_popup_width, $config_image_popup_height) )
+						->addMeta( 'twitter:image:width', $this->config->get('config_image_category_width') )
+						->addMeta( 'twitter:image:height', $this->config->get('config_image_category_height') )
+						->addMeta( 'twitter:description', $category_info['meta_description'] )
+						->addMeta( 'twitter:site', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_site' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' )
+						->addMeta( 'twitter:creator', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_creator' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_googleplus_metadata' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {		
+					$this->load->model('tool/image');
+					
+					$this->document
+						->addMeta( 'name', $category_info['name'], 'itemprop' ) 
+						->addMeta( 'description', $category_info['meta_description'], 'itemprop' ) 
+						->addMeta( 'image', $this->model_tool_image->resize($category_info['image'], $config_image_popup_width, $config_image_popup_height), 'itemprop' );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- /////////////////////// MANUFACTURER /////////////////////// -->
+
+	<file name="catalog/controller/product/manufacturer.php">
+		<operation>
+			<search position="before"><![CDATA[$this->document->setTitle($manufacturer_info['name']);]]></search>
+			<add><![CDATA[
+				if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+					$config_image_popup_width = $this->config->get($this->config->get('config_theme') . '_image_category_width');
+					$config_image_popup_height = $this->config->get($this->config->get('config_theme') . '_image_category_height');
+				} else {
+					$config_image_popup_width = $this->config->get('config_image_category_width');
+					$config_image_popup_height = $this->config->get('config_image_category_height');
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_facebook_open_graph' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'og:type', 'og:website', 'property' )
+						->addMeta( 'og:title', $manufacturer_info['name'], 'property' )
+						->addMeta( 'og:url', $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_info['manufacturer_id']), 'property' )
+						->addMeta( 'og:image', $this->model_tool_image->resize($manufacturer_info['image'], $config_image_popup_width, $config_image_popup_height), 'property' )
+						->addMeta( 'og:description', $manufacturer_info['meta_description'], 'property' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_cart' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {
+					$this->load->model('tool/image');
+				
+					$this->document
+						->addMeta( 'twitter:card', 'category' )
+						->addMeta( 'twitter:title', $manufacturer_info['name'] )
+						->addMeta( 'twitter:url', $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_info['manufacturer_id']) )
+						->addMeta( 'twitter:image:src', $this->model_tool_image->resize($manufacturer_info['image'], $config_image_popup_width, $config_image_popup_height) )
+						->addMeta( 'twitter:image:width', $this->config->get('config_image_category_width') )
+						->addMeta( 'twitter:image:height', $this->config->get('config_image_category_height') )
+						->addMeta( 'twitter:description', $manufacturer_info['meta_description'] )
+						->addMeta( 'twitter:site', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_site' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' )
+						->addMeta( 'twitter:creator', NULL != ( $tmp = (array) $this->config->get( 'smp_twitter_creator' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ? $tmp[$this->config->get('config_store_id')] : '' );
+				}
+				
+				if( NULL != ( $tmp = (array) $this->config->get( 'smp_googleplus_metadata' ) ) && ! empty( $tmp[$this->config->get('config_store_id')] ) ) {		
+					$this->load->model('tool/image');
+					
+					$this->document
+						->addMeta( 'name', $manufacturer_info['name'], 'itemprop' ) 
+						->addMeta( 'description', $manufacturer_info['meta_description'], 'itemprop' ) 
+						->addMeta( 'image', $this->model_tool_image->resize($manufacturer_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')), 'itemprop' );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

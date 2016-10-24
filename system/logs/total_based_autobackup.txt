@@ -1,0 +1,46 @@
+EXTENSION	SETTING	NUMBER	SUB-SETTING	SUB-NUMBER	SUB-SUB-SETTING	VALUE
+total_based	charge	1	charges			0-39 =3.99\n40-74 = 6.99\n75-9999999=0
+total_based	charge	1	group			1
+total_based	charge	1	rule	1	comparison	is
+total_based	charge	1	rule	1	type	geo_zone
+total_based	charge	1	rule	1	value	4
+total_based	charge	1	title_admin			2nd
+total_based	charge	1	title_en			Royal Mail 2nd Class Signed for
+total_based	charge	2	charges			0-49=4.99\n50-99=7.99\n100-999999=0
+total_based	charge	2	group			2
+total_based	charge	2	rule	1	comparison	is
+total_based	charge	2	rule	1	type	geo_zone
+total_based	charge	2	rule	1	value	4
+total_based	charge	2	title_admin			1st
+total_based	charge	2	title_en			Royal Mail 1st Class Signed For
+total_based	charge	3	charges			0-39=8.99\n40-74=12.99\n45-99-15.99\n100-199=19.99\n200-9999999=29.99
+total_based	charge	3	group			3
+total_based	charge	3	rule	1	comparison	is
+total_based	charge	3	rule	1	type	geo_zone
+total_based	charge	3	rule	1	value	4
+total_based	charge	3	title_admin			special
+total_based	charge	3	title_en			UK Next Day Special
+total_based	charge	4	charges			0-100=16.99\n101-150=21.99\n151-999999=0
+total_based	charge	4	group			4
+total_based	charge	4	rule	1	comparison	is
+total_based	charge	4	rule	1	type	geo_zone
+total_based	charge	4	rule	1	value	5
+total_based	charge	4	title_admin			eu
+total_based	charge	4	title_en			Europe Tracked &amp; Signed
+total_based	charge	5	charges			0-100=24.99\n100-999999=49.99
+total_based	charge	5	group			5
+total_based	charge	5	rule	1	comparison	not
+total_based	charge	5	rule	1	type	geo_zone
+total_based	charge	5	rule	1	value	5
+total_based	charge	5	rule	2	comparison	not
+total_based	charge	5	rule	2	type	geo_zone
+total_based	charge	5	rule	2	value	4
+total_based	charge	5	title_admin			rest of the world
+total_based	charge	5	title_en			Rest of the World
+total_based	display					expanded
+total_based	heading_en					Shipping
+total_based	sort_order					1
+total_based	status					1
+total_based	tax_class_id					0
+total_based	testing_mode					0
+total_based	tooltips					1

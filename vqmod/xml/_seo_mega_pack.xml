@@ -1,0 +1,477 @@
+<modification>
+	<id>SEO Mega KIT</id>
+	<version>2.0.0.0</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+	
+	<!-- URL -->
+	<file name="system/library/url.php">
+		<operation>
+			<search position="after"><![CDATA[class Url {]]></search>
+			<add><![CDATA[	
+				public function getRewrites() {
+					return $this->rewrite;
+				}
+
+				public function resetRewrites() {
+					$this->rewrite = array();
+
+					return $this;
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Extension -->
+	<file name="catalog/model/extension/extension.php">
+		<operation>
+			<search position="after"><![CDATA[class ModelExtensionExtension extends Model {]]></search>
+			<add><![CDATA[
+				public function getInstalled($type) {
+					$extension_data = array();
+
+					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE `type` = '" . $this->db->escape($type) . "'");
+
+					foreach ($query->rows as $result) {
+						$extension_data[] = $result['code'];
+					}
+
+					return $extension_data;
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Not Found -->
+	<file name="catalog/controller/*/*.php" error="skip">
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');]]></search>
+			<add><![CDATA[
+				if( class_exists( 'ControllerCommonSeoMegaPackProUrl' ) ) {
+					ControllerCommonSeoMegaPackProUrl::notFound( $this );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Languages -->
+	<file name="catalog/controller/common/language.php,catalog/controller/module/blog_language.php" error="skip">
+		<operation>
+			<search position="before"><![CDATA[function index() {]]></search>
+			<add><![CDATA[
+				protected function __smpRedirectByLang() {
+					if( empty( $this->request->post['redirect'] ) )
+						return;
+				
+					$path_info	= parse_url( $this->request->post['redirect'] );
+				
+					if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+						$connection = 'SSL';
+					} else {
+						$connection = 'NONSSL';
+					}
+
+					if( isset( $path_info['path'] ) ) {
+						$languages	= array();
+						
+						$this->load->model('localisation/language');
+
+						foreach( $this->model_localisation_language->getLanguages() as $lang ) {
+							$languages[$lang['language_id']] = $lang['code'];
+						}
+
+						if( $languages ) {
+							$url_info = parse_url( defined( HTTPS_SERVER ) ? HTTPS_SERVER : HTTP_SERVER );
+
+							if( empty( $url_info['path'] ) ) {
+								$url_info['path'] = '';
+							}
+
+							$language = $this->db->query("
+								SELECT 
+									* 
+								FROM 
+									`" . DB_PREFIX . "setting`
+								WHERE 
+									`store_id` = '" . (int)$this->config->get('config_store_id') . "' AND 
+									`" . ( version_compare( VERSION, '2.0.1.0', '<' ) ? 'group' : 'code' ) . "` = 'config' AND 
+									`key` = 'config_language'"
+							);
+							
+							if( $language->num_rows ) {
+								$language = $language->row['value'];
+							} else {
+								$language = $this->config->get( 'config_language' );
+							}
+				
+							foreach( $languages as $lang ) {
+								$path = explode( '/', trim( $path_info['path'], '/' ) );
+				
+								if( $lang == $path[0] ) {
+									unset( $path[0] );
+									
+									$path_info['path'] = $url_info['path'] . implode( '/', $path );
+
+									break;
+								}
+							}
+				
+							$this->request->post['redirect']	= '';
+
+							if( isset( $path_info['scheme'] ) && isset( $path_info['host'] ) ) {
+								$this->request->post['redirect'] .= $path_info['scheme'] . '://' . $path_info['host'] . ( isset( $path_info['port'] ) ? ':' . $path_info['port'] : '' );
+							}
+
+							if( $language != $this->session->data['language'] ) {
+								$path_info['path'] = $url_info['path'] . $this->session->data['language'] . '/' .
+									mb_substr( $path_info['path'], mb_strlen( $url_info['path'], 'utf-8' ), mb_strlen( $path_info['path'], 'utf-8' ), 'utf-8' );
+							}
+
+							$this->request->post['redirect'] .= $path_info['path'];
+
+							if( $this->config->get( 'smp_trans_urls_when_change_langs' ) ) {
+								foreach( $this->url->getRewrites() as $rewrite ) {
+									if( $rewrite instanceof ControllerCommonSeoMegaPackProUrl ) {
+										$url_info	= parse_url( str_replace( '&amp;', '&', $this->request->post['redirect'] ) );
+										$path		= parse_url( defined( HTTPS_SERVER ) ? HTTPS_SERVER : HTTP_SERVER );
+
+										if( empty( $path['path'] ) )
+											$path['path'] = '/';
+
+										if( ! isset( $url_info['path'] ) )
+											$url_info['path'] = '';
+
+										if( strpos( $url_info['path'], $path['path'] ) === 0 )
+											$url_info['path'] = substr( $url_info['path'], mb_strlen( $path['path'], 'utf-8' ) );
+
+										$this->request->get['_route_'] = trim( $url_info['path'], '/' );
+
+										$this->request->get['route'] = '';
+
+										$this->config->set( 'config_language', $this->session->data['language'] );
+										$this->config->set( 'config_language_id', array_search( $this->session->data['language'], $languages ) );
+										$rewrite->__resetCache();
+										$this->url->resetRewrites();
+										$rewrite->_setConfigLang( $this->session->data['language'], array_search( $this->session->data['language'], $languages ) );
+										//$rewrite->_setDetectLanguageByURL( false );
+										$rewrite->index();
+
+										$get = $this->request->get;
+
+										if( ! empty( $get['route'] ) ) {										
+											$params = array();
+
+											foreach( $get as $k => $v )
+												if( ! in_array( $k, array( 'route', '_route_' ) ) )
+													$params[] = $k . '=' . urlencode( $v );
+
+											$this->request->post['redirect'] = $this->url->link( $get['route'], implode( '&', $params ), $connection );
+										} else {
+											$this->request->post['redirect'] = $this->url->link( '', '', $connection );
+										}
+
+										break;
+									}
+								}
+							}
+						}
+					}
+					
+					$this->response->redirect( $this->request->post[ 'redirect' ] );
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[$data['redirect'] = $this->url->link('common/home');]]></search>
+			<add><![CDATA[$data['redirect'] = $this->url->link('common/home', '', isset( $connection ) ? $connection : 'SSL');]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->session->data['language'] = $this->request->post['code'];]]></search>
+			<add><![CDATA[
+				$this->__smpRedirectByLang();
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Catalog/Header -->
+	<file name="catalog/controller/common/header.php">		
+		<operation>
+			<search position="after"><![CDATA[function index() {]]></search>
+			<add><![CDATA[
+				if( $this->config->get( 'smp_is_install' ) && isset( $this->request->get['route'] ) ) {
+					switch( $this->request->get['route'] ) {
+						case 'product/category' : {
+							if( ! empty( $this->request->get['path'] ) ) {
+								$data['smp_canonical_url'] = $this->url->link('product/category', 'path=' . $this->request->get['path'], 'SSL' );
+							}
+
+							break;
+						}
+						case 'product/manufacturer/info' : {
+							if( ! empty( $this->request->get['manufacturer_id'] ) ) {
+								$data['smp_canonical_url'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'], 'SSL' );
+							}
+
+							break;
+						}
+					}
+				}
+				
+				$data['documentGetMeta'] = $this->document->getMeta();
+				
+				if( ! empty( $this->request->get['route'] ) ) {
+					$data['smk_current_route'] = $this->request->get['route'];
+				}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="system/library/document.php">
+		<operation>
+			<search position="after"><![CDATA[class Document {]]></search>
+			<add><![CDATA[
+				private $_meta = array();
+				
+				public function addMeta( $key, $val, $type = 'name' ) {
+					if( $val === '' )
+						return $this;
+				
+					$this->_meta[$type . ':' . $key] = array(
+						$type		=> $key,
+						'content'	=> $val
+					);
+					
+					return $this;
+				}
+				
+				public function getMeta() {
+					return $this->_meta;
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search position="before"><![CDATA[</head>]]></search>
+			<add><![CDATA[
+				<?php if( ! empty( $smp_canonical_url ) ) { ?>
+					<link href="<?php echo $smp_canonical_url; ?>" rel="canonical" />
+				<?php } ?>
+				
+				<?php foreach( $documentGetMeta as $val ) { ?>
+					<meta<?php foreach( $val as $k => $v ) { ?> <?php echo $k; ?>="<?php echo $v; ?>"<?php } ?> />
+				<?php } ?>
+				
+				<script type="text/javascript">
+					function getURLVar(key) {
+						<?php if( ! empty( $smk_current_route ) ) { ?>
+							if( key == 'route' ) {
+								return '<?php echo addslashes( $smk_current_route ); ?>';
+							}
+						<?php } ?>
+				
+						var value 	= [],
+							url		= String(document.location),
+							query;
+						
+						if( url.indexOf( '?' ) > -1 ) {
+							query = url.split('?');
+						} else {
+							query = url.split('/');
+							query.shift();
+							query.shift();
+							query.shift();
+							query = query.join('/');
+							
+							query = query.indexOf( '&' ) > -1 ? [ query.substring( 0, query.indexOf('&') ), query.substring( query.indexOf('&')+1 ) ] : [ query, '' ];
+							
+							value['route'] = query[0];
+						}
+						
+						if (typeof query[1] != 'undefined') {
+							var part = query[1].split('&');
+
+							for (i = 0; i < part.length; i++) {
+								var data = part[i].split('=');
+								
+								if (data[0] && data[1]) {
+									value[data[0]] = data[1];
+								}
+							}
+							
+							if (value[key]) {
+								return value[key];
+							} else {
+								return '';
+							}
+						}
+					}
+				</script>
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Admin/Header -->
+	<file name="admin/controller/common/menu.php">
+		<operation>
+			<search position="after"><![CDATA[$this->load->language('common/menu');]]></search>
+			<add><![CDATA[
+				if( $this->config->get( 'smp_is_install' ) && isset( $this->session->data['token'] ) ) {
+					$data['text_seo_mega_pack'] = $this->language->get('text_seo_mega_pack');
+					$data['text_smp_extensions'] = $this->language->get('text_smp_extensions');
+					$data['text_smp_manager'] = $this->language->get('text_smp_manager');
+					
+					if( $data['text_seo_mega_pack'] == 'text_seo_mega_pack' )
+						$data['text_seo_mega_pack'] = 'SEO Mega KIT PLUS';
+						
+					if( $data['text_smp_extensions'] == 'text_smp_extensions' )
+						$data['text_smp_extensions'] = 'Extensions';
+						
+					if( $data['text_smp_manager'] == 'text_smp_manager' )
+						$data['text_smp_manager'] = 'Manager';
+
+					$data['seo_mega_pack'] = $this->url->link('module/seo_mega_pack', 'token=' . $this->session->data['token'], 'SSL');
+					$data['smp_manager'] = $this->url->link('module/seo_mega_pack/manager', 'token=' . $this->session->data['token'], 'SSL');
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/common/menu.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>]]></search>
+			<add><![CDATA[
+				<?php if( ! empty( $seo_mega_pack ) ) { ?>
+					<li>
+						<a><?php echo $text_seo_mega_pack; ?></a>
+						<ul>
+							<li><a href="<?php echo $seo_mega_pack; ?>"><?php echo $text_smp_extensions; ?></a></li>
+							<li><a href="<?php echo $smp_manager; ?>"><?php echo $text_smp_manager; ?></a></li>
+						</ul>
+					</li>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/*/common/menu.php">
+		<operation>
+			<search position="after"><![CDATA[<?php]]></search>
+			<add><![CDATA[
+				$_['text_seo_mega_pack']	= 'SEO Mega KIT PLUS';
+				$_['text_smp_extensions']	= 'Extensions';
+				$_['text_smp_manager']		= 'SEO Manager';
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- SeoUrl -->
+	<file name="catalog/controller/common/seo_url.php,catalog/controller/startup/seo_url.php" error="skip">
+		<operation>
+			<search position="before"><![CDATA[function index() {]]></search>
+			<add><![CDATA[
+				private $_seoMegaPackProUrl = NULL;
+				
+				private function _initSeoMegaPackProUrl() {
+					if( $this->config->get( 'smp_is_install' ) ) {
+						require_once VQMod::modCheck(realpath(DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php'));
+					
+						$this->_seoMegaPackProUrl = new ControllerCommonSeoMegaPackProUrl( $this->registry );
+					}
+					
+					$config_language = $this->_seoMegaPackProUrl != NULL ? 
+						$this->_seoMegaPackProUrl->getConfigLanguage() : $this->config->get('config_language');
+				}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[function index() {]]></search>
+			<add><![CDATA[
+				$this->_initSeoMegaPackProUrl();
+
+				if( $this->_seoMegaPackProUrl !== NULL )
+					return $this->_seoMegaPackProUrl->index();
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[public function rewrite($link) {]]></search>
+			<add><![CDATA[
+				$this->_initSeoMegaPackProUrl();
+				
+				if( $this->_seoMegaPackProUrl !== NULL )
+					return $this->_seoMegaPackProUrl->rewrite( $link );
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- Search -->
+	<file name="catalog/controller/product/search.php,catalog/controller/common/search.php">
+		<operation>
+			<search position="before"><![CDATA[function index() {]]></search>
+			<add><![CDATA[
+				private function _decodeSearchKeyword() {
+					$name = 'search';
+
+					if( ! isset( $this->request->get[$name] ) ) {
+						$name = $name == 'filter_name' ? 'search' : 'filter_name';
+						
+						if( ! isset( $this->request->get[$name] ) )
+							return '';
+					}
+
+					$search = urldecode( $this->request->get[$name] );
+
+					return str_replace( 'Ow==', ';', $search );
+				}
+			]]></add>
+		</operation>
+	</file>
+		
+	<file name="catalog/controller/common/search.php">
+		<operation>
+			<search position="replace"><![CDATA[$data['search'] = $this->request->get['search'];]]></search>
+			<add><![CDATA[
+				$data['search'] = $this->_decodeSearchKeyword();
+			]]></add>
+		</operation>
+	</file>
+		
+	<file name="catalog/controller/product/search.php">
+		<operation>
+			<search position="replace"><![CDATA[$search = $this->request->get['search'];]]></search>
+			<add><![CDATA[
+				$search = $this->_decodeSearchKeyword();
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$tag = $this->request->get['search'];]]></search>
+			<add><![CDATA[
+				$tag = $this->_decodeSearchKeyword();
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);]]></search>
+			<add><![CDATA[
+				$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->_decodeSearchKeyword());
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'))]]></search>
+			<add><![CDATA[urlencode(html_entity_decode($this->_decodeSearchKeyword(), ENT_QUOTES, 'UTF-8'))]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->request->get['search'];]]></search>
+			<add><![CDATA[$data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->_decodeSearchKeyword();]]></add>
+		</operation>
+	</file>
+		
+	<file name="system/library/smk/extensions/parse_url_journal2_blog.php" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[public function _part_3() {]]></search>
+			<add><![CDATA[public function _part_3( $part, $parts, $params ) {]]></add>
+		</operation>
+	</file>
+
+</modification>

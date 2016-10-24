@@ -1,0 +1,131 @@
+.panel-group legend {
+    font-size: 13px !important;
+}
+
+/* Slide Preview */
+.slide-preview {
+    position: relative;
+    margin: 30px 0;
+    min-height: 100px;
+    border: 1px solid #dedede;
+    overflow: hidden;
+}
+
+.slide-preview .tp-caption {
+    cursor: move;
+    position: absolute !important;
+}
+
+.slide-preview .tp-caption.active {
+    -webkit-box-shadow: rgb(221, 229, 115) 0px 0px 8px 0px;
+    box-shadow: rgb(221, 229, 115) 0px 0px 8px 0px;
+}
+
+/* Layer Options */
+
+.layer-style-item {
+    position: relative;
+}
+
+.layer-style-item .layer-style-preview {
+    position: absolute;
+    top: 0;
+    left: 160px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 2px 2px 3px #dedede;
+    display: none;
+}
+
+.layer-style-item .layer-style-preview .tp-caption {
+    position: static;
+}
+
+.layer-style-item:hover .layer-style-preview {
+    display: block;
+}
+
+.layer-align-table span {
+    margin-left: 3px;
+    display: inline-block;
+    border: 1px solid #dedede;
+    width: 30px;
+    height: 30px;
+}
+
+.layer-align-table span:hover,
+.layer-align-table span.active {
+    background-color: #a3a3a3;
+    cursor: pointer;
+}
+
+/* Layer List */
+.layer-item {
+    margin: 5px 0;
+    padding: 10px 10px 5px 10px;
+    background-color: #fff;
+    border: 1px solid #dedede;
+    cursor: move;
+}
+
+.layer-item.active {
+    border-color: #333;
+}
+
+.layer-item .layer-time-frame {
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-start-time,
+.layer-item .layer-time-frame .layer-time-frame-end-time {
+    position: absolute;
+    top: -7px;
+    font-size: 10px;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-start-time {
+    left: 0;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-end-time {
+    right: -5px;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-bar {
+    margin: 0 40px;
+    height: 5px;
+    position: relative;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-bar .ui-slider-range {
+    background: #75A74D;
+}
+
+.layer-item .layer-time-frame .layer-time-frame-bar .ui-slider-handle {
+    margin-left: -2px;
+    width: 5px;
+    height: 15px;
+}
+
+.layer-item .layer-info {
+    position: relative;
+}
+
+.layer-item .layer-info .layer-description {
+    font-size: 13px;
+}
+
+.layer-item .layer-info .layer-toggle {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+
+.layer-item .layer-info .layer-start-time {
+    position: absolute;
+    right: 40px;
+    top: 0;
+    width: 40px;
+}

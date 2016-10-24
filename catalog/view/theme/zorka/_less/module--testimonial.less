@@ -1,0 +1,77 @@
+@import (reference) "_elements";
+/*--------------------------------------------------------------
+Kuler Testimonial
+--------------------------------------------------------------*/
+.kt-module{
+  border: 5px solid #EEEEEE;
+  padding: 10px;
+  @media @md {
+    padding: 60px 50px 50px;
+  }
+  .owl-wrapper-outer{
+    .clearfix;
+    padding: 40px 0;
+  }
+  &__item{
+    text-align: left;
+    .clearfix;
+    &__image{
+      float: left;
+      width: 100px;
+      height: 100px;
+      .rounded(50%);
+    }
+  }
+}
+/***************768px****************/
+@media @sm {
+
+}
+/***************1024px****************/
+@media @md {
+
+}
+/***************1200px****************/
+@media @lg {
+  .kt-module{
+    .box-heading{
+      margin-bottom: 15px;
+      span{
+        position: relative;
+        &:before{
+          content: "";
+          position: absolute;
+          display: inline-block;
+          width: 50px;
+          height: 3px;
+          background: #DDD;
+          bottom: -15px;
+          left: calc(~'50% - 25px');
+        }
+      }
+    }
+    &__item{
+      p{
+        margin-left: 130px;
+        padding-left: 10px;
+        font-size: 12px;
+      }
+      &__writer{
+        text-transform: uppercase;
+        color: #25272C;
+      }
+      &__information{
+        padding-top: 5px;
+        color: #212121;
+        .merriweather;
+      }
+      &__testimonial{
+        background: url(../image/quote.png) 0 15px no-repeat;
+        padding-top: 15px;
+        color: #868686;
+        font-size: @font-normal + 2;
+        line-height: 2;
+      }
+    }
+  }
+}

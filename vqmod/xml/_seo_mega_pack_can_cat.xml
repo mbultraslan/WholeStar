@@ -1,0 +1,46 @@
+<modification>
+	<id>SEO Mega KIT - Canonical Category</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+
+	<!-- /////////////////////// PRODUCT /////////////////////// -->
+
+	<file name="admin/language/*/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[<?php]]></search>
+			<add><![CDATA[
+				$_['smp_text_smp_url_category_id'] = 'Select Default URL/Canonical category';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[catalog/product_form]]></search>
+			<add><![CDATA[
+				$data['smp_text_smp_url_category_id'] = $this->language->get( 'smp_text_smp_url_category_id' );
+				$data['smp_url_category_id'] = isset( $product_info['smp_url_category_id'] ) ? $product_info['smp_url_category_id'] : NULL;
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[product SET model = '" . $this->db->escape($data['model']) . "']]></search>
+			<add><![CDATA[product SET model = '" . $this->db->escape($data['model']) . "', smp_url_category_id = " . ( empty( $data['smp_url_category_id'] ) ? 'NULL' : "'" . $this->db->escape($data['smp_url_category_id']) . "'" ) . "]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />]]></search>
+			<add><![CDATA[<input <?php echo $smp_url_category_id == $product_category['category_id'] ? ' checked="checked"' : ''; ?> title="<?php echo $smp_text_smp_url_category_id; ?>" style="float:left; margin: 0 5px 0 0;" type="radio" name="smp_url_category_id" value="<?php echo $product_category['category_id']; ?>" /> <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="product-category' + item['value'] + '"><i class="fa fa-minus-circle"></i>]]></search>
+			<add><![CDATA[<div id="product-category' + item['value'] + '"><input type="radio" value="' + item['value'] + '" name="smp_url_category_id" style="float:left; margin: 0 5px 0 0;" title="<?php echo $smp_text_smp_url_category_id; ?>"> <i class="fa fa-minus-circle"></i>]]></add>
+		</operation>
+	</file>
+
+</modification>

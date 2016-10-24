@@ -1,0 +1,29 @@
+<modification>
+	<id>SEO Mega KIT - Store Settings</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+	
+	<!-- Home -->
+	<file name="catalog/controller/common/home.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->document->setKeywords($this->config->get('config_meta_keyword'));]]></search>
+			<add><![CDATA[
+				if( NULL != ( $smk_settings = $this->config->get('smp_meta_stores' ) ) ) {
+					if( ! empty( $smk_settings[$this->config->get('config_store_id')]['title'][$this->config->get('config_language_id')] ) ) {
+						$this->document->setTitle( $smk_settings[$this->config->get('config_store_id')]['title'][$this->config->get('config_language_id')] );
+					}
+				
+					if( ! empty( $smk_settings[$this->config->get('config_store_id')]['description'][$this->config->get('config_language_id')] ) ) {
+						$this->document->setDescription( $smk_settings[$this->config->get('config_store_id')]['description'][$this->config->get('config_language_id')] );
+					}
+				
+					if( ! empty( $smk_settings[$this->config->get('config_store_id')]['keywords'][$this->config->get('config_language_id')] ) ) {
+						$this->document->setKeywords( $smk_settings[$this->config->get('config_store_id')]['keywords'][$this->config->get('config_language_id')] );
+					}
+				}
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

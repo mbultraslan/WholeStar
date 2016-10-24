@@ -1,0 +1,1122 @@
+{
+    "zorka|skin1": {
+        "name": "Skin 1",
+        "theme_id": "zorka",
+        "root_skin_id": "skin1",
+        "options": {
+            "lens_zoom_shape": "basic",
+            "menu_item_hover_color": "#25292C",
+            "category_menu_type": "accordion",
+            "home_icon_type": "text",
+            "social_icon_bg": "",
+            "email_1": "Email. info@kulerthemes.com",
+            "custom_tab_2_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "body_link_color": "#25282C",
+            "product_price_color": "#CA7379",
+            "product_cart_bg_color": "#ffffff",
+            "product_old_price_color": "#aaa",
+            "zoom_window_height": "300",
+            "custom_tab_2_title": {
+                "en": "Custom Tab 2",
+                "ar": "Custom Tab 2"
+            },
+            "custom_tab_1_title": {
+                "en": "Custom Tab 1",
+                "ar": "Custom Tab 1"
+            },
+            "kuler_slides_buttons_bg_color": "#1f1f1f",
+            "information_content": {
+                "ar": "<span style=\"line-height: 20.7999992370605px;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est, impedit incidunt, laboriosam maxime molestias numquam odio officiis, possimus quo rem repellendus sapiente tenetur voluptas. A, expedita?</span>",
+                "en": "<span>580, BROADWAY, 10012 - NEW YORK <br> \nNY - U</span>"
+            },
+            "menu_font": {
+                "font_family": "Montserrat"
+            },
+            "product_image_width": "100",
+            "body_container_bg_color": "#fff",
+            "primary_color": "#CA7379",
+            "body_font": {
+                "font_family": "Montserrat"
+            },
+            "icon_size": "24px",
+            "menu_bg_color": "",
+            "button_hover_background": "#212121",
+            "related_products_style": "grid",
+            "payment_icons": [
+                {
+                    "image": "catalog/demo/zorka/payment_icons/visa.png",
+                    "name": {
+                        "ar": "Visa",
+                        "en": "Visa"
+                    },
+                    "link": "",
+                    "sort": "1",
+                    "new_tab": "true",
+                    "$$hashKey": "03N"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/paypal.png",
+                    "link": "",
+                    "sort": "2",
+                    "new_tab": "true",
+                    "$$hashKey": "03U",
+                    "name": {
+                        "ar": "Paypal",
+                        "en": "Paypal"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/2co.png",
+                    "link": "",
+                    "sort": "3",
+                    "new_tab": "true",
+                    "$$hashKey": "041",
+                    "name": {
+                        "ar": "2CO",
+                        "en": "2CO"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/amex.png",
+                    "name": {
+                        "ar": "Amex",
+                        "en": "Amex"
+                    },
+                    "link": "",
+                    "sort": "4",
+                    "new_tab": "true",
+                    "$$hashKey": "object:157"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/skrill.png",
+                    "name": {
+                        "ar": "Skrill",
+                        "en": "Skrill"
+                    },
+                    "link": "",
+                    "sort": "5",
+                    "new_tab": "true",
+                    "$$hashKey": "object:165"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/wallet.png",
+                    "name": {
+                        "ar": "Google",
+                        "en": "Google"
+                    },
+                    "link": "",
+                    "sort": "6",
+                    "new_tab": "true",
+                    "$$hashKey": "object:173"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/western.png",
+                    "name": {
+                        "ar": "Western Union",
+                        "en": "Western Union"
+                    },
+                    "link": "",
+                    "sort": "",
+                    "new_tab": "true",
+                    "$$hashKey": "object:180"
+                }
+            ],
+            "powered_background_color": "#fafafa",
+            "bottom_heading_color": "#25282C",
+            "body_link_hover_color": "#CA7379",
+            "topbar_link_color": "#888888",
+            "heading_font": {
+                "font_family": "Montserrat",
+                "text_style_transform": "uppercase"
+            },
+            "social_icon_hover_bg": "",
+            "product_cart_hover_color": "#fff",
+            "bottom_link_hover_color": "#25292C",
+            "icon_style": "icon",
+            "phone_1": "Tel. +1 2123431725",
+            "kuler_slides_buttons_bg_hover_color": "#34477A",
+            "bottom_link_color": "#888888",
+            "custom_block_content": "<div>This is a Demo Online Store. No orders shall be fulfilled.</div><div>Zorka is a Design-Driven Shop Theme for WooCommerce and WordPress. If you’re planning to start an online store right away, look no further, get this theme on ThemeForest .</div><div>This product page demonstrates a “Simple Product“.</div>",
+            "custom_copyright": {
+                "en": ""
+            },
+            "search_result_limit": "2",
+            "topbar_border_color": "#EEEEEE",
+            "topbar_link_hover_color": "#666666",
+            "product_name_color": "#1F1F1F",
+            "social_icon_color": "#CCCCCC",
+            "custom_information": {
+                "en": ""
+            },
+            "button_color": "#fff",
+            "product_sale_color": "#CA7379",
+            "information_title": {
+                "en": "About Us",
+                "ar": "About Us"
+            },
+            "product_cart_hover_bg_color": "#CA7379",
+            "product_buttons_bg_color": "#ffffff",
+            "custom_tab_1_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "topbar_background_color": "#FFFFFF",
+            "menu_item_color": "#25292C",
+            "product_sale_text_color": "#fff",
+            "product_buttons_bg_hover_color": "#ca7379",
+            "bottom_text_color": "#888888",
+            "product_buttons_hover_color": "#ffffff",
+            "product_cart_color": "#25282C",
+            "topbar_text_color": "#888888",
+            "product_buttons_color": "#25282c",
+            "bottom_background_color": "#fafafa",
+            "zoom_window_width": "300",
+            "button_background_color": "#34477A",
+            "product_image_height": "100",
+            "social_icon_hover_color": "#25292C",
+            "body_text_color": "#25282C",
+            "image_zoom_type": "outer_cloud",
+            "button_select_list": "false",
+            "custom_js_status": "false",
+            "custom_css_status": "false",
+            "custom_css_file_status": "false",
+            "show_payment_icons": "true",
+            "show_custom_copyright": "false",
+            "newsletter_button_text": {
+                "ar": "Subscribe",
+                "en": "Subscribe"
+            },
+            "newsletter_input_text": {
+                "ar": "Your Email Here",
+                "en": "Your Email Here"
+            },
+            "newsletter_success_message": {
+                "ar": "Thank You!",
+                "en": "Thank You!"
+            },
+            "newsletter_description_text": {
+                "ar": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here",
+                "en": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here"
+            },
+            "newsletter_title": {
+                "ar": "Newsletter",
+                "en": "Newsletter"
+            },
+            "show_newsletter_title": "true",
+            "show_newsletter": "true",
+            "social_icon_rss": "false",
+            "social_icon_instagram": "false",
+            "social_icon_pinterest": "false",
+            "social_icon_youtube": "true",
+            "social_icon_google_plus": "true",
+            "social_icon_twitter": "true",
+            "social_icon_facebook": "true",
+            "show_social_icons_title": "false",
+            "show_social_icons": "true",
+            "show_twitter_footer": "false",
+            "twitter_transparent_background": "false",
+            "show_twitter_title": "false",
+            "show_twitter_header": "false",
+            "show_twitter": "false",
+            "show_facebook_posts": "false",
+            "show_facebook_friend_faces": "false",
+            "show_facebook_title": "false",
+            "show_facebook": "false",
+            "show_contact_title": "false",
+            "show_contact": "true",
+            "show_information_title": "true",
+            "show_information": "true",
+            "scroll_up_text": {
+                "ar": "Up",
+                "en": "Up"
+            },
+            "enable_scroll_up": "true",
+            "enable_swap_image": "true",
+            "show_sale_badge": "true",
+            "show_quick_view": "true",
+            "show_custom_notification": "false",
+            "login_popup": "true",
+            "enable_one_page_checkout": "false",
+            "show_google_map": "false",
+            "show_custom_information": "false",
+            "show_custom_tab_2": "true",
+            "show_custom_tab_1": "true",
+            "show_custom_block": "true",
+            "show_related_products": "true",
+            "image_lightbox": "true",
+            "default_sharing": "true",
+            "show_number_quantity": "false",
+            "show_tax": "false",
+            "show_save_percent": "false",
+            "show_brand_logo": "false",
+            "sub_categories_image_carousel": "false",
+            "sub_category_image": "false",
+            "hide_category_image": "false",
+            "show_compare_button": "false",
+            "show_wish_list_button": "false",
+            "show_add_to_cart_button": "false",
+            "show_product_rating": "false",
+            "show_product_price": "false",
+            "show_product_description": "true",
+            "show_product_name": "true",
+            "show_product_image": "true",
+            "search_in_product_description": "false",
+            "search_in_specific_manufacturer": "false",
+            "search_in_specific_category": "false",
+            "live_search_status": "true",
+            "search_field_text": {
+                "ar": "Live Search Products ...",
+                "en": "Live Search Products ..."
+            },
+            "multi_level_default_menu": "false",
+            "mobile_menu_title": {
+                "ar": "Menu",
+                "en": "Menu"
+            },
+            "fixed_header": "false"
+        }
+    },
+    "zorka|skin2": {
+        "name": "Skin 2",
+        "theme_id": "zorka",
+        "root_skin_id": "skin2",
+        "options": {
+            "lens_zoom_shape": "basic",
+            "menu_item_hover_color": "#25292C",
+            "category_menu_type": "accordion",
+            "home_icon_type": "text",
+            "social_icon_bg": "",
+            "email_1": "Email. info@kulerthemes.com",
+            "custom_tab_2_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "body_link_color": "#25282C",
+            "product_price_color": "#CA7379",
+            "product_cart_bg_color": "#ffffff",
+            "product_old_price_color": "#aaa",
+            "zoom_window_height": "300",
+            "custom_tab_2_title": {
+                "en": "Custom Tab 2",
+                "ar": "Custom Tab 2"
+            },
+            "custom_tab_1_title": {
+                "en": "Custom Tab 1",
+                "ar": "Custom Tab 1"
+            },
+            "kuler_slides_buttons_bg_color": "#1f1f1f",
+            "information_content": {
+                "ar": "<span style=\"line-height: 20.7999992370605px;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est, impedit incidunt, laboriosam maxime molestias numquam odio officiis, possimus quo rem repellendus sapiente tenetur voluptas. A, expedita?</span>",
+                "en": "<span>580, BROADWAY, 10012 - NEW YORK <br> \nNY - U</span>"
+            },
+            "menu_font": {
+                "font_family": "Montserrat"
+            },
+            "product_image_width": "100",
+            "body_container_bg_color": "#fff",
+            "primary_color": "#CA7379",
+            "body_font": {
+                "font_family": "Montserrat"
+            },
+            "icon_size": "24px",
+            "menu_bg_color": "",
+            "button_hover_background": "#212121",
+            "related_products_style": "grid",
+            "payment_icons": [
+                {
+                    "image": "catalog/demo/zorka/payment_icons/visa.png",
+                    "name": {
+                        "ar": "Visa",
+                        "en": "Visa"
+                    },
+                    "link": "",
+                    "sort": "1",
+                    "new_tab": "true",
+                    "$$hashKey": "03N"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/paypal.png",
+                    "link": "",
+                    "sort": "2",
+                    "new_tab": "true",
+                    "$$hashKey": "03U",
+                    "name": {
+                        "ar": "Paypal",
+                        "en": "Paypal"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/2co.png",
+                    "link": "",
+                    "sort": "3",
+                    "new_tab": "true",
+                    "$$hashKey": "041",
+                    "name": {
+                        "ar": "2CO",
+                        "en": "2CO"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/amex.png",
+                    "name": {
+                        "ar": "Amex",
+                        "en": "Amex"
+                    },
+                    "link": "",
+                    "sort": "4",
+                    "new_tab": "true",
+                    "$$hashKey": "object:157"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/skrill.png",
+                    "name": {
+                        "ar": "Skrill",
+                        "en": "Skrill"
+                    },
+                    "link": "",
+                    "sort": "5",
+                    "new_tab": "true",
+                    "$$hashKey": "object:165"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/wallet.png",
+                    "name": {
+                        "ar": "Google",
+                        "en": "Google"
+                    },
+                    "link": "",
+                    "sort": "6",
+                    "new_tab": "true",
+                    "$$hashKey": "object:173"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/western.png",
+                    "name": {
+                        "ar": "Western Union",
+                        "en": "Western Union"
+                    },
+                    "link": "",
+                    "sort": "",
+                    "new_tab": "true",
+                    "$$hashKey": "object:180"
+                }
+            ],
+            "powered_background_color": "#fafafa",
+            "bottom_heading_color": "#25282C",
+            "body_link_hover_color": "#CA7379",
+            "topbar_link_color": "#888888",
+            "heading_font": {
+                "font_family": "Montserrat",
+                "text_style_transform": "uppercase"
+            },
+            "social_icon_hover_bg": "",
+            "product_cart_hover_color": "#fff",
+            "bottom_link_hover_color": "#25292C",
+            "icon_style": "icon",
+            "phone_1": "Tel. +1 2123431725",
+            "kuler_slides_buttons_bg_hover_color": "#34477A",
+            "bottom_link_color": "#888888",
+            "custom_block_content": "<div>This is a Demo Online Store. No orders shall be fulfilled.</div><div>Zorka is a Design-Driven Shop Theme for WooCommerce and WordPress. If you’re planning to start an online store right away, look no further, get this theme on ThemeForest .</div><div>This product page demonstrates a “Simple Product“.</div>",
+            "custom_copyright": {
+                "en": ""
+            },
+            "search_result_limit": "2",
+            "topbar_border_color": "#EEEEEE",
+            "topbar_link_hover_color": "#666666",
+            "product_name_color": "#1F1F1F",
+            "social_icon_color": "#CCCCCC",
+            "custom_information": {
+                "en": ""
+            },
+            "button_color": "#fff",
+            "product_sale_color": "#CA7379",
+            "information_title": {
+                "en": "About Us",
+                "ar": "About Us"
+            },
+            "product_cart_hover_bg_color": "#CA7379",
+            "product_buttons_bg_color": "#ffffff",
+            "custom_tab_1_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "topbar_background_color": "#FFFFFF",
+            "menu_item_color": "#25292C",
+            "product_sale_text_color": "#fff",
+            "product_buttons_bg_hover_color": "#ca7379",
+            "bottom_text_color": "#888888",
+            "product_buttons_hover_color": "#ffffff",
+            "product_cart_color": "#25282C",
+            "topbar_text_color": "#888888",
+            "product_buttons_color": "#25282c",
+            "bottom_background_color": "#fafafa",
+            "zoom_window_width": "300",
+            "button_background_color": "#34477A",
+            "product_image_height": "100",
+            "social_icon_hover_color": "#25292C",
+            "body_text_color": "#25282C",
+            "image_zoom_type": "outer_cloud",
+            "button_select_list": "false",
+            "custom_js_status": "false",
+            "custom_css_status": "false",
+            "custom_css_file_status": "false",
+            "show_payment_icons": "true",
+            "show_custom_copyright": "false",
+            "newsletter_button_text": {
+                "ar": "Subscribe",
+                "en": "Subscribe"
+            },
+            "newsletter_input_text": {
+                "ar": "Your Email Here",
+                "en": "Your Email Here"
+            },
+            "newsletter_success_message": {
+                "ar": "Thank You!",
+                "en": "Thank You!"
+            },
+            "newsletter_description_text": {
+                "ar": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here",
+                "en": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here"
+            },
+            "newsletter_title": {
+                "ar": "Newsletter",
+                "en": "Newsletter"
+            },
+            "show_newsletter_title": "true",
+            "show_newsletter": "true",
+            "social_icon_rss": "false",
+            "social_icon_instagram": "false",
+            "social_icon_pinterest": "false",
+            "social_icon_youtube": "true",
+            "social_icon_google_plus": "true",
+            "social_icon_twitter": "true",
+            "social_icon_facebook": "true",
+            "show_social_icons_title": "false",
+            "show_social_icons": "true",
+            "show_twitter_footer": "false",
+            "twitter_transparent_background": "false",
+            "show_twitter_title": "false",
+            "show_twitter_header": "false",
+            "show_twitter": "false",
+            "show_facebook_posts": "false",
+            "show_facebook_friend_faces": "false",
+            "show_facebook_title": "false",
+            "show_facebook": "false",
+            "show_contact_title": "false",
+            "show_contact": "true",
+            "show_information_title": "true",
+            "show_information": "true",
+            "scroll_up_text": {
+                "ar": "Up",
+                "en": "Up"
+            },
+            "enable_scroll_up": "true",
+            "enable_swap_image": "true",
+            "show_sale_badge": "true",
+            "show_quick_view": "true",
+            "show_custom_notification": "false",
+            "login_popup": "true",
+            "enable_one_page_checkout": "false",
+            "show_google_map": "false",
+            "show_custom_information": "false",
+            "show_custom_tab_2": "true",
+            "show_custom_tab_1": "true",
+            "show_custom_block": "true",
+            "show_related_products": "true",
+            "image_lightbox": "true",
+            "default_sharing": "true",
+            "show_number_quantity": "false",
+            "show_tax": "false",
+            "show_save_percent": "false",
+            "show_brand_logo": "false",
+            "sub_categories_image_carousel": "false",
+            "sub_category_image": "false",
+            "hide_category_image": "false",
+            "show_compare_button": "false",
+            "show_wish_list_button": "false",
+            "show_add_to_cart_button": "false",
+            "show_product_rating": "false",
+            "show_product_price": "false",
+            "show_product_description": "true",
+            "show_product_name": "true",
+            "show_product_image": "true",
+            "search_in_product_description": "false",
+            "search_in_specific_manufacturer": "false",
+            "search_in_specific_category": "false",
+            "live_search_status": "true",
+            "search_field_text": {
+                "ar": "Live Search Products ...",
+                "en": "Live Search Products ..."
+            },
+            "multi_level_default_menu": "false",
+            "mobile_menu_title": {
+                "ar": "Menu",
+                "en": "Menu"
+            },
+            "fixed_header": "false"
+        }
+    },
+    "zorka|skin3": {
+        "name": "Skin 3",
+        "theme_id": "zorka",
+        "root_skin_id": "skin3",
+        "options": {
+            "lens_zoom_shape": "basic",
+            "menu_item_hover_color": "#25292C",
+            "category_menu_type": "accordion",
+            "home_icon_type": "text",
+            "social_icon_bg": "",
+            "email_1": "Email. info@kulerthemes.com",
+            "custom_tab_2_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "body_link_color": "#25282C",
+            "product_price_color": "#CA7379",
+            "product_cart_bg_color": "#ffffff",
+            "product_old_price_color": "#aaa",
+            "zoom_window_height": "300",
+            "custom_tab_2_title": {
+                "en": "Custom Tab 2",
+                "ar": "Custom Tab 2"
+            },
+            "custom_tab_1_title": {
+                "en": "Custom Tab 1",
+                "ar": "Custom Tab 1"
+            },
+            "kuler_slides_buttons_bg_color": "#1f1f1f",
+            "information_content": {
+                "ar": "<span style=\"line-height: 20.7999992370605px;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est, impedit incidunt, laboriosam maxime molestias numquam odio officiis, possimus quo rem repellendus sapiente tenetur voluptas. A, expedita?</span>",
+                "en": "<span>580, BROADWAY, 10012 - NEW YORK <br> \nNY - U</span>"
+            },
+            "menu_font": {
+                "font_family": "Montserrat"
+            },
+            "product_image_width": "100",
+            "body_container_bg_color": "#fff",
+            "primary_color": "#CA7379",
+            "body_font": {
+                "font_family": "Montserrat"
+            },
+            "icon_size": "24px",
+            "menu_bg_color": "",
+            "button_hover_background": "#212121",
+            "related_products_style": "grid",
+            "payment_icons": [
+                {
+                    "image": "catalog/demo/zorka/payment_icons/visa.png",
+                    "name": {
+                        "ar": "Visa",
+                        "en": "Visa"
+                    },
+                    "link": "",
+                    "sort": "1",
+                    "new_tab": "true",
+                    "$$hashKey": "03N"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/paypal.png",
+                    "link": "",
+                    "sort": "2",
+                    "new_tab": "true",
+                    "$$hashKey": "03U",
+                    "name": {
+                        "ar": "Paypal",
+                        "en": "Paypal"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/2co.png",
+                    "link": "",
+                    "sort": "3",
+                    "new_tab": "true",
+                    "$$hashKey": "041",
+                    "name": {
+                        "ar": "2CO",
+                        "en": "2CO"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/amex.png",
+                    "name": {
+                        "ar": "Amex",
+                        "en": "Amex"
+                    },
+                    "link": "",
+                    "sort": "4",
+                    "new_tab": "true",
+                    "$$hashKey": "object:157"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/skrill.png",
+                    "name": {
+                        "ar": "Skrill",
+                        "en": "Skrill"
+                    },
+                    "link": "",
+                    "sort": "5",
+                    "new_tab": "true",
+                    "$$hashKey": "object:165"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/wallet.png",
+                    "name": {
+                        "ar": "Google",
+                        "en": "Google"
+                    },
+                    "link": "",
+                    "sort": "6",
+                    "new_tab": "true",
+                    "$$hashKey": "object:173"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/western.png",
+                    "name": {
+                        "ar": "Western Union",
+                        "en": "Western Union"
+                    },
+                    "link": "",
+                    "sort": "",
+                    "new_tab": "true",
+                    "$$hashKey": "object:180"
+                }
+            ],
+            "powered_background_color": "#fafafa",
+            "bottom_heading_color": "#25282C",
+            "body_link_hover_color": "#CA7379",
+            "topbar_link_color": "#888888",
+            "heading_font": {
+                "font_family": "Montserrat",
+                "text_style_transform": "uppercase"
+            },
+            "social_icon_hover_bg": "",
+            "product_cart_hover_color": "#fff",
+            "bottom_link_hover_color": "#25292C",
+            "icon_style": "icon",
+            "phone_1": "Tel. +1 2123431725",
+            "kuler_slides_buttons_bg_hover_color": "#34477A",
+            "bottom_link_color": "#888888",
+            "custom_block_content": "<div>This is a Demo Online Store. No orders shall be fulfilled.</div><div>Zorka is a Design-Driven Shop Theme for WooCommerce and WordPress. If you’re planning to start an online store right away, look no further, get this theme on ThemeForest .</div><div>This product page demonstrates a “Simple Product“.</div>",
+            "custom_copyright": {
+                "en": ""
+            },
+            "search_result_limit": "2",
+            "topbar_border_color": "#EEEEEE",
+            "topbar_link_hover_color": "#666666",
+            "product_name_color": "#1F1F1F",
+            "social_icon_color": "#CCCCCC",
+            "custom_information": {
+                "en": ""
+            },
+            "button_color": "#fff",
+            "product_sale_color": "#CA7379",
+            "information_title": {
+                "en": "About Us",
+                "ar": "About Us"
+            },
+            "product_cart_hover_bg_color": "#CA7379",
+            "product_buttons_bg_color": "#ffffff",
+            "custom_tab_1_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "topbar_background_color": "#FFFFFF",
+            "menu_item_color": "#25292C",
+            "product_sale_text_color": "#fff",
+            "product_buttons_bg_hover_color": "#ca7379",
+            "bottom_text_color": "#888888",
+            "product_buttons_hover_color": "#ffffff",
+            "product_cart_color": "#25282C",
+            "topbar_text_color": "#888888",
+            "product_buttons_color": "#25282c",
+            "bottom_background_color": "#fafafa",
+            "zoom_window_width": "300",
+            "button_background_color": "#34477A",
+            "product_image_height": "100",
+            "social_icon_hover_color": "#25292C",
+            "body_text_color": "#25282C",
+            "image_zoom_type": "outer_cloud",
+            "button_select_list": "false",
+            "custom_js_status": "false",
+            "custom_css_status": "false",
+            "custom_css_file_status": "false",
+            "show_payment_icons": "true",
+            "show_custom_copyright": "false",
+            "newsletter_button_text": {
+                "ar": "Subscribe",
+                "en": "Subscribe"
+            },
+            "newsletter_input_text": {
+                "ar": "Your Email Here",
+                "en": "Your Email Here"
+            },
+            "newsletter_success_message": {
+                "ar": "Thank You!",
+                "en": "Thank You!"
+            },
+            "newsletter_description_text": {
+                "ar": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here",
+                "en": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here"
+            },
+            "newsletter_title": {
+                "ar": "Newsletter",
+                "en": "Newsletter"
+            },
+            "show_newsletter_title": "true",
+            "show_newsletter": "true",
+            "social_icon_rss": "false",
+            "social_icon_instagram": "false",
+            "social_icon_pinterest": "false",
+            "social_icon_youtube": "true",
+            "social_icon_google_plus": "true",
+            "social_icon_twitter": "true",
+            "social_icon_facebook": "true",
+            "show_social_icons_title": "false",
+            "show_social_icons": "true",
+            "show_twitter_footer": "false",
+            "twitter_transparent_background": "false",
+            "show_twitter_title": "false",
+            "show_twitter_header": "false",
+            "show_twitter": "false",
+            "show_facebook_posts": "false",
+            "show_facebook_friend_faces": "false",
+            "show_facebook_title": "false",
+            "show_facebook": "false",
+            "show_contact_title": "false",
+            "show_contact": "true",
+            "show_information_title": "true",
+            "show_information": "true",
+            "scroll_up_text": {
+                "ar": "Up",
+                "en": "Up"
+            },
+            "enable_scroll_up": "true",
+            "enable_swap_image": "true",
+            "show_sale_badge": "true",
+            "show_quick_view": "true",
+            "show_custom_notification": "false",
+            "login_popup": "true",
+            "enable_one_page_checkout": "false",
+            "show_google_map": "false",
+            "show_custom_information": "false",
+            "show_custom_tab_2": "true",
+            "show_custom_tab_1": "true",
+            "show_custom_block": "true",
+            "show_related_products": "true",
+            "image_lightbox": "true",
+            "default_sharing": "true",
+            "show_number_quantity": "false",
+            "show_tax": "false",
+            "show_save_percent": "false",
+            "show_brand_logo": "false",
+            "sub_categories_image_carousel": "false",
+            "sub_category_image": "false",
+            "hide_category_image": "false",
+            "show_compare_button": "false",
+            "show_wish_list_button": "false",
+            "show_add_to_cart_button": "false",
+            "show_product_rating": "false",
+            "show_product_price": "false",
+            "show_product_description": "true",
+            "show_product_name": "true",
+            "show_product_image": "true",
+            "search_in_product_description": "false",
+            "search_in_specific_manufacturer": "false",
+            "search_in_specific_category": "false",
+            "live_search_status": "true",
+            "search_field_text": {
+                "ar": "Live Search Products ...",
+                "en": "Live Search Products ..."
+            },
+            "multi_level_default_menu": "false",
+            "mobile_menu_title": {
+                "ar": "Menu",
+                "en": "Menu"
+            },
+            "fixed_header": "false"
+        }
+    },
+    "zorka|skin4": {
+        "name": "Skin 4",
+        "theme_id": "zorka",
+        "root_skin_id": "skin4",
+        "options": {
+            "lens_zoom_shape": "basic",
+            "menu_item_hover_color": "#25292C",
+            "category_menu_type": "accordion",
+            "home_icon_type": "text",
+            "social_icon_bg": "",
+            "email_1": "Email. info@kulerthemes.com",
+            "custom_tab_2_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "body_link_color": "#25282C",
+            "product_price_color": "#CA7379",
+            "product_cart_bg_color": "#ffffff",
+            "product_old_price_color": "#aaa",
+            "zoom_window_height": "300",
+            "custom_tab_2_title": {
+                "en": "Custom Tab 2",
+                "ar": "Custom Tab 2"
+            },
+            "custom_tab_1_title": {
+                "en": "Custom Tab 1",
+                "ar": "Custom Tab 1"
+            },
+            "kuler_slides_buttons_bg_color": "#1f1f1f",
+            "information_content": {
+                "ar": "<span style=\"line-height: 20.7999992370605px;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut dignissimos ea est, impedit incidunt, laboriosam maxime molestias numquam odio officiis, possimus quo rem repellendus sapiente tenetur voluptas. A, expedita?</span>",
+                "en": "<span>580, BROADWAY, 10012 - NEW YORK <br> \nNY - U</span>"
+            },
+            "menu_font": {
+                "font_family": "Montserrat"
+            },
+            "product_image_width": "100",
+            "body_container_bg_color": "#fff",
+            "primary_color": "#CA7379",
+            "body_font": {
+                "font_family": "Montserrat"
+            },
+            "icon_size": "24px",
+            "menu_bg_color": "",
+            "button_hover_background": "#212121",
+            "related_products_style": "grid",
+            "payment_icons": [
+                {
+                    "image": "catalog/demo/zorka/payment_icons/visa.png",
+                    "name": {
+                        "ar": "Visa",
+                        "en": "Visa"
+                    },
+                    "link": "",
+                    "sort": "1",
+                    "new_tab": "true",
+                    "$$hashKey": "03N"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/paypal.png",
+                    "link": "",
+                    "sort": "2",
+                    "new_tab": "true",
+                    "$$hashKey": "03U",
+                    "name": {
+                        "ar": "Paypal",
+                        "en": "Paypal"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/2co.png",
+                    "link": "",
+                    "sort": "3",
+                    "new_tab": "true",
+                    "$$hashKey": "041",
+                    "name": {
+                        "ar": "2CO",
+                        "en": "2CO"
+                    }
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/amex.png",
+                    "name": {
+                        "ar": "Amex",
+                        "en": "Amex"
+                    },
+                    "link": "",
+                    "sort": "4",
+                    "new_tab": "true",
+                    "$$hashKey": "object:157"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/skrill.png",
+                    "name": {
+                        "ar": "Skrill",
+                        "en": "Skrill"
+                    },
+                    "link": "",
+                    "sort": "5",
+                    "new_tab": "true",
+                    "$$hashKey": "object:165"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/wallet.png",
+                    "name": {
+                        "ar": "Google",
+                        "en": "Google"
+                    },
+                    "link": "",
+                    "sort": "6",
+                    "new_tab": "true",
+                    "$$hashKey": "object:173"
+                },
+                {
+                    "image": "catalog/demo/zorka/payment_icons/western.png",
+                    "name": {
+                        "ar": "Western Union",
+                        "en": "Western Union"
+                    },
+                    "link": "",
+                    "sort": "",
+                    "new_tab": "true",
+                    "$$hashKey": "object:180"
+                }
+            ],
+            "powered_background_color": "#fafafa",
+            "bottom_heading_color": "#25282C",
+            "body_link_hover_color": "#CA7379",
+            "topbar_link_color": "#888888",
+            "heading_font": {
+                "font_family": "Montserrat",
+                "text_style_transform": "uppercase"
+            },
+            "social_icon_hover_bg": "",
+            "product_cart_hover_color": "#fff",
+            "bottom_link_hover_color": "#25292C",
+            "icon_style": "icon",
+            "phone_1": "Tel. +1 2123431725",
+            "kuler_slides_buttons_bg_hover_color": "#34477A",
+            "bottom_link_color": "#888888",
+            "custom_block_content": "<div>This is a Demo Online Store. No orders shall be fulfilled.</div><div>Zorka is a Design-Driven Shop Theme for WooCommerce and WordPress. If you’re planning to start an online store right away, look no further, get this theme on ThemeForest .</div><div>This product page demonstrates a “Simple Product“.</div>",
+            "custom_copyright": {
+                "en": ""
+            },
+            "search_result_limit": "2",
+            "topbar_border_color": "#EEEEEE",
+            "topbar_link_hover_color": "#666666",
+            "product_name_color": "#1F1F1F",
+            "social_icon_color": "#CCCCCC",
+            "custom_information": {
+                "en": ""
+            },
+            "button_color": "#fff",
+            "product_sale_color": "#CA7379",
+            "information_title": {
+                "en": "About Us",
+                "ar": "About Us"
+            },
+            "product_cart_hover_bg_color": "#CA7379",
+            "product_buttons_bg_color": "#ffffff",
+            "custom_tab_1_content": {
+                "en": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+                "ar": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+            },
+            "topbar_background_color": "#FFFFFF",
+            "menu_item_color": "#25292C",
+            "product_sale_text_color": "#fff",
+            "product_buttons_bg_hover_color": "#ca7379",
+            "bottom_text_color": "#888888",
+            "product_buttons_hover_color": "#ffffff",
+            "product_cart_color": "#25282C",
+            "topbar_text_color": "#888888",
+            "product_buttons_color": "#25282c",
+            "bottom_background_color": "#fafafa",
+            "zoom_window_width": "300",
+            "button_background_color": "#34477A",
+            "product_image_height": "100",
+            "social_icon_hover_color": "#25292C",
+            "body_text_color": "#25282C",
+            "image_zoom_type": "outer_cloud",
+            "button_select_list": "false",
+            "custom_js_status": "false",
+            "custom_css_status": "false",
+            "custom_css_file_status": "false",
+            "show_payment_icons": "true",
+            "show_custom_copyright": "false",
+            "newsletter_button_text": {
+                "ar": "Subscribe",
+                "en": "Subscribe"
+            },
+            "newsletter_input_text": {
+                "ar": "Your Email Here",
+                "en": "Your Email Here"
+            },
+            "newsletter_success_message": {
+                "ar": "Thank You!",
+                "en": "Thank You!"
+            },
+            "newsletter_description_text": {
+                "ar": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here",
+                "en": "Enter your email and we’ll send you a coupon with 10% off your next order. Add any text here"
+            },
+            "newsletter_title": {
+                "ar": "Newsletter",
+                "en": "Newsletter"
+            },
+            "show_newsletter_title": "true",
+            "show_newsletter": "true",
+            "social_icon_rss": "false",
+            "social_icon_instagram": "false",
+            "social_icon_pinterest": "false",
+            "social_icon_youtube": "true",
+            "social_icon_google_plus": "true",
+            "social_icon_twitter": "true",
+            "social_icon_facebook": "true",
+            "show_social_icons_title": "false",
+            "show_social_icons": "true",
+            "show_twitter_footer": "false",
+            "twitter_transparent_background": "false",
+            "show_twitter_title": "false",
+            "show_twitter_header": "false",
+            "show_twitter": "false",
+            "show_facebook_posts": "false",
+            "show_facebook_friend_faces": "false",
+            "show_facebook_title": "false",
+            "show_facebook": "false",
+            "show_contact_title": "false",
+            "show_contact": "true",
+            "show_information_title": "true",
+            "show_information": "true",
+            "scroll_up_text": {
+                "ar": "Up",
+                "en": "Up"
+            },
+            "enable_scroll_up": "true",
+            "enable_swap_image": "true",
+            "show_sale_badge": "true",
+            "show_quick_view": "true",
+            "show_custom_notification": "false",
+            "login_popup": "true",
+            "enable_one_page_checkout": "false",
+            "show_google_map": "false",
+            "show_custom_information": "false",
+            "show_custom_tab_2": "true",
+            "show_custom_tab_1": "true",
+            "show_custom_block": "true",
+            "show_related_products": "true",
+            "image_lightbox": "true",
+            "default_sharing": "true",
+            "show_number_quantity": "false",
+            "show_tax": "false",
+            "show_save_percent": "false",
+            "show_brand_logo": "false",
+            "sub_categories_image_carousel": "false",
+            "sub_category_image": "false",
+            "hide_category_image": "false",
+            "show_compare_button": "false",
+            "show_wish_list_button": "false",
+            "show_add_to_cart_button": "false",
+            "show_product_rating": "false",
+            "show_product_price": "false",
+            "show_product_description": "true",
+            "show_product_name": "true",
+            "show_product_image": "true",
+            "search_in_product_description": "false",
+            "search_in_specific_manufacturer": "false",
+            "search_in_specific_category": "false",
+            "live_search_status": "true",
+            "search_field_text": {
+                "ar": "Live Search Products ...",
+                "en": "Live Search Products ..."
+            },
+            "multi_level_default_menu": "false",
+            "mobile_menu_title": {
+                "ar": "Menu",
+                "en": "Menu"
+            },
+            "fixed_header": "false"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<modification>
+	
+	<id>Extra Product Pages</id>
+	<version>220.1</version>
+	<vqmver>2.6.1</vqmver>
+	<author>Clear Thinking, LLC</author>
+	<email>johnathan@getclearthinking.com</email>
+	<website>http://www.getclearthinking.com</website>
+	
+	<!-- Bestseller link -->
+	<file name="catalog/view/theme/*/template/module/bestseller.tpl" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php echo $heading_title; ?>
+			]]></search>
+			<add trim="true"><![CDATA[
+				<?php echo $heading_title; ?> <div style="text-transform: none; padding-right: 10px; float: right"><a href="index.php?route=product/list/bestseller">View All</a></div>
+			]]></add>
+		</operation>
+	</file>
+	
+	<!-- Featured link -->
+	<file name="catalog/view/theme/*/template/module/featured.tpl" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php echo $heading_title; ?>
+			]]></search>
+			<add trim="true"><![CDATA[
+				<?php echo $heading_title; ?> <div style="text-transform: none; padding-right: 10px; float: right"><a href="index.php?route=product/list/featured">View All</a></div>
+			]]></add>
+		</operation>
+	</file>
+	
+	<!-- Latest link -->
+	<file name="catalog/view/theme/*/template/module/latest.tpl" error="skip">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php echo $heading_title; ?>
+			]]></search>
+			<add trim="true"><![CDATA[
+				<?php echo $heading_title; ?> <div style="text-transform: none; padding-right: 10px; float: right"><a href="index.php?route=product/list/latest">View All</a></div>
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

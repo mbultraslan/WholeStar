@@ -1,0 +1,52 @@
+---------- Date: 2016-09-25 20:22:16 ~ IP : 77.98.143.225 ----------
+REQUEST URI : /image/catalog/yeni%20logo%20%205.png
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-25 20:30:46 ~ IP : 66.249.79.146 ----------
+REQUEST URI : /V-Front-Open-Back-Chiffon-Dress-S391.html?sort=pd.name&order=ASC&limit=75
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/0_out_of_stock_for_options_v2000_to_v2011.xml
+   id        : Out of Stock for Options v2.0.0.0 to v2.0.1.1
+   version   : 
+   vqmver    : 
+   author    : GoGo OpenCart
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(1)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <input type="_radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" />
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-09-25 21:41:15 ~ IP : 66.249.79.131 ----------
+REQUEST URI : /index.php?route=product/search&tag=Frill%20Bardot%20Black%20Dress%20S1137
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/_seo_mega_pack.xml
+   id        : SEO Mega KIT
+   version   : 2.0.0.0
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);
+
+MOD DETAILS:
+   modFile   : /home/glam/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+----------------------------------------------------------------------
+
+

@@ -1,0 +1,381 @@
+@import (reference) "_elements";
+
+/*-------------------------------------
+KULER BLOG MODULE
+-------------------------------------*/
+.kbm-recent-article {
+  .articles__image {
+    float: left;
+    margin-right: 20px;
+    > li {
+      padding: 10px 0;
+    }
+    .article__title {
+      text-transform: uppercase;
+      padding: 10px 20px;
+    }
+  }
+  .articles__description {
+    color: #878787;
+    line-height: 1.8;
+    margin: 10px 0;
+  }
+  .articles__date{
+    display: none;
+  }
+  .articles__read-more {
+    @media @xs-max {
+      padding-left: 170px;
+    }
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: @font-small;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
+  .author {
+    font-size: 16px;
+    margin-bottom: 5px;
+    &-badge {
+      font-size: 12px;
+      text-transform: none;
+      margin: 0 10px;
+      padding: 5px;
+    }
+  }
+
+  .date {
+    display: inline;
+    margin-left: 30px !important;
+  }
+
+  .message {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .reply {
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 10px;
+    .transition;
+  }
+
+  #comment-form {
+    display: inline-block;
+  }
+
+
+.reply-list {
+  margin-left: 75px;
+  .comment {
+    padding: 20px !important;
+    margin-bottom: 10px;
+  }
+  &.comment-list {
+    border: none;
+  }
+}
+
+#comment-form {
+  margin-top: 30px;
+
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    margin-bottom: 50px;
+    &:before {
+      line-height: 12px;
+      vertical-align: top;
+    }
+  }
+
+  #captcha {
+    margin-top: 10px;
+  }
+
+  #comment-submit {
+    margin-top: 20px;
+  }
+
+  form {
+    float: none;
+  }
+
+  #reply-cancel {
+    float: none !important;
+    margin-top: 20px !important;
+  }
+}
+.article{
+  &__extra-info {
+    text-align: start;
+    font-size: 0;
+    margin: 10px 0;
+    time, a {
+      font-size: 13px;
+      margin-right: 15px;
+    }
+    span:before, time:before {
+      font-family: FontAwesome;
+      font-size: 14px;
+      margin-right: 5px;
+    }
+    &__author {
+      &:before {
+        content: "\f007";
+      }
+    }
+    &__category {
+      &:before {
+        content: "\f07c";
+      }
+    }
+    &__date {
+      &:before {
+        content: "\f073";
+      }
+    }
+    &__comment-total {
+      &:before {
+        content: "\f086";
+      }
+    }
+  }
+  &__read-more{
+    margin-top: 20px;
+    text-align: right;
+    .read-more{
+      color: #ffffff;
+    }
+  }
+}
+.module-kbm-article{
+  .article{
+    margin-bottom: 20px;
+    &-extra-info{
+      margin-bottom: 10px;
+    }
+  }
+  .comment{
+    &-container{
+      padding: 0;
+    }
+    &-stats{
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+}
+//side bar setting
+#column-left {
+  [class*="col-"]{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .articles {
+    text-align: start;
+    margin-bottom: 30px;
+    &__image {
+      float: left;
+      margin-right: 10px;
+      &:before {
+        display: none;
+      }
+      a:before {
+        display: none;
+      }
+    }
+    &__title {
+      font-size: 14px;
+      text-transform: none;
+      margin: 0;
+    }
+    &__date {
+      display: block;
+      color: #878787;
+    }
+  }
+}
+
+/* BLOG CATEGORY */
+.kbm-category {
+  padding: 0 20px;
+  border: 2px solid @color1;
+  .treemenu {
+    > li {
+      padding: 15px;
+      .transition;
+      &:before {
+        content: '+';
+        font-size: 15px;
+        line-height: 15px;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media @sm-max {
+  .comment {
+
+    .author, .message {
+      margin-left: 70px !important;
+    }
+
+    .author-badge {
+      margin: 0;
+    }
+
+    .date {
+      margin-left: 10px !important;
+    }
+
+    .reply {
+      margin-top: 10px;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .reply-list {
+    margin: 30px 0 0;
+  }
+
+  #comment-form {
+    form {
+      width: 100%;
+    }
+  }
+}
+
+@media @lg {
+  .article {
+    &__image {
+      overflow: hidden;
+      position: relative;
+      &:hover {
+        &:before, a:before {
+          opacity: 1;
+          visibility: visible;
+        }
+        a:before {
+          left: 50%;
+        }
+      }
+      &:before {
+        content: '';
+        opacity: 0;
+        visibility: hidden;
+        .absolute-center;
+        .transition;
+      }
+      a:before {
+        content: "\f0c1";
+        color: #ffffff;
+        font-family: FontAwesome;
+        font-size: 35px;
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        opacity: 0;
+        visibility: hidden;
+        padding: 20px;
+        .translate(-50%, -50%);
+        .transition;
+      }
+    }
+  }
+}
+
+/******************* SKIN ******************/
+.article {
+  &__extra-info a, &__extra-info time, &__date {
+    color: #999999;
+  }
+  &__extra-info {
+    span:before, time:before {
+      color: #999999;
+    }
+  }
+}
+
+.article-list {
+  .article {
+    padding: 30px 0;
+    border-bottom: 1px solid #eeeeee;
+  }
+}
+
+.side-bar {
+  .kbm-recent-article {
+    .recent-article {
+      &__title, &__date {
+        color: @color1;
+      }
+      &__description {
+        color: #666;
+      }
+    }
+  }
+}
+
+.kbm-category {
+  .treemenu {
+    > li:hover {
+      border-color: #ccc;
+    }
+  }
+}
+
+.related-articles {
+  border-top: 1px solid #eee;
+}
+
+.comment {
+  background-color: transparent !important;
+  &-list {
+    border-bottom: 1px solid #eeeeee;
+  }
+  &-container {
+    background-color: transparent !important;
+  }
+  &-stats {
+    color: #444444;
+    background-color: #eeeeee;
+  }
+  .date, .message {
+    color: #888888;
+  }
+  .author {
+    &-badge {
+      background-color:#ccc;
+    }
+  }
+}
+
+.reply-list {
+  .comment {
+    background-color: #f5f5f2 !important;
+  }
+}
+
+@media @lg {
+  .article {
+    &__image {
+      &:before {
+        background-color: rgba(202, 115, 121, 0.5);
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript">
+        u = "{{template_base_path}}";
+        function ath(t, p) {
+            var e = document.createElement(t);
+            document.getElementsByTagName("head")[0].appendChild(e);
+            if (p) {
+                for ( var k in p) {
+                    e.setAttribute(k, p[k]);
+                }
+            }
+        }
+        ath("script", {src : u + "/js/script.js", epi : ebayItemID, url : u });
+        ath("link", {href : u + "/css/style.css", rel : "stylesheet"});
+    </script>
+</head>
+<body marginwidth="0" marginheight="0">
+
+<div id="dpd">
+    <div id="w">
+
+        <div id="c">
+            <div class="pb">
+                <div class="r">
+                    <div id="a">
+                        <h1>{{name}}</h1>
+
+                        {% if model %}
+                        <b>Model: {{model}}</b>
+                        {% endif %}
+                        {% if manufacturer %}
+                        <b>Mnufacturer: {{manufacturer}}</b>
+                        {% endif %}
+
+                    </div>
+                    <h2>{{currency}} {{price}}</h2>
+                    <hr>
+                </div>
+                <img src="{{image}}" style="width: 50%;">
+                <div id="g">
+                    {% for image in img_tpl %}
+                    <img src="{{ image }}">
+                    {% endfor %}
+
+                </div>
+
+                <div class="k">
+                    <div class="pdesc">{{description}}</div>
+                </div>
+            </div>
+            <div class="k">
+
+
+                <div>
+                    {% for attrbute_group in attrbute_groups %}
+                    <div class="group_name">
+                        {{ attrbute_group.name }}
+                    </div>
+                    <div>
+                        {% for attribute in attrbute_group.attrbutes %}
+                        <div class="name">{{attribute.name}}</div>
+                        <div class="value">{{attribute.value}}</div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <name>Zorka</name>
+  <code>default</code>
+  <version>1.0</version>
+  <author>KulerThemes.com</author>
+  <link>http://www.kulerthemes.com</link>
+
+  <!-- Override Owl Carousel -->
+	<file path="catalog/controller/module/carousel.php">
+		<operation>
+			<search><![CDATA[$this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');]]></search>
+			<add position="replace"><![CDATA[
+			
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

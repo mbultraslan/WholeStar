@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <name>KulerThemes CP</name>
+  <code>default</code>
+  <version>1.0</version>
+  <author>KulerThemes.com</author>
+  <link>http://www.kulerthemes.com</link>
+
+  <!-- Override Response -->
+	<file path="system/library/response.php">
+		<operation>
+			<search><![CDATA[if ($this->output) {]]></search>
+			<add position="after"><![CDATA[
+			if (class_exists('Kuler'))
+			{
+			  $this->output = Kuler::getInstance()->processOutput($this->output);
+			}
+			]]></add>
+		</operation>
+	</file>
+
+  <file path="system/engine/front.php">
+    <operation>
+      <search><![CDATA[$this->registry = $registry;]]></search>
+      <add position="after"><![CDATA[
+      if (!defined('DIR_CATALOG') && defined('DIR_IMAGE')) {
+        $this->addPreAction(new Action('module/kuler_cp/startup'));
+      }
+      ]]></add>
+    </operation>
+  </file>
+
+  <file path="catalog/controller/module/kuler_cp.php">
+    <operation>
+      <search><![CDATA[$this->overrideResponse();]]></search>
+      <add position="replace"><![CDATA[]]></add>
+    </operation>
+  </file>
+  <!-- / Override Response -->
+
+  <!-- All pages layout -->
+  <file path="catalog/model/design/layout.php">
+    <operation>
+      <search><![CDATA[return $query->rows;]]></search>
+      <add position="before"><![CDATA[
+        $all_layouts_id = $this->model_design_layout->getLayout('all');
+        if ($all_layouts_id) {
+          $all_layouts_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$all_layouts_id . "' AND position = '" . $this->db->escape($position) . "' ORDER BY sort_order");
+
+          return array_merge($all_layouts_query->rows, $query->rows);
+        }      
+      ]]></add>
+    </operation>
+  </file>
+  <!-- / All pages layout -->
+
+  <!-- Extra Positions -->
+  <file path="admin/controller/design/layout.php">
+    <operation>
+      <search><![CDATA[$this->response->setOutput($this->load->view('design/layout_form.tpl', $data));]]></search>
+      <add position="before"><![CDATA[
+      $this->load->model('kuler/common');
+      $data['kuler_extra_positions'] = $this->model_kuler_common->getPositions();
+      ]]></add>
+    </operation>
+  </file>
+
+  <file path="admin/view/template/design/layout_form.tpl">
+    <operation>
+      <search><![CDATA[html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';]]></search>
+      <add position="replace"><![CDATA[
+      html += '    <option value="column_right"><?php echo $text_column_right; ?> </option>';
+      <?php foreach ($kuler_extra_positions as $position_code => $position_name) { ?>
+        html += '<option value="<?php echo $position_code; ?>"><?php echo $position_name; ?></option>';
+      <?php } ?>
+      ]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[<option value="column_right"><?php echo $text_column_right; ?></option>]]></search>
+      <add position="after"><![CDATA[
+      <?php } ?>
+      <?php foreach ($kuler_extra_positions as $position_code => $position_name) { ?>
+        <option value="<?php echo $position_code; ?>"<?php if ($layout_module['position'] == $position_code) echo ' selected="selected"'; ?>><?php echo $position_name; ?></option>
+      ]]></add>
+    </operation>
+  </file>
+  <!-- / Extra Positions -->
+
+</modification>

@@ -1,0 +1,53 @@
+.page-header h1 {
+font-size: 24px !important;
+margin-bottom: 0 !important;
+}
+#content .text-left,#content .text-right {
+padding: 4px !important;
+}
+#content .tooltip1 {
+margin-bottom: 0 !important;
+margin-left: 10px;
+}
+.scroll1 {
+height: 104px;
+overflow: auto;
+margin-bottom: 4px !important;
+padding: 2px !important;
+}
+.scroll1 .checkbox {
+margin: 0 !important;
+}
+.list1 {
+border-collapse: collapse;
+width: 100%;
+border-top: 1px solid #DDDDDD;
+border-left: 1px solid #DDDDDD;
+}
+.list1 td {
+border-right: 1px solid #DDDDDD;
+border-bottom: 1px solid #DDDDDD;
+}
+.tooltip-inner {
+max-width: 400px !important;
+text-align: left !important;
+}
+.form-horizontal .radio,
+.form-horizontal .checkbox,
+.form-horizontal .control-label {
+min-height: 0 !important;
+padding: 0 !important;
+}
+
+
+
+.prod_table1 > tbody > tr> td {
+padding: 4px !important;
+}
+.prod_h1 {
+min-height: 60px;
+}
+.prod_h1 > h3 {
+font-size: 24px !important;
+}
+

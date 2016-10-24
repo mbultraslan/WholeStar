@@ -1,0 +1,76 @@
+<modification>
+	<id>SEO Mega KIT - Auto Generator</id>
+	<version>1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>marsilea15@gmail.com</author>
+
+	<!-- Product -->
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[$this->cache->delete('product');]]></search>
+			<add><![CDATA[
+				if( in_array( __FUNCTION__, array( 'addProduct', 'editProduct' ) ) && $this->config->get( 'smp_at_is_install' ) ) {
+					require_once VQMod::modCheck( DIR_SYSTEM . 'library/smk/extensions/auto_generator.php' );
+
+					SeoMegaPack_AutoGenerator::newInstance( $this )
+						->createSeoUrlProduct( $product_id )
+						->createMetaKeywords( $product_id )
+						->createMetaDescription( $product_id )
+						->createSeoTitles( $product_id )
+						->createSeoHeaderTitles( $product_id )
+						->createTags( $product_id )
+						->createDescription( $product_id )
+						->createSeoAltImages( $product_id )
+						->createSeoTitleImages( $product_id )
+						->createRelatedProducts( $product_id );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- #################################################################################### -->
+
+	<!-- Category -->
+	<file name="admin/model/catalog/category.php">
+		<operation>
+			<search position="before"><![CDATA[$this->cache->delete('category');]]></search>
+			<add><![CDATA[
+				if( in_array( __FUNCTION__, array( 'addCategory', 'editCategory' ) ) && $this->config->get( 'smp_at_is_install' ) ) {
+					require_once VQMod::modCheck( DIR_SYSTEM . 'library/smk/extensions/auto_generator.php' );
+
+					SeoMegaPack_AutoGenerator::newInstance( $this )
+						->createSeoUrlCategory( $category_id )
+						->createMetaKeywordsCategory( $category_id )
+						->createMetaDescriptionCategory( $category_id )
+						->createSeoTitlesCategory( $category_id )
+						->createSeoHeaderTitlesCategory( $category_id )
+						->createTagsCategory( $category_id )
+						->createDescriptionCategory( $category_id );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<!-- #################################################################################### -->
+
+	<!-- Information -->
+	<file name="admin/model/catalog/information.php">
+		<operation>
+			<search position="before"><![CDATA[$this->cache->delete('information');]]></search>
+			<add><![CDATA[
+				if( in_array( __FUNCTION__, array( 'addInformation', 'editInformation' ) ) && $this->config->get( 'smp_at_is_install' ) ) {
+					require_once VQMod::modCheck( DIR_SYSTEM . 'library/smk/extensions/auto_generator.php' );
+
+					SeoMegaPack_AutoGenerator::newInstance( $this )
+						->createSeoUrlInformation( $information_id )
+						->createMetaKeywordsInformation( $information_id )
+						->createMetaDescriptionInformation( $information_id )
+						->createSeoTitlesInformation( $information_id )
+						->createSeoHeaderTitlesInformation( $information_id )
+						->createTagsInformation( $information_id );
+				}
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

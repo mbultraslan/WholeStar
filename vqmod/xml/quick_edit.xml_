@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created using vQModerator's XML Generator by The Wizard of Osch for http://www.crystalcopy.nl //-->
+<modification>
+	<name><![CDATA[QuickEdit]]></name>
+	<version>2.0.3</version>
+	<author><![CDATA[The Wizard of Osch, for www.CrystalCopy.nl]]></author>
+	<code>quickedit</code>
+	<description><![CDATA[Quickly edit your products from the Product Listing]]></description>
+
+	<file path="admin/controller/catalog/product.php">
+		<operation>
+			<search index="0,1,2,3,5,6,7" trim="true"><![CDATA[if (isset($this->request->get['page'])) {]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Admin Category Filter and Limit
+			if (isset($this->request->get['filter_category_id'])) $url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
+			if (isset($this->request->get['limit'])) $url .= '&limit=' . $this->request->get['limit'];
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$this->load->language('catalog/product');]]></search>
+			<add position="after" trim="false"><![CDATA[		$this->load->language('catalog/quick_edit');]]></add>
+		</operation>
+	
+		<operation info="For OpenCart above v2.1.0.1">
+			<search trim="true"><![CDATA[$this->language->load('catalog/product');]]></search>
+			<add position="after" trim="false"><![CDATA[		$this->language->load('catalog/quick_edit');]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$page = 1;]]></search>
+			<add position="after" trim="false" offset="1"><![CDATA[// BOF - Zappo - Quick Edit - Added Category filter, Limit and Quick Edit Settings
+		if (isset($this->request->get['filter_category_id'])) {
+			$filter_category_id = $this->request->get['filter_category_id'];
+		} else {
+			$filter_category_id = NULL;
+		}
+
+		if (isset($this->request->get['limit'])) {
+			$limit = (int)$this->request->get['limit'];
+		} else {
+			$limit = $this->config->get('config_limit_admin');
+		}
+
+		$data['text_select_all'] = $this->language->get('text_select_all');
+		$data['text_unselect_all'] = $this->language->get('text_unselect_all');
+		$data['text_per_page'] = $this->language->get('text_per_page');
+
+		$data['limits'] = '';
+		for ($lim = 10; $lim <= 1000; $lim+=5) {
+			if ($lim > 50 && $lim < 100) $lim += 5;
+			if ($lim > 100 && $lim < 250) $lim += 20;
+			if ($lim > 250 && $lim < 500) $lim += 45;
+			if ($lim > 500) $lim += 95;
+			$data['limits'] .= '<option value="'.$lim.'"'.(($lim == $limit) ? ' selected="selected"' : '').'>'.$lim.'</option>';
+		}
+// EOF - Zappo - Quick Edit - Added Category filter, Limit and Quick Edit Settings]]></add>
+		</operation>
+	
+		<operation>
+			<search index="1" trim="true"><![CDATA[if (isset($this->request->get['page'])) {]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Calculate correct page & go to Prev/Next Product
+			if (isset($this->request->get['quick'])) {
+				$quick = $this->request->get['quick'];
+				$data = array();
+				foreach ($this->request->get as $g => $v) {
+					if (substr($g, 0, 7) == 'filter_' || $g == 'sort' || $g == 'order') {
+						$data[$g] = $v;
+					}
+				}
+				$results = $this->model_catalog_product->getProducts($data);
+				// Get Current product's key
+				foreach ($results as $key => $result) {
+					if ($result['product_id'] == $this->request->get['product_id']) {
+						$pkey = $key;
+						break;
+					}
+				}
+				// Get Last and First key
+				end($results);
+				$last = key($results);
+				if ($pkey == $last) {
+					reset($results);
+					$first = key($results);
+				}
+				$limit = (isset($this->request->get['limit'])) ? $this->request->get['limit'] : $this->config->get('config_limit_admin');
+				if ($quick == 'prev') {
+					$page = ceil($key / $limit);
+					if ($key == 0) $page = ceil(($last + 1) / $limit);
+					$url .= '&page=' . $page;
+					$pId = ($key == 0) ? $results[$last]['product_id'] : $results[$key-1]['product_id'];
+				} else {
+					$page = ceil(($key + 2) / $limit);
+					if (isset($first)) $page = 1;
+					$url .= '&page=' . $page;
+					$pId = (isset($first)) ? $results[$first]['product_id'] : $results[$key+1]['product_id'];
+				}
+				$this->response->redirect($this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $pId . $url, 'SSL'));
+			}
+// EOF - Zappo - Quick Edit - Calculate correct page & go to Prev/Next Product
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[function getList(]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - ONE LINE - Load QuickEdit Settings
+		$this->config->load('quick_edit');]]></add>
+		</operation>
+	
+		<operation info="Added Default Sort Setting">
+			<search trim="true"><![CDATA[$sort = 'pd.name';]]></search>
+			<add position="replace" trim="false"><![CDATA[$sort = (QE_DEFAULT_SORT) ? QE_DEFAULT_SORT : 'pd.name';]]></add>
+		</operation>
+	
+		<operation info="Added Default Sort Setting">
+			<search trim="true"><![CDATA[$order = 'ASC';]]></search>
+			<add position="replace" trim="false"><![CDATA[$order = (QE_DEFAULT_ORDER) ? 'DESC' : 'ASC';]]></add>
+		</operation>
+	
+		<operation>
+			<search index="4" trim="true"><![CDATA[$url .= '&sort=' . $this->request->get['sort'];]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Default Sort Setting for Prev/Next listing
+		} elseif (QE_DEFAULT_SORT) {
+			$url .= '&sort=' . QE_DEFAULT_SORT;]]></add>
+		</operation>
+	
+		<operation>
+			<search index="4" trim="true"><![CDATA[$url .= '&order=' . $this->request->get['order'];]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Default Sort Setting for Prev/Next listing
+        } elseif (QE_DEFAULT_ORDER) {
+            $url .= '&order=' . QE_DEFAULT_ORDER;]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[* $this->config->get('config_limit_admin')]]></search>
+			<add position="replace" trim="false"><![CDATA[* $limit]]></add>
+		</operation>
+	
+		<operation>
+			<search index="0" trim="true"><![CDATA['start']]></search>
+			<add position="after" trim="false"><![CDATA[			'filter_category_id' => $filter_category_id,
+			'filter_sub_category' => true,]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[=> $this->config->get('config_limit_admin')]]></search>
+			<add position="replace" trim="false"><![CDATA[=> $limit]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$product_total =]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Get Categories, Quick Settings button & link, and get inline edit
+		if (!isset($data['product_types'])) $data['product_types'] = array(); // Pre-added Product Types
+		$this->load->model('localisation/language');
+		$languages = $this->model_localisation_language->getLanguages();
+		$data['language_flags'] = '';
+		foreach ($languages as $lang) {
+			if ($data['language_flags']) $data['language_flags'] .= ', ';
+			$data['language_flags'] .= $lang['language_id'] . ': "view/image/flags/' . $lang['image'] . '"';
+		}
+
+		$this->load->model('catalog/category');
+		$data['categories'] = $this->model_catalog_category->getCategories(array('sort' => 'name'));
+		$data['column_category'] = $this->language->get('column_category');
+
+		$data['text_none'] = $this->language->get('text_none');
+		$data['button_quick'] = $this->language->get('text_quick_edit');
+		$data['button_quick_settings'] = $this->language->get('button_quick_settings');
+		$data['quick_settings'] = $this->url->link('catalog/product/quickset', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$qe = $this->user->hasPermission('modify', 'catalog/product');
+		$data['quick_image'] = 'false'; // Not implemented...
+		$data['quick_name'] = (QE_INLINE_NAME && $qe) ? 'name' : 'false';
+		$data['quick_model'] = (QE_INLINE_MODEL && $qe) ? 'model' : 'false';
+		$data['quick_price'] = (QE_INLINE_PRICE && $qe) ? 'price' : 'false';
+// BOF - Zappo - Product Types - ONE LINE - Added Product Types
+		$data['quick_type'] = (defined('QE_INLINE_TYPE') && QE_INLINE_TYPE && $qe) ? 'type' : 'false';
+		$data['quick_category'] = (QE_INLINE_CATEGORY && $qe) ? 'category' : 'false';
+		$data['quick_quantity'] = (QE_INLINE_QUANTITY && $qe) ? 'quantity' : 'false';
+		$data['quick_status'] = (QE_INLINE_STATUS && $qe) ? 'status' : 'false';
+		$data['category_height'] = QE_CATEGORY_HEIGHT;
+		$data['dialog_width'] = QE_DIALOG_WIDTH;
+		$data['dialog_height'] = QE_DIALOG_HEIGHT;
+// EOF - Zappo - Quick Edit - Get Categories, Quick Settings button & link, and get inline edit
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$result['quantity']]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Admin Category Filter and Quick Edit
+				'category'   => $this->model_catalog_product->getProductCategories($result['product_id']),
+				'quick'      => $this->url->link('catalog/product/quickedit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL').'" onclick="$(\'#quick-edit\').load(this.href).modal({backdrop:false}, \'show\');return false;',]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$data['sort_name']]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - ONE LINE - Added Sort by Category
+        $data['sort_category'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p2c.category' . $url, 'SSL');
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[new Pagination();]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Admin Category Filter and Limit
+		if (isset($this->request->get['filter_category_id'])) $url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
+		if (isset($this->request->get['limit'])) $url .= '&limit=' . $this->request->get['limit'];
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$pagination->limit = $this->config->get('config_limit_admin');]]></search>
+			<add position="replace" trim="false"><![CDATA[$pagination->limit = $limit;]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$data['filter_price']]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - ONE LINE - Admin Category Filter
+		$data['filter_category_id'] = $filter_category_id;]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$data['button_recurring_add']]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Admin Prev/Next Product
+		$data['button_prev'] = $this->language->get('button_prev');
+		$data['button_next'] = $this->language->get('button_next');]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[public function autocomplete() {]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Added Quick Edit
+	public function quickset() {
+		$this->load->model('catalog/quick_edit');
+		$this->load->language('catalog/product');
+		$this->load->language('catalog/quick_edit');
+
+		$data['button_quick_settings'] = $this->language->get('button_quick_settings');
+		$data['button_save'] = $this->language->get('button_save');
+		$data['button_cancel'] = $this->language->get('button_cancel');
+
+		$url = '';
+		if (isset($this->request->get['filter_name'])) $url .= '&filter_name=' . $this->request->get['filter_name'];
+		if (isset($this->request->get['filter_model'])) $url .= '&filter_model=' . $this->request->get['filter_model'];
+	// BOF - Zappo - Product Types - ONE LINE - Admin Product Type Filter
+		if (isset($this->request->get['filter_type'])) $url .= '&filter_type=' . $this->request->get['filter_type'];
+		if (isset($this->request->get['filter_price'])) $url .= '&filter_price=' . $this->request->get['filter_price'];
+		if (isset($this->request->get['filter_category_id'])) $url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
+		if (isset($this->request->get['filter_quantity'])) $url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		if (isset($this->request->get['filter_status'])) $url .= '&filter_status=' . $this->request->get['filter_status'];
+		if (isset($this->request->get['sort'])) $url .= '&sort=' . $this->request->get['sort'];
+		if (isset($this->request->get['order'])) $url .= '&order=' . $this->request->get['order'];
+		if (isset($this->request->get['page'])) $url .= '&page=' . $this->request->get['page'];
+		if (isset($this->request->get['limit'])) $url .= '&limit=' . $this->request->get['limit'];
+
+		$data['action'] = $this->url->link('catalog/product/quickset', 'token=' . $this->session->data['token'], 'SSL');
+		$data['reload'] = str_replace('&amp;','&',$this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			$settings = DIR_CONFIG . 'quick_edit.php';
+			if (file_exists($settings)) {
+				$parameters = "<?php\r\n".$this->model_catalog_quick_edit->getSettings(true)."?>";
+				if (is_writable($settings)) {
+					if (!@file_put_contents($settings, $parameters) || empty($_POST)) {
+						$message = '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> '.$this->language->get('error_intro') . '</div>';
+					} else {
+						$message = '<div class="alert alert-success"><i class="fa fa-check-circle"></i> '.$this->language->get('text_quick_success').'</div>';
+					}
+				} else {
+					$message = '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> '.$this->language->get('error_intro') . '<br/>' . sprintf($this->language->get('error_not_writable'),'<b>'.DIR_SYSTEM.'quick_edit.php</b>') . '</div>';
+				}
+			}
+			echo $message;
+			exit;
+		} else {
+			$data['error_warning'] = false;
+			$data['html'] = $this->model_catalog_quick_edit->getSettings();
+
+			$this->response->setOutput($this->load->view('catalog/quick_edit.tpl', $data));
+		}
+	}
+
+	public function quickget() {
+		$this->load->model('catalog/product');
+		$this->load->model('catalog/quick_edit');
+		$what = (isset($this->request->get['what'])) ? $this->request->get['what'] : false;
+		$json = false;
+		if (isset($this->request->get['product_id']) && $what) {
+			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+				$json = $this->model_catalog_product->updateProduct($this->request->get['product_id'], $this->request->post, true);
+				if (isset($this->request->post['status'])) {
+					$json = ($json) ? $this->language->get('text_enabled') : $this->language->get('text_disabled');
+				}
+			} else {
+				if ($what == 'name') {
+					$description = $this->model_catalog_product->getProductDescriptions($this->request->get['product_id']);
+					foreach ($description as $l => $d) $json[$l] = $d['name'];
+				} elseif ($what == 'category') {
+					$json = $this->model_catalog_product->getProductCategories($this->request->get['product_id']);
+				} else {
+					if ($what == 'type') $what = 'type_id';
+					$json = $this->model_catalog_quick_edit->getProductValue($this->request->get['product_id'], $what);
+				}
+			}
+		}
+		if ($json === false) $json['error'] = 'ERROR!!!';
+
+		$this->response->setOutput(json_encode($json));
+	}
+
+	public function quickedit() {
+		$this->load->language('catalog/product');
+		$this->load->language('catalog/quick_edit');
+		$this->load->model('catalog/product');
+		$this->config->load('quick_edit');
+
+		$url = '';
+		if (isset($this->request->get['filter_name'])) $url .= '&filter_name=' . $this->request->get['filter_name'];
+		if (isset($this->request->get['filter_model'])) $url .= '&filter_model=' . $this->request->get['filter_model'];
+	// BOF - Zappo - Product Types - ONE LINE - Admin Product Type Filter
+		if (isset($this->request->get['filter_type'])) $url .= '&filter_type=' . $this->request->get['filter_type'];
+		if (isset($this->request->get['filter_price'])) $url .= '&filter_price=' . $this->request->get['filter_price'];
+		if (isset($this->request->get['filter_category_id'])) $url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
+		if (isset($this->request->get['filter_quantity'])) $url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		if (isset($this->request->get['filter_status'])) $url .= '&filter_status=' . $this->request->get['filter_status'];
+		if (isset($this->request->get['sort'])) $url .= '&sort=' . $this->request->get['sort'];
+		if (isset($this->request->get['order'])) $url .= '&order=' . $this->request->get['order'];
+		if (isset($this->request->get['page'])) $url .= '&page=' . $this->request->get['page'];
+		if (isset($this->request->get['limit'])) $url .= '&limit=' . $this->request->get['limit'];
+
+		$json = array();
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if (!$this->user->hasPermission('modify', 'catalog/product')) {
+				$json['error']['warning'] = $this->language->get('error_permission');
+			} else {
+				if (QE_QUICK_MODEL && ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64))) {
+					$json['error']['model'] = $this->language->get('error_model');
+				}
+				if (isset($json['error']) && !isset($this->error['warning'])) {
+					$json['error']['warning'] = $this->language->get('error_warning');
+				}
+			}
+
+			if (!isset($json['error'])) {
+				$this->model_catalog_product->updateProduct($this->request->get['product_id'], $this->request->post);
+				$json['success'] = $this->language->get('text_success');
+			}
+
+			echo (json_encode($json));
+			exit;
+		}
+
+		$data['text_enabled'] = $this->language->get('text_enabled');
+		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_none'] = $this->language->get('text_none');
+		$data['text_yes'] = $this->language->get('text_yes');
+		$data['text_no'] = $this->language->get('text_no');
+		$data['entry_model'] = $this->language->get('entry_model');
+		$data['entry_manufacturer'] = $this->language->get('entry_manufacturer');
+	// BOF - Zappo - Product Types - ONE LINE - Added Product Types
+		$data['entry_type_id'] = $this->language->get('entry_type_id');
+		$data['entry_sku'] = $this->language->get('entry_sku');
+		$data['entry_upc'] = $this->language->get('entry_upc');
+		$data['entry_date_available'] = $this->language->get('entry_date_available');
+		$data['entry_quantity'] = $this->language->get('entry_quantity');
+		$data['entry_stock_status'] = $this->language->get('entry_stock_status');
+		$data['entry_price'] = $this->language->get('entry_price');
+		$data['entry_keyword'] = $this->language->get('entry_keyword');
+		$data['entry_tax_class'] = $this->language->get('entry_tax_class');
+		$data['entry_points'] = $this->language->get('entry_points');
+		$data['entry_weight_class'] = $this->language->get('entry_weight_class');
+		$data['entry_weight'] = $this->language->get('entry_weight');
+		$data['entry_dimension'] = $this->language->get('entry_dimension');
+		$data['entry_length'] = $this->language->get('entry_length');
+		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
+		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
+		$data['entry_reward'] = $this->language->get('entry_reward');
+
+		$data['button_save'] = $this->language->get('button_save');
+		$data['button_save_load'] = ($this->user->hasPermission('modify', 'catalog/product')) ? $this->language->get('button_save_load') : false;
+		$data['button_cancel'] = $this->language->get('button_cancel');
+
+		$data['error_warning'] = '';
+		if (isset($this->error['warning'])) $data['error_warning'] = $this->error['warning'];
+
+		$data['error_model'] = '';
+		if (isset($this->error['model'])) $data['error_model'] = $this->error['model'];
+
+		$data['error_date_available'] = '';
+		if (isset($this->error['date_available'])) $data['error_date_available'] = $this->error['date_available'];
+
+		$data['action'] = $this->url->link('catalog/product/quickedit', 'token=' . $this->session->data['token'] . '&product_id=' . $this->request->get['product_id'], 'SSL');
+		$data['reload'] = str_replace('&amp;','&',$this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&product_id=' . $this->request->get['product_id'] . $url, 'SSL'));
+
+		$data['token'] = $this->session->data['token'];
+
+		$product_info = (isset($this->request->get['product_id'])) ? $this->model_catalog_product->getProduct($this->request->get['product_id']) : array();
+
+		$data['name'] = ($product_info) ? $product_info['name'] : '';
+		$data['model'] = ($product_info) ? $product_info['model'] : '';
+
+		$this->load->model('catalog/manufacturer');	
+		$data['manufacturers'] = $this->model_catalog_manufacturer->getManufacturers();
+		$data['manufacturer_id'] = ($product_info) ? $product_info['manufacturer_id'] : 0;
+
+	// BOF - Zappo - Product Types - Added Product Types
+		if (file_exists(DIR_CONFIG . 'product_types.php')) {
+			$this->load->model('catalog/product_types');
+			$type_id = ($product_info) ? $product_info['type_id'] : '';
+			$type_ids = $this->model_catalog_product_types->getTypes();
+			$data['type_ids'] = '';
+			foreach ($type_ids as $ptype) {
+				$data['type_ids'] .= '<option value="' . $ptype['type_id'] . '"';
+				if ($type_id == $ptype['type_id']) $data['type_ids'] .= ' selected="selected"';
+				$data['type_ids'] .= '>' . $ptype['type_name'] . '</option>';
+			}
+		}
+	// EOF - Zappo - Product Types - Added Product Types
+
+		$data['sku'] = ($product_info) ? $product_info['sku'] : '';
+
+		$data['upc'] = ($product_info) ? $product_info['upc'] : '';
+
+		$data['keyword'] = ($product_info) ? $product_info['keyword'] : '';
+
+		$data['price'] = ($product_info) ? $product_info['price'] : '';
+
+		$this->load->model('localisation/tax_class');
+		$data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
+		$data['tax_class_id'] = ($product_info) ? $product_info['tax_class_id'] : 0;
+
+		$data['date_available'] = ($product_info) ? date('Y-m-d', strtotime($product_info['date_available'])) : date('Y-m-d', time() - 86400);
+
+		$data['quantity'] = ($product_info) ? $product_info['quantity'] : 1;
+
+		$data['sort_order'] = ($product_info) ? $product_info['sort_order'] : 1;
+
+		$data['status'] = ($product_info) ? $product_info['status'] : 1;
+
+		$data['weight'] = ($product_info) ? $product_info['weight'] : '';
+
+		$this->load->model('localisation/weight_class');
+		$data['weight_classes'] = $this->model_localisation_weight_class->getWeightClasses();
+		$data['weight_class_id'] = ($product_info) ? $product_info['weight_class_id'] : $this->config->get('config_weight_class_id');
+
+		$data['length'] = ($product_info) ? $product_info['length'] : '';
+		$data['width'] = ($product_info) ? $product_info['width'] : '';
+		$data['height'] = ($product_info) ? $product_info['height'] : '';
+
+		$this->load->model('localisation/length_class');
+		$data['length_classes'] = $this->model_localisation_length_class->getLengthClasses();
+		$data['length_class_id'] = ($product_info) ? $product_info['length_class_id'] : $this->config->get('config_length_class_id');
+
+		$data['points'] = ($product_info) ? $product_info['points'] : '';
+
+		if (file_exists(DIR_APPLICATION . 'model/sale/customer_group.php')) {
+			$this->load->model('sale/customer_group');
+			$data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
+		} else {
+			$this->load->model('customer/customer_group');
+			$data['customer_groups'] = $this->model_customer_customer_group->getCustomerGroups();
+		}
+		$data['product_reward'] = (isset($this->request->get['product_id'])) ? $this->model_catalog_product->getProductRewards($this->request->get['product_id']) : array();
+
+		$this->response->setOutput($this->load->view('catalog/quick_edit.tpl', $data));
+	}
+// EOF - Zappo - Quick Edit - Added Quick Edit
+]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/model/catalog/category.php">
+		<operation>
+			<search trim="true"><![CDATA[SELECT cp.category_id]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - ONE LINE - Add-back getCategory by ID
+		if (!empty($data['category_id'])) $sql .= " AND c1.parent_id = '" . (int)$data['category_id'] . "'";]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/model/catalog/product.php">
+		<operation>
+			<search trim="true"><![CDATA[$sql = "SELECT * FROM " . DB_PREFIX . "product]]></search>
+			<add position="after" trim="false"><![CDATA[        }
+// EOF - Zappo - Quick Edit - Add back Product Category filter]]></add>
+		</operation>
+	
+		<operation info="Remove changes made by Category Click">
+			<search trim="true"><![CDATA[if (!empty($data['filter_category_id'])) {]]></search>
+			<add position="before" trim="false"><![CDATA[/* Remove changes made by Category Click]]></add>
+		</operation>
+	
+		<operation info="Remove changes made by Category Click">
+			<search trim="true"><![CDATA[$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";]]></search>
+			<add position="after" trim="false" offset="1"><![CDATA[*/]]></add>
+		</operation>
+	
+		<operation info="Remove changes made by Category Click">
+			<search index="1" trim="true"><![CDATA[$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";]]></search>
+			<add position="after" trim="false" offset="1"><![CDATA[*/]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[function getProducts(]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Add back Product Category filter
+		if (!empty($data['filter_category_id'])) {
+			$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+        } else {]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$sql .= " GROUP BY]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Add back Product Category filter
+		if (!empty($data['filter_category_id'])) {
+			if (!empty($data['filter_sub_category'])) {
+				$implode_cats = array();
+
+				$implode_cats[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+
+				$this->load->model('catalog/category');
+
+				$categories = $this->model_catalog_category->getCategories(array('filter_name' => false, 'category_id' => $data['filter_category_id']));
+
+				foreach ($categories as $category) {
+					$implode_cats[] = "p2c.category_id = '" . (int)$category['category_id'] . "'";
+				}
+
+				$sql .= " AND (" . implode(' OR ', $implode_cats) . ")";
+			} else {
+				$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+			}
+		}
+// EOF - Zappo - Quick Edit - Add back Product Category filter
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA['p.status']]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - TWO LINES - Added Sort by Date
+			'p.date_added',
+			'p.date_modified',]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[$sql = "SELECT COUNT]]></search>
+			<add position="after" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Add back Product Category filter
+		if (!empty($data['filter_category_id'])) {
+			$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";
+        }
+// EOF - Zappo - Quick Edit - Add back Product Category filter]]></add>
+		</operation>
+	
+		<operation>
+			<search index="1" trim="true"><![CDATA[$query = $this->db->query($sql]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Add back Product Category filter
+		if (!empty($data['filter_category_id'])) {
+			if (!empty($data['filter_sub_category'])) {
+				$implode_data = array();
+				
+				$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+				
+				$this->load->model('catalog/category');
+				
+				$categories = $this->model_catalog_category->getCategories(array('filter_name' => false, 'category_id' => $data['filter_category_id']));
+				
+				foreach ($categories as $category) {
+					$implode_data[] = "p2c.category_id = '" . (int)$category['category_id'] . "'";
+				}
+				
+				$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+			} else {
+				$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+			}
+		}
+// EOF - Zappo - Quick Edit - Add back Product Category filter
+]]></add>
+		</operation>
+	
+		<operation>
+			<search index="10" trim="true"><![CDATA[return $query->row['total']]]></search>
+			<add position="after" trim="false" offset="1"><![CDATA[// BOF - Zappo - Quick Edit - Update Product
+	public function updateProduct($product_id, $data, $return=false) {
+		$query = $this->db->query("SHOW COLUMNS FROM " . DB_PREFIX . "product");
+		foreach ($query->rows as $column) $columns[$column['Field']] = $column['Type']; // Build array of all table columns
+		foreach ($data as $entry => $value) {
+			if (isset($columns[$entry])) {
+				$int = (strpos(strtolower($columns[$entry]), 'int'));
+				$float = (strpos(strtolower($columns[$entry]), 'decimal'));
+				$value = ($int) ? (int)$value : (($float) ? (float)$value : $this->db->escape($value));
+				$this->db->query("UPDATE " . DB_PREFIX . "product SET ".$entry." = '" . $value . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
+// BOF - Zappo - Product Types - Added Product Types
+				if ($entry == 'type_id') {
+					$query = $this->db->query("SELECT type_name as name, type_color as color FROM " . DB_PREFIX . "product_types where type_id = '" . $value . "'");
+					$value = $query->row;
+				}
+// EOF - Zappo - Product Types - Added Product Types
+				if ($return) return $value;
+			}
+		}
+
+		if (isset($data['product_description'])) {
+			foreach ($data['product_description'] as $l => $value) {
+				$this->db->query("UPDATE " . DB_PREFIX . "product_description SET name = '" . $this->db->escape($value['name']) . "' WHERE product_id = '" . (int)$product_id . "' AND language_id = '" . (int)$l . "'");
+			}
+			if ($return) return $data['product_description'][$this->config->get('config_language_id')]['name'];
+		}
+		if (isset($data['product_category'])) {
+			$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
+			foreach ($data['product_category'] as $category_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$category_id . "'");
+			}
+			if ($return) {
+				$this->load->model('catalog/category');
+				$categories = $this->model_catalog_category->getCategories(0);
+				$cats = $this->getProductCategories($product_id);
+				$return = '';
+				foreach ($categories as $category) {
+					if (in_array($category['category_id'], $cats)) $return .= $category['name'] . '<br />';
+				}
+				return $return;
+			}
+		}
+		if (isset($data['product_reward'])) {
+			$this->db->query("DELETE FROM " . DB_PREFIX . "product_reward WHERE product_id = '" . (int)$product_id . "'");
+			foreach ($data['product_reward'] as $customer_group_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_reward SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$customer_group_id . "', points = '" . (int)$value['points'] . "'");
+			}
+		}
+		if (isset($data['keyword'])) {
+			$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'product_id=" . (int)$product_id. "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'product_id=" . (int)$product_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
+		}
+
+		$this->cache->delete('product');
+	}
+// EOF - Zappo - Quick Edit - Update Product
+]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search trim="true"><![CDATA[<button type="submit"]]></search>
+			<add position="before" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - TWO LINES - Admin Prev/Next Product ?>
+        <a onclick="$('#form-product').attr('action', $('#form-product').attr('action')+'&quick=prev');$('#form-product').submit();" class="btn btn-primary" data-toggle="tooltip" title="<?php echo $button_prev; ?>"><i class="fa fa-hand-o-left"></i></a>
+        <a onclick="$('#form-product').attr('action', $('#form-product').attr('action')+'&quick=next');$('#form-product').submit();" class="btn btn-primary" data-toggle="tooltip" title="<?php echo $button_next; ?>"><i class="fa fa-hand-o-right"></i></a>]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/view/template/catalog/product_list.tpl">
+		<operation>
+			<search trim="true"><![CDATA[id="content"]]></search>
+			<add position="after" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - Added QuickEdit DIV using Bootstrap Modal ?>
+  <style>
+<?php if ($dialog_width || $dialog_height) { ?>
+	#quick-edit .modal-content {
+		<?php if ($dialog_width) { ?>max-width: <?php echo ($dialog_width > 100) ? $dialog_width : 250;?>px;<?php } ?>
+		<?php if ($dialog_height) { ?>max-height: <?php echo ($dialog_height > 100) ? $dialog_height : 150;?>px;<?php } ?>
+		overflow-y: auto;
+	}
+<?php } ?>
+	.qe-setting {
+		display:inline-block;
+		width:220px;
+	}
+  </style>
+  <div id="quick-edit" class="modal fade" role="dialog"></div>
+<?php // EOF - Zappo - Quick Edit - Added QuickEdit DIV using Bootstrap Modal ?>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[id="button-filter"]]></search>
+			<add position="before" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - Add Category Filter and Prod per Page ?>
+              <div class="form-group">
+                <label class="control-label" for="input-category"><?php echo $column_category; ?></label>
+                <select name="filter_category_id" id="input-category" class="form-control">
+                  <option value="*"></option>
+                  <?php foreach ($categories as $category) { ?>
+                  <?php if ($category['category_id'] == $filter_category_id) { ?>
+                    <option value="<?php echo $category['category_id']; ?>" selected="selected"><?php echo $category['name']; ?></option>
+                  <?php } else { ?>
+                    <option value="<?php echo $category['category_id']; ?>"><?php echo $category['name']; ?></option>
+                  <?php } ?>
+                <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label" for="input-limit"><?php echo $text_per_page; ?></label>
+              <select name="limit" id="input-limit" class="form-control" onchange="filter();"><?php echo $limits;?></select>
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+<?php // EOF - Zappo - Quick Edit - Add Category Filter and Prod per Page ?>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[id="button-filter"]]></search>
+			<add position="after" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - ONE LINE - Quick Settings button ?>
+              <button type="button" id="button-qsetting" class="btn btn-primary pull-right" style="margin-right: 10px;" data-toggle="modal" data-target="#quick-edit" data-backdrop="false" onclick="$('#quick-edit').load('<?php echo $quick_settings; ?>');return false;"><i class="fa fa-gear"></i> <?php echo $button_quick_settings; ?></button>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA['p.price']]></search>
+			<add position="before" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - Admin Category Filter ?>
+                   <td class="text-left"><?php if ($sort == 'p2c.category_id') { ?>
+                    <a href="<?php echo $sort_category; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_category; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_category; ?>"><?php echo $column_category; ?></a>
+                  <?php } ?></td>
+<?php // EOF - Zappo - Quick Edit - Admin Category Filter ?>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php if ($product['image']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_image . '-' .  $product['product_id'];?>"><?php if ($product['image']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php echo $product['name']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_name . '-' .  $product['product_id'];?>"><?php echo $product['name']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php echo $product['model']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_model . '-' .  $product['product_id'];?>"><?php echo $product['model']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php if ($product['special']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_price . '-' .  $product['product_id'];?>"><?php if ($product['special']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php if ($product['special']]]></search>
+			<add position="before" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - Admin Category Filter ?>
+                  <td class="left" data-type="<?php echo $quick_category . '-' .  $product['product_id'];?>">
+                  <?php $setcat = false;?>
+                  <?php foreach ($categories as $category) { ?>
+                    <?php if (in_array($category['category_id'], $product['category'])) { ?>
+                    <?php $setcat = true;?>
+                    <?php echo $category['name'];?><br>
+                    <?php } ?>
+                  <?php } ?>
+                  <?php if (!$setcat) echo $text_none;?>
+                  </td>
+<?php // EOF - Zappo - Quick Edit - Admin Category Filter ?>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php if ($product['quantity']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_quantity . '-' .  $product['product_id'];?>"><?php if ($product['quantity']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php echo $product['status']]]></search>
+			<add position="before" trim="false"><![CDATA[                  <?php $color = ' style="color: #' . (($product['status'] != $text_enabled) ? 'FF0000' : '008000') . ';"';?>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[><?php echo $product['status']]]></search>
+			<add position="replace" trim="false"><![CDATA[ data-type="<?php echo $quick_status . '-' .  $product['product_id'];?>"<?php echo $color;?>><?php echo $product['status']]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[</a></td>]]></search>
+			<add position="replace" trim="false"><![CDATA[</a><a href="<?php echo $product['quick']; ?>" data-toggle="tooltip" title="<?php echo $button_quick; ?>" class="btn btn-primary"><i class="fa fa-bolt"></i></a></td>]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[colspan="10"]]></search>
+			<add position="replace" trim="false"><![CDATA[colspan="11"]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[colspan="9"]]></search>
+			<add position="replace" trim="false"><![CDATA[colspan="10"]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[colspan="8"]]></search>
+			<add position="replace" trim="false"><![CDATA[colspan="9"]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[var filter_quantity]]></search>
+			<add position="before" trim="false"><![CDATA[// BOF - Zappo - Quick Edit - Admin Category Filter & Limit
+	var filter_category = $('select[name="filter_category_id"]').val();
+	if (filter_category != '*') {
+		url += '&filter_category_id=' + encodeURIComponent(filter_category);
+	}
+	var limit = $('select[name="limit"]').val();
+	url += '&limit=' + encodeURIComponent(limit);
+// EOF - Zappo - Quick Edit - Admin Category Filter & Limit
+]]></add>
+		</operation>
+	
+		<operation>
+			<search trim="true"><![CDATA[</script></div>]]></search>
+			<add position="before" trim="false"><![CDATA[<?php // BOF - Zappo - Quick Edit - Added Inline QuickEdit ?>
+var language_flags = { <?php echo $language_flags;?> },
+	t; // Timer
+$('[data-type]:not([data-type^="false"])').wrapInner('<span class="inline-input" style="cursor: pointer;" />');
+$('body').on('click', '.inline-input', function() {
+	var field = $(this).closest('td').data('type').split('-');
+	var pId = field[1];
+	field = field[0];
+	if ($('input, select',$(this).parent()).length <= 0) {
+		var clicked = $(this).parent();
+		$.ajax({
+			url: 'index.php?route=catalog/product/quickget&token=<?php echo $token;?>&product_id=' + pId + '&what=' + field,
+			dataType: 'json',
+			success: function(json) {
+				if (json['error']) {
+					$('<div class="warning" style="display: none;">' + json['error'] + '<img src="view/image/delete.png" alt="" onclick="$(\'.warning\').remove();" /></div>').appendTo('body');
+
+					$('.warning').fadeIn('slow');
+				} else {
+					var html = '', value = '';
+					if (field === 'name') {
+						for (var i in json) {
+							if (html != '') html += '<br/>';
+							if (language_flags[i]) html += '<img src="' + language_flags[i] + '" alt="" />';
+							html += '<input type="text" name="product_description[' + i + '][name]" value="' + json[i] + '" class="inline-input" style="width:85%" />';
+							value += ((value) ? '|' : '') + json[i];
+						}
+<?php // BOF - Zappo - Product Types - Added Product Type ?>
+					} else if (field === 'type') {
+						html += '<select name="type_id" class="inline-input">';
+						<?php foreach($product_types as $type_id) { ?>
+						html += '<option value="<?php echo $type_id['type_id'];?>"';
+						if ('<?php echo $type_id['type_id'];?>' == json) {
+							html += ' selected="selected"';
+							value = json;
+						}
+						html += '><?php echo str_replace("'", "\'", $type_id['type_name']);?></option>';
+						<?php } ?>
+						html += '</select>';
+<?php // EOF - Zappo - Product Types - Added Product Type ?>
+					} else if (field === 'category') {
+						html += '<div class="scrollbox" style="border: 1px solid #CCCCCC; width: 350px; height: <?php echo ($category_height) ? $category_height : 100;?>px; background: #FFFFFF; overflow-y: scroll;">';
+						<?php $class = 'odd'; ?>
+						<?php foreach ($categories as $category) { ?>
+						<?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+						html += '<div class="<?php echo $class; ?>">';
+						html += '<input type="checkbox" name="product_category[]" value="<?php echo $category['category_id']; ?>" class="inline-input"';
+						if ($.inArray('<?php echo $category['category_id'];?>', json) != -1) {
+							html += ' checked="checked"';
+							value += ((value) ? '|' : '') + '<?php echo $category['category_id'];?>';
+						}
+						html += ' /><?php echo str_replace("'", "\'", $category['name']);?>';
+						html += '</div>';
+						<?php } ?>
+						html += '</div>';
+						html += '<a onclick="$(this).parent().find(\':checkbox\').attr(\'checked\', true); $(\':input:first\',$(this).parent()).focus();"><?php echo $text_select_all; ?></a>';
+						html += ' / <a onclick="$(this).parent().find(\':checkbox\').attr(\'checked\', false); $(\':input:first\',$(this).parent()).focus();"><?php echo $text_unselect_all; ?></a> &nbsp;';
+					} else if (field === 'status') {
+						html += '<select name="' + field + '" class="inline-input"><option value="1"';
+						if (json == '1') {
+							html += ' selected="selected"';
+							value = '1';
+						}
+						html += '><?php echo $text_enabled; ?></option><option value="0"';
+						if (json != '1') {
+							html += ' selected="selected"';
+							value = '0';
+						}
+						html += '><?php echo $text_disabled; ?></option></select>';
+					} else {
+						html += '<input type="text" name="' + field + '" value="' + json + '" class="inline-input" ';
+						value = json;
+						if (field === 'price' || field === 'quantity') {
+							html += 'size="8" ';
+						}
+						html += '/>';
+					}
+
+					clicked.data('prev', clicked.html());
+					clicked.data('value', value);
+					clicked.html(html);
+					<?php if (QE_INLINE_AUTOCLOSE <= 0) { ?>
+					var quickcancel = $('<a/>', { 'class': 'btn-xs btn-danger quick-cancel' }).append('<i class="fa fa-times">').css('cursor', 'pointer');
+                    clicked.append(quickcancel);
+					<?php } ?>
+					<?php if (QE_INLINE_AUTOCLOSE <= 0 || (QE_INLINE_AUTOCLOSE >= 1 && QE_INLINE_AUTOSAVE <= 0)) { ?>
+					var quicksave = $('<a/>', { 'class': 'btn-xs btn-success quick-save' }).append('<i class="fa fa-check">').css('cursor', 'pointer');
+					clicked.append(quicksave);
+					<?php } ?>
+					$(':input:first', clicked).focus();
+				}
+			}
+		});
+	}
+});
+$('body').on('keydown', '[name="price"], [name="quantity"]', function(event) {
+	// Allow Dot (.) IF field == price AND price has no dot yet
+	var dot = ($(this).attr('name') != 'quantity' && $(this).val().indexOf('.') == -1) ? (event.keyCode != 110 && event.keyCode != 190) : true;
+	if ((!event.shiftKey && !event.ctrlKey && !event.altKey) && ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) && dot) {
+		// 0-9 or numpad 0-9, disallow shift, ctrl, and alt
+	} else if (event.keyCode != 8 && event.keyCode != 13 && event.keyCode != 46 && event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 9 && event.keyCode != 109 && event.keyCode != 189 && dot) {
+		// not backsapce (8), enter (13), del (46), left arrow (37), right arrow (39), tab (9), negetive sign (- : 109, 189), or point (. : 110, 190)
+		// http://www.webonweboff.com/tips/js/event_key_codes.aspx
+		event.preventDefault();
+	}
+});
+$('body').on('click', '.quick-cancel', function() {
+	var clicked = $(this).closest('td');
+	clicked.html(clicked.data('prev'));
+    return false;
+});
+$('body').on('click', '.quick-save', function() {
+	var clicked = $(this).closest('td');
+	var value = '';
+	$('input[type="checkbox"]:checked, input[type="text"], select', clicked).each(function() {
+		value += ((value) ? '|' : '') + $(this).val();
+	});
+	if (value == clicked.data('value')) {
+		clicked.html(clicked.data('prev'));
+		return false;
+	}
+
+	if (t) clearTimeout(t);
+	saveInlineEdit(clicked);
+});
+<?php if (QE_INLINE_AUTOCLOSE >= 1) { ?>
+var saveclick = false;
+$('body').on('focusout', '.inline-input', function() {
+	var clicked = $(this).closest('td');
+	saveclick = clicked.data('type');
+	var timeoutFunc = function() {
+	<?php if (QE_INLINE_AUTOSAVE >= 1) { ?>
+		var value = '';
+		$('input[type="checkbox"]:checked, input[type="text"], select', clicked).each(function() {
+			value += ((value) ? '|' : '') + $(this).val();
+		});
+		if (value == clicked.data('value')) {
+			clicked.html(clicked.data('prev'));
+			return false;
+		}
+		saveInlineEdit(clicked);
+	<?php } else { ?>
+		clicked.html(clicked.data('prev'));
+		return false;
+	<?php } ?>
+	};
+	t = setTimeout(timeoutFunc, 800);
+});
+<?php } ?>
+$('body').on('keypress', '.inline-input', function(e) {
+	var clicked = $(this).closest('td');
+	if (e.which == 13) {
+		saveInlineEdit(clicked);
+	}
+});
+function saveInlineEdit(clicked) {
+    var field = clicked.data('type').split('-');
+	var pId = field[1];
+	field = field[0];
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=catalog/product/quickget&token=<?php echo $token;?>&product_id=' + pId + '&what=' + field + '&save=go',
+		data: $('input[type="checkbox"]:checked, input[type="text"], select', clicked),
+		dataType: 'json',
+		success: function(json) {
+			if (json['error']) {
+				$('#notification').html('<div class="warning" style="display: none;">' + json['error'] + '<img src="view/image/delete.png" alt="" class="close" /></div>');
+
+				$('.warning').fadeIn('slow');
+			} else {
+				if (typeof(json) != 'object') {
+					if (field == 'quantity') {
+                        if (json <= 0) json = '<span class="label label-warning">' + json + '</span>';
+                        else if (json <= 5) json = '<span class="label label-danger">' + json + '</span>';
+                        else json = '<span class="label label-success">' + json + '</span>';
+                    } else if (field == 'status') {
+                        if (json == '<?php echo $text_enabled;?>') {
+                            json = '<span style="color: #008000">' + json + '</span>';
+                        } else if (json == '<?php echo $text_disabled;?>') {
+                            json = '<span style="color: #FF0000">' + json + '</span>';
+                        }
+                    }
+                    clicked.html('<span class="inline-input" style="cursor: pointer">' + json + '</span>');
+				} else {
+					var html = '<span class="inline-input" style="cursor: pointer">' + json['name'] + '</span>';
+					clicked.html(html);
+<?php // BOF - Zappo - Product Types - ONE LINE - Added Product Type Color ?>
+					if (json['color']) $('[data-type="name-' + pId + '"],[data-type="model-' + pId + '"],[data-type="type-' + pId + '"],[data-type="category-' + pId + '"]').css('color', json['color']);
+				}
+			}
+		}
+	});
+	return false;
+}
+<?php if (QE_INLINE_AUTOCLOSE >= 1) { ?>
+$('body').on('focusin', '.inline-input', function() {
+	var clicked = $(this).closest('td').data('type');
+	if (t && clicked == saveclick) clearTimeout(t);
+});
+<?php }
+// EOF - Zappo - Quick Edit - Added Inline QuickEdit ?>]]></add>
+		</operation>
+	</file>
+
+</modification>

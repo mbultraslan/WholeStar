@@ -1,0 +1,312 @@
+@import (reference) "_elements";
+
+/*********************************
+RIGHT TO LEFT support
+/*********************************/
+/*----------------------
+Combo CSS
+----------------------*/
+.text-left {
+  text-align: start !important;
+}
+
+.text-right {
+  text-align: end !important;
+}
+
+.radio input[type=radio],
+.radio-inline input[type=radio],
+.checkbox input[type=checkbox],
+.checkbox-inline input[type=checkbox] {
+  float: right;
+  margin-left: 0;
+  margin-right: -20px;
+}
+
+/*----------------------
+Elements
+----------------------*/
+.row-heading {
+  &:before {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+}
+
+// Modal dialog
+.modal {
+  .close {
+    float: left;
+  }
+}
+
+.form-horizontal {
+  .control-label {
+    text-align: end;
+  }
+}
+
+#notification {
+  right: auto;
+  left: 20px;
+}
+
+.alert {
+  button.close {
+    right: auto;
+    left: 15px;
+  }
+}
+
+/*--------------------------------------------------------------
+Header Block
+--------------------------------------------------------------*/
+.extra {
+  span:after {
+    margin-left: 0;
+    margin-right: 5px;
+  }
+  .dropdown-toggle {
+    &.open, &:hover, &:focus {
+      span {
+        .translate(-10px, 0);
+        &:after {
+          .translate(-20px, 0);
+        }
+      }
+    }
+  }
+  .dropdown-menu {
+    right: 0;
+  }
+}
+
+#search {
+  .button-search:before {
+    right: auto;
+    left: 1px;
+  }
+
+  @media @md {
+    right: auto;
+    left: 15px;
+  }
+
+  @media @lg {
+    .kf_search {
+      background-position: 3% center;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+LEFT - RIGHT COLUMN
+--------------------------------------------------------------*/
+.side-bar {
+  .box-heading {
+    &:before {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+Navigation Block
+--------------------------------------------------------------*/
+@media @sm-max {
+  #btn-mobile-toggle {
+    &:after {
+      content: '\f104';
+      right: auto;
+      left: 15px;
+    }
+    &.expand:after {
+      .rotation(-90deg);
+    }
+  }
+
+  .main-nav {
+    &__item {
+      .btn-expand-menu {
+        right: auto;
+        left: 0;
+      }
+      &.expand {
+
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+TOPBAR BLOCK
+--------------------------------------------------------------*/
+.mini-cart__info {
+  @media @md {
+    left: 0;
+    right: auto;
+  }
+}
+
+/*--------------------------------------------------------------
+Kuler Showcase Module
+--------------------------------------------------------------*/
+.kuler-showcase-module {
+  .nav {
+    span {
+      right: auto;
+      left: 35px;
+      &.prev {
+        right: auto;
+        left: 0px;
+      }
+    }
+  }
+
+  .tab-heading {
+    span {
+      &:before, &:after {
+        left: auto;
+        right: 0;
+      }
+      &:after {
+        margin-left: 0;
+        margin-right: 5px;
+      }
+      &:hover, &.active {
+        &:before {
+          .translate(-10px, 0);
+        }
+        &:after {
+          .translate(-30px, 0);
+        }
+      }
+    }
+  }
+}
+
+/*-------------------------------------
+KULER BLOG
+-------------------------------------*/
+.blog-feed {
+  right: auto;
+  left: 15px;
+}
+
+.article {
+  [class*="col-"]:first-child {
+    padding-left: 15px;
+    padding-right: 0;
+  }
+  &-image {
+    float: right;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  &__extra-info {
+    time, a {
+      margin-right: 0;
+      margin-left: 5px;
+    }
+    span:before, time:before {
+      margin-right: 0;
+      margin-left: 15px;
+    }
+  }
+}
+
+.related-articles {
+  ul {
+    float: right !important;
+    margin-right: 0;
+    margin-left: 20px;
+  }
+}
+
+.comment {
+  .avatar {
+    float: right !important;
+  }
+  .author, .message {
+    margin-left: 0 !important;
+    margin-right: 130px !important;
+  }
+  .date {
+    margin-left: 0 !important;
+    margin-right: 30px !important;
+  }
+}
+
+.reply-list {
+  margin-left: 0;
+  margin-right: 75px;
+}
+
+//side bar setting
+.side-bar {
+  .article {
+    &__image {
+      float: right;
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+.kbm-category {
+  .treemenu {
+    > li {
+      &:before {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+/*--------------------------------------------
+Box category
+----------------------------------------------*/
+.box-category {
+  &__item {
+    > .toggle {
+      float: right;
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+Kuler Live Search
+--------------------------------------------------------------*/
+.live-search-container {
+  @media @md {
+    .dropdown-menu {
+      left: 0 !important;
+      right: auto;
+    }
+  }
+  @media @lg {
+    &.open, &:hover {
+      .button-search {
+        &:before {
+          .translate(400px, 0);
+        }
+      }
+    }
+  }
+}
+
+#search-close {
+  right: auto;
+  left: -15px;
+}
+/** Boxed Style **/
+.boxed {
+  #search-close {
+    right: auto;
+    left: -7px;
+  }
+}

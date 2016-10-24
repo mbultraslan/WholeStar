@@ -1,0 +1,81 @@
+@import (reference) "_elements";
+/*--------------------------------------------------------------
+Footer Block
+--------------------------------------------------------------*/
+.footer{
+  overflow: hidden;
+  border-bottom: 1px solid transparent;
+  padding: 30px 0;
+  @media @md {
+    padding: 20px 0;
+  }
+  .box-heading{
+    display: inline-block;
+    font-size: @font-normal + 1;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid;
+  }
+  &__information{
+    &-text{
+      color: #1F1F1F;
+    }
+  }
+  li{
+    a{
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+/***************payment****************/
+.payment{
+  text-align: center;
+  @media @md {
+    text-align: right;
+  }
+  font-size: @font-small + 1;
+  &__item{
+    display: inline-block;
+  }
+}
+
+/***************contact****************/
+.contact{
+  &__list{
+    margin: 25px 0;
+  }
+}
+/***************footer address****************/
+.footer__address{
+  position: relative;
+  &:before{
+    content: "";
+    position: absolute;
+    width: 5000px;
+    height: 1px;
+    top: 0;
+    right: -50%;
+  }
+  .have-contact-form &{
+    padding: 50px 0;
+  }
+}
+/***************powered****************/
+#powered{
+  padding: 0 0 45px 0;
+}
+/***************768px****************/
+@media @sm {
+
+}
+/***************1024px****************/
+@media @md {
+
+}
+/***************1200px****************/
+@media @lg {
+
+}
+/***************skin****************/
