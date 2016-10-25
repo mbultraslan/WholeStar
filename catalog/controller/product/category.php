@@ -222,6 +222,20 @@ class ControllerProductCategory extends Controller
                     $rating = false;
                 }
 
+               $otherImages = array();
+
+                $images = $this->model_catalog_product->getProductOtherImages($result['product_id']);
+
+                foreach ($images as $i) {
+
+                    $otherImages[] = array(
+
+                       'thumb'=> $this->model_tool_image->resize($i['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'))
+                    );
+
+                }
+
+
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
                     'thumb' => $image,
@@ -240,10 +254,10 @@ class ControllerProductCategory extends Controller
                     'tax' => $tax,
                     'rating' => $result['rating'],
                     'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url),
-                    'packQty' => array_sum(explode('-', $result['ratio']))
+                    'packQty' => array_sum(explode('-', $result['ratio'])),
+                    'otherImages' => $otherImages
                 );
             }
-
 
             $url = '';
 

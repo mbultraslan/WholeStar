@@ -468,6 +468,271 @@
 
               </div>
 
+<!--                other color -->
+                <?php
+//print_r($product['otherImages']);
+                foreach ($product['otherImages'] as $oi){ ?>
+
+                <div class="product-layout product-list col-lg-12 col-xs-12">
+
+                    <div class="product-wrapper">
+
+                        <?php if ($oi['thumb']) {
+
+                            ?>
+
+                            <div class="product-thumb">
+
+                                <div class="product-thumb__primary">
+
+                                    <a href="<?php echo $product['href']; ?>">
+
+                                        <img src="<?php echo $oi['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" />
+                                        <div class="category-product-info" style="position: absolute; margin-top: 0px; ">Style : <?php echo $product['model']; ?><br>Size : <?php echo $product['ratioScale']; ?><br>Ratio : <?php echo $product['ratio']; ?></div>
+                                    </a>
+
+                                </div>
+
+
+                                <?php if ($images = $kuler->getProductImages($product['product_id'])) { ?>
+
+                                    <?php if(!$kuler->mobile->isMobile() && $kuler->getSkinOption('enable_swap_image')){ ?>
+
+                                        <?php $size = $kuler->getImageSizeByPath($oi['thumb']); ?>
+
+                                        <div class="product-thumb__secondary hidden-xs hidden-sm hidden-md">
+
+                                            <a href="<?php echo $product['href']; ?>">
+
+                                                <img src="<?php echo $kuler->resizeImage($images[0], $size['width'], $size['height']); ?>" alt="<?php echo $product['name']; ?>"/>
+
+                                                <img src="<?php echo $image['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" />
+                                                <div class="category-product-info" style="position: absolute; margin-top: 0px; ">Style : <?php echo $product['model']; ?><br>Size : <?php echo $product['packQty']; ?><br>Ratio : <?php echo $product['ratio']; ?></div>
+
+                                            </a>
+
+                                        </div>
+
+                                    <?php } ?>
+
+                                <?php } //end swap image ?>
+
+                                <?php if (Kuler::getInstance()->getSkinOption('show_quick_view')) { ?>
+
+                                    <button class="product-detail-button product-detail-button--quick-view">
+
+                                        <a href="<?php echo Kuler::getInstance()->getQuickViewUrl($product); ?>" data-toggle="tooltip" title="<?php echo $kuler->translate($kuler->getSkinOption('view_button_text')) ?>">
+
+                                            <?php echo ($kuler->translate($kuler->getSkinOption('view_button_text'))) ? $kuler->translate($kuler->getSkinOption('view_button_text')) : '<i class="pe-7s-search"></i>';?>
+
+                                        </a>
+
+                                    </button>
+
+                                <?php } ?>
+
+                                <?php if ($product['special']) { ?>
+
+                                    <div class="product-sale" style="min-width: 50px;">
+                                        <?php if ($product['price']) { ?>
+                                            <br/>  <span style="background-color: #942a25; padding: 5px;"><?php echo $kuler->calculateSalePercent($product['special'], $product['price']); ?>% Off</span>
+                                        <?php }  ?>
+                                    </div><!--/.product-sale-->
+
+                                <?php } //end special ?>
+
+                                <?php if(isset($setting['deal_date']) && $setting['deal_date']) { ?>
+
+                                    <?php if(isset($product['date_end'])) { ?>
+
+                                        <?php
+
+                                        $parts = array('0000', '00', '00');
+
+
+
+                                        if ($product['date_end']) {
+
+                                            $parts = explode('-', $product['date_end']);
+
+                                        }
+
+                                        ?>
+
+                                        <div class="product-deal-countdown" data-is-deal="<?php echo $product['date_end'] ? 'true' : 'false' ?>" data-product-id="<?php echo $product['product_id'] ?>" data-date-end="<?php echo $product['date_end'] ?>" data-year="<?php echo $parts[0] ?>" data-month="<?php echo $parts[1] ?>" data-day="<?php echo $parts[2] ?>"></div>
+
+                                    <?php }  ?>
+
+                                <?php } //end deal date ?>
+
+                            </div><!--/.produc-thumb-->
+
+                        <?php } else { ?>
+
+                            <div class="product-thumb product-thumb--no-image">
+
+                                <a href="<?php echo $product['href']; ?>">
+
+                                    <img src="image/no_image.jpg" alt="<?php echo $product['name']; ?>" />
+
+                                    <img src="<?php echo $oi['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" />
+                                    <div class="category-product-info" style="position: absolute; margin-top: 0px; ">Style : <?php echo $product['model']; ?><br>Size : <?php echo $product['packQty']; ?><br>Ratio : <?php echo $product['ratio']; ?></div>
+
+                                </a>
+
+                            </div>
+
+
+
+                        <?php } //end product thumb ?>
+
+                        <h4 class="product-name" style="margin-bottom: 5px;">
+
+                            <a href="<?php echo $product['href']; ?>">
+
+                                <?php echo $product['name']; ?>
+
+                            </a>
+                        </h4>
+                        <div style="margin-bottom: 5px;">
+                            <?php
+
+                            foreach ($product['colours'] as $colour) {
+                                ?>
+
+                                <span style="border: 1px solid #000000; min-width:40px; min-height:40px; background-color: #<?php echo $colour['colour'];?>" data-toggle="tooltip" title="<?php echo $colour['name']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+
+                        <!-- <div class="product-rating">
+
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+
+                      <?php if ($product['rating'] < $i) { ?>
+
+                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+
+                      <?php } else { ?>
+
+                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+
+                      <?php } ?>
+
+                    <?php } ?>
+
+                  </div>-->
+
+
+                        <?php if (!$product['special']) { ?>
+
+                            <table class="table" style="margin-bottom: 0;">
+                                <?php if ($product['price']) { ?>
+                                <tr>
+                                    <td  style="text-align: center;">
+                                        PACK<br>
+                                        <span class="price-new price-tag"><?php echo $product['price']; ?></span>
+                                    </td>
+                                    <td  style="text-align: center;">
+                                        PIECE <br>
+                                        <span class="price-new price-tag"><?php echo $product['eachPrice']; ?></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <?php } ?>
+
+                                    <td colspan="2"  style="text-align: center;">
+                                        1 PACK = <?php echo $product['packQty']; ?> UNITS
+                                    </td>
+                                </tr>
+                            </table>
+
+                        <?php } else { ?>
+
+
+                            <table class="table" style="margin-bottom: 0;">
+                                <?php if ($product['price']) { ?>
+                                <tr>
+                                    <td  style="text-align: center;">
+                                        PACK<br>
+                                        <span class="product-price--old"><?php echo $product['price']; ?></span>
+                                        <span class="price-new price-tag"><?php echo $product['special']; ?></span>
+                                    </td>
+                                    <td  style="text-align: center;">
+                                        PIECE <br>
+                                        <span class="product-price--old"><?php echo $product['eachPrice']; ?></span>
+                                        <span class="price-new price-tag"><?php echo $product['specialEach']; ?></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <?php } ?>
+
+                                    <td colspan="2"  style="text-align: center;">
+                                        1 PACK = <?php echo $product['packQty']; ?> UNITS
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!--                      <span class="product-price--old">--><?php //echo $product['price']; ?><!--</span>-->
+                            <!---->
+                            <!--            		  <!--<span>--><?php //echo $kuler->calculateSalePercent($product['special'], $product['price']); ?><!--% off</span>-->
+                            <!---->
+                            <!--            		  <span class="product-price--new">--><?php //echo $product['special']; ?><!--</span>-->
+
+                        <?php } ?>
+
+
+
+                        <div class="product-description hidden">
+
+                            <?php echo $product['description']; ?>
+
+                        </div>
+
+                        <?php /*
+                  <div class="product-detail button-group">
+
+                    <div class="product-detail__group-buttons">
+
+                      <button class="product-detail-button product-detail-button--cart" type="button" data-toggle="tooltip" title="<?php echo $button_cart; ?>" onclick="cart.add('<?php echo $product['product_id']; ?>');">
+
+                        <span><?php echo $button_cart; ?></span>
+
+                        <i class="pe-7s-cart"></i>
+
+                      </button>
+
+                      <button class="product-detail-button product-detail-button--wishlist" type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');">
+
+                        <i class="pe-7s-like"></i>
+
+                      </button>
+
+                      <!--<button class="product-detail-button product-detail-button--compare" type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');">
+
+                       <!-- <i class="pe-7s-repeat"></i>
+
+                      </button>-->
+
+                    </div>
+
+                  </div>
+
+                */
+                        ?>
+
+                    </div>
+
+
+                </div>
+
+    <?php } ?>
+
+<!--                end of other color-->
+
             <?php } ?>
 
           </div>
