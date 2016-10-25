@@ -583,3 +583,5 @@ admin/controller/sale/recurring.php
 admin/language/english/sale/recurring.php
 admin/model/sale/recurring.php
 admin/view/template/sale/recurring_list.tpl
+catalog/controller/product/list.php
+catalog/view/theme/zorka/template/product/special.tpl
