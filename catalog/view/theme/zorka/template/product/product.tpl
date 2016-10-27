@@ -809,7 +809,21 @@ global $config;
                          }
                          ?></span>
                                     </a>
-                                <?php } ?>
+                                <?php }
+
+                                else{
+                                    ?>
+                                    <a href="index.php?route=account/login" style="width: 300px; color: #ffffff"
+                                       class=" add-btn  col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xlg-4"
+                                       title="Login to add bag"
+                                       data-loading-text="<?php echo $text_loading; ?>">
+                                       Please login to add cart!
+                                    </a>
+                                <?php
+
+                                }
+
+                                ?>
                                 <a class="share-icon" title="<?php echo $button_wishlist; ?>"
                                    onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></a>
                                 <?php if ($kuler->getSkinOption('default_sharing')) { ?>

@@ -541,9 +541,6 @@ class ControllerProductProduct extends Controller {
 
 			$data['ratioScale'] = $product_info['ratioScale'];
 
-			$data['eachPrice'] = $this->currency->format($product_info['eachPrice']);
-
-			$data['packPrice'] = $this->currency->format($product_info['packPrice']);
 
 			$data['material'] = $product_info['material'];
 
@@ -625,7 +622,8 @@ class ControllerProductProduct extends Controller {
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
 
 				$data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
-
+                $data['eachPrice'] = $this->currency->format($this->tax->calculate($product_info['eachPrice'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+                $data['packPrice'] = $this->currency->format($this->tax->calculate($product_info['packPrice'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 
 				$data['price'] = false;

@@ -85,6 +85,34 @@
               <input type="text" name="fax" value="<?php echo $fax; ?>" placeholder="<?php echo $entry_fax; ?>" id="input-fax" class="form-control" />
             </div>
           </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-country"><?php echo $entry_country; ?></label>
+                <div class="col-sm-10">
+                    <select name="country_id" id="input-country" class="form-control">
+                        <option value=""><?php echo $text_select; ?></option>
+                        <?php foreach ($countries as $country) { ?>
+                            <?php if ($country['country_id'] == $country_id) { ?>
+                                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                            <?php } else { ?>
+                                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select>
+                    <?php if ($error_country) { ?>
+                        <div class="text-danger"><?php echo $error_country; ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
+                <div class="col-sm-10">
+                    <select name="zone_id" id="input-zone" class="form-control">
+                    </select>
+                    <?php if ($error_zone) { ?>
+                        <div class="text-danger"><?php echo $error_zone; ?></div>
+                    <?php } ?>
+                </div>
+            </div>
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'account') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>
@@ -280,34 +308,7 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-country"><?php echo $entry_country; ?></label>
-            <div class="col-sm-10">
-              <select name="country_id" id="input-country" class="form-control">
-                <option value=""><?php echo $text_select; ?></option>
-                <?php foreach ($countries as $country) { ?>
-                <?php if ($country['country_id'] == $country_id) { ?>
-                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select>
-              <?php if ($error_country) { ?>
-              <div class="text-danger"><?php echo $error_country; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
-            <div class="col-sm-10">
-              <select name="zone_id" id="input-zone" class="form-control">
-              </select>
-              <?php if ($error_zone) { ?>
-              <div class="text-danger"><?php echo $error_zone; ?></div>
-              <?php } ?>
-            </div>
-          </div>
+
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'address') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>
@@ -694,4 +695,40 @@ $('select[name=\'country_id\']').on('change', function() {
 
 $('select[name=\'country_id\']').trigger('change');
 //--></script>
+
+<script>
+    $('#input-custom-field2').on('change', function() {
+        if(!$('#input-country').val()){
+            alert('Please choose your country first');
+            return false
+        }
+        $.ajax({
+            url: 'index.php?route=account/register/checkVat&ext=1&country_id=' + $('#input-country').val() + '&vat='+$('#input-custom-field2').val(),
+            dataType: 'json',
+            beforeSend: function() {
+               $('#vatError').remove();
+                $('#input-custom-field2').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
+            },
+            complete: function() {
+                $('.fa-spin').remove();
+            },
+            success: function(json) {
+if(json['valid'] == 'true') {
+    $('#input-company').val(json['name']);
+    $('#input-company').prop('disabled', true);
+}
+else{
+    $('#input-company').val('');
+    $('#input-company').prop('disabled', false);
+    $('#input-custom-field2').after(' <span id="vatError" style="color: red;">Your VAT number is not valid</span>');
+}
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+</script>
 <?php echo $footer; ?>
