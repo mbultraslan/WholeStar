@@ -287,6 +287,7 @@ class ControllerAccountOrder extends Controller {
 
 			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
+
 			foreach ($products as $product) {
 				$option_data = array();
 
@@ -307,9 +308,24 @@ class ControllerAccountOrder extends Controller {
 
 					$option_data[] = array(
 						'name'  => $option['name'],
+						'type'  => $option['type'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
+                    /** @var  $sizeOptions[] */
+                    $sizeOptions = json_decode(stripslashes(html_entity_decode($value)), true);
+                    $totalPack = 0;
+                    $totalSingle = 0;
+                    foreach ($sizeOptions['pack'] as $pack) {
+                        $packRatio = $pack['ratio'];
+                        $totalPack += array_sum(explode('-', $packRatio));
+                    }
+                    foreach ($sizeOptions['single'] as $single) {
+                        $singleRatio = $single['ratio'];
+                        $totalSingle += array_sum(explode('-', $singleRatio));
+                    }
 				}
+
+
 
 				$product_info = $this->model_catalog_product->getProduct($product['product_id']);
 
@@ -322,12 +338,21 @@ class ControllerAccountOrder extends Controller {
 				$data['products'][] = array(
 					'name'     => $product['name'],
 					'model'    => $product['model'],
+					'productRatio'    => $product['ratio'],
+					'productRatioScale'    => $product['ratio_scale'],
 					'option'   => $option_data,
 					'quantity' => $product['quantity'],
+                    'packQty' => $totalPack,
+                    'singleQty' => $totalSingle,
+                    'packData' => $sizeOptions['pack'],
+                    'singleData' => $sizeOptions['single'],
 					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'eachPrice'    => $this->currency->format($product['each_price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'packPrice'    => $this->currency->format($product['pack_price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'reorder'  => $reorder,
-					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
+					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL'),
+					'href'   => $this->url->link('product/product', '&product_id=' . $product['product_id'], 'SSL')
 				);
 			}
 

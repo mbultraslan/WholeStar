@@ -197,7 +197,8 @@ class ControllerCheckoutConfirm extends Controller {
 			$order_data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
+			//	print_r($product);
+                $option_data = array();
 
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
@@ -222,7 +223,12 @@ class ControllerCheckoutConfirm extends Controller {
 					'price'      => $product['price'],
 					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
-					'reward'     => $product['reward']
+					'reward'     => $product['reward'],
+					'eachPrice'     => $product['eachPrice'],
+					'packPrice'     => $product['packPrice'],
+					'ratio'     => $product['productRatio'],
+					'ratioScale'     => $product['productRatioScale']
+
 				);
 			}
 
@@ -310,7 +316,7 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			$this->load->model('checkout/order');
-
+//print_r($order_data);
 			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
 
 			$data['text_recurring_item'] = $this->language->get('text_recurring_item');

@@ -241,10 +241,9 @@ jQuery(document).ready(function ($) {
 
 	// Login Popup
 	if (Kuler.login_popup) {
-		$('a').each(function () {
-			if (this.href == Kuler.login_url) {
-				$(this).on('click', function (evt) {
-					evt.preventDefault();
+		$('.loginModal').click(function (evt) {
+
+							evt.preventDefault();
 
 					$.magnificPopup.open({
 						items: [
@@ -255,8 +254,7 @@ jQuery(document).ready(function ($) {
 						type: 'inline',
 						mainClass: 'mfp-fade'
 					});
-				});
-			}
+
 		});
 	}
 

@@ -201,7 +201,8 @@ global $config;
                                         } else {
                                             ?>
                                             <div class="alert alert-info"><i class="fa fa-info-circle"></i> Attention:
-                                                You must <a href="index.php?route=account/login">login</a> or <a
+                                                You must <a class="loginModal" href="index.php?route=account/login">login</a>
+                                                or <a
                                                     href="index.php?route=account/register">create an account</a> to
                                                 view prices!
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -700,7 +701,6 @@ global $config;
                                     }
                                     totalProduct += parseInt(productCount);
                                 });
-                                $('#totalQty').text(totalProduct + 'pcs');
                                 // $('#quantity').val(totalProduct);
                                 $('#totalProducts').val(totalProduct);
 //
@@ -721,6 +721,22 @@ global $config;
                                     }
                                     totalPack += parseFloat(productCount);
                                 });
+                                var totalPackText = '';
+                                var totalPlus = '';
+                                var totalQtyText = '';
+                                var totalSingleText = '';
+                                if (totalPack > 0) {
+                                    totalPackText = totalPack + 'pcs in pack ';
+                                }
+                                if (totalSingle > 0) {
+                                    totalSingleText = totalSingle + 'pcs in single ';
+                                }
+                                if (totalSingle > 0 && totalPack > 0) {
+                                    totalPlus = ' + ';
+                                    totalQtyText = ' = ' + totalProduct + ' pieces';
+                                }
+                                $('#totalQty').html(totalPackText + totalPlus + totalSingleText + totalQtyText);
+
                                 <?php if ($price) {
                                 if (!$special) { ?>
                                 var packPrice = '<?php echo $packPrice; ?>';
@@ -730,7 +746,28 @@ global $config;
 
                                 var totalAmount = totalPack * packPrice + totalSingle * eachPrice;
 
-                                var res = '<span class="price-new price-tag"> £' + totalAmount.toFixed(2) + '</span>';
+                                var totalPackPriceText = '';
+                                var totalPricePlus = '';
+                                var totalQtyPriceText = '';
+                                var totalSinglePriceText = '';
+                                if (totalPack > 0) {
+                                    totalPackPriceText = '£' + (totalPack * packPrice).toFixed(2) + ' for pack ';
+                                }
+                                if (totalPack > 0 && totalSingle == 0) {
+                                    totalPackPriceText = '£' + (totalPack * packPrice).toFixed(2);
+                                }
+                                if (totalSingle > 0) {
+                                    totalSinglePriceText = '£' + (totalSingle * eachPrice).toFixed(2) + ' for single ';
+                                }
+                                if (totalSingle > 0 && totalPack ==0) {
+                                    totalSinglePriceText = '£' + (totalSingle * eachPrice).toFixed(2);
+                                }
+                                if (totalSingle > 0 && totalPack > 0) {
+                                    totalPricePlus = ' + ';
+                                    totalQtyPriceText = ' = £' + totalAmount.toFixed(2);
+                                }
+
+                                var res = '<span class="price-new price-tag">'+ totalPackPriceText + totalPricePlus + totalSinglePriceText + totalQtyPriceText + '</span>';
                                 $('#totalAmount').html(res);
                                 <?php
                                 }
@@ -759,7 +796,7 @@ global $config;
                                 }
                                 else{
                                 ?>
-                                $('#totalAmount').html('You must <a href="index.php?route=account/login">login</a> or <a href="index.php?route=account/register">create an account</a> to view prices!');
+                                $('#totalAmount').html('You must <a class= "loginModal" href="index.php?route=account/login">login</a> or <a href="index.php?route=account/register">create an account</a> to view prices!');
                                 <?php
                                 }
                                 ?>
@@ -809,17 +846,15 @@ global $config;
                          }
                          ?></span>
                                     </a>
-                                <?php }
-
-                                else{
+                                <?php } else {
                                     ?>
                                     <a href="index.php?route=account/login" style="width: 300px; color: #ffffff"
-                                       class=" add-btn  col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xlg-4"
+                                       class="loginModal add-btn  col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xlg-4"
                                        title="Login to add bag"
                                        data-loading-text="<?php echo $text_loading; ?>">
-                                       Please login to add cart!
+                                        Please login to add cart!
                                     </a>
-                                <?php
+                                    <?php
 
                                 }
 
@@ -1534,6 +1569,10 @@ global $config;
             return false;
 
         });
+
+        function loginModal() {
+
+        }
 
     </script>
 <?php echo $footer; ?>

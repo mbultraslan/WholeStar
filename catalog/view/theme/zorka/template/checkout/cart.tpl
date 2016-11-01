@@ -114,10 +114,13 @@
 
                                 <td class="text-left"><a style="font-weight: bold;"
                                                          href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
-                                    <br/>
-                                    <span>Ratio : <?php echo $product['productRatio']; ?></span> /
-                                    <span>Ratio Scale : <?php echo $product['productRatioScale']; ?></span>
-
+                                    <?php
+                                    if ($product['packQty'] !== 0) {
+                                        ?>
+                                        <br/>
+                                        <span>Ratio : <?php echo $product['productRatio']; ?></span> /
+                                        <span>Ratio Scale : <?php echo $product['productRatioScale']; ?></span>
+                                    <?php } ?>
                                     <?php if (!$product['stock']) { ?>
 
                                         <span class="text-danger">***</span>
@@ -213,8 +216,8 @@
                                                     foreach (explode('-', $product['productRatioScale']) as $rs) {
                                                         if (explode('-', $single['ratio'])[$i] != 0) {
                                                             ?>
-                                                            <br/><span style="margin-left: 10px;"><?php echo $rs; ?>
-                                                                : <?php echo explode('-', $single['ratio'])[$i]; ?></span>
+                                                            <br/><span style="margin-left: 10px;"><?php echo $rs; ?>Size-
+                                                                : <?php echo explode('-', $single['ratio'])[$i]; ?>pcs</span>
                                                             <?php
                                                         }
 

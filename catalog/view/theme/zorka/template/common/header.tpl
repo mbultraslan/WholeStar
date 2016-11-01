@@ -127,7 +127,7 @@ if ($modules) {
             <span><?php // echo $kuler->language->get('text_welcome'); ?></span>
             <a href="<?php echo $register; ?>"><?php echo $text_register; ?></a>
             <span><?php // echo $kuler->language->get('text_or'); ?>&nbsp; / &nbsp; </span>
-            <a href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
+            <a class="loginModal" href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
           <?php } ?>
         </div>
         <div class="col-lg-5 col-md-5 topbar__right">
