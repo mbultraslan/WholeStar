@@ -25,7 +25,7 @@ class ModelToolImage extends Model {
 						return array();
 					}
 				
-					if( NULL == ( $smp_si_params = $this->config->get( 'smp_si_params' ) ) ) {
+					if( NULL == ( $smp_si_params = $this->_seoUrlParams() ) ) {
 						return array();
 					}
 				
@@ -96,7 +96,11 @@ class ModelToolImage extends Model {
 							p.product_id
 					")->rows;
 				
-					require_once VQMod::modCheck(realpath( DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php' ));
+					require_once VQMod::modCheck(modification(realpath( DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php' )));
+				
+					if( is_array( $smp_si_params ) ) {
+						$smp_si_params = isset( $smp_si_params[$this->config->get('config_language_id')] ) ? $smp_si_params[$this->config->get('config_language_id')] : '';
+					}
 
 					foreach( $images as $key => $item ) {
 						$images[$key]['slug'] = ControllerCommonSeoMegaPackProUrl::_clear( str_replace( array(
@@ -118,9 +122,19 @@ class ModelToolImage extends Model {
 				
 					return $images;
 				}
+				
+				private function _seoUrlParams() {
+					$smp_si_params = $this->config->get( 'smp_si_params' );
+				
+					if( is_array( $smp_si_params ) ) {
+						$smp_si_params = isset( $smp_si_params[$this->config->get('config_language_id')] ) ? $smp_si_params[$this->config->get('config_language_id')] : '';
+					}
+				
+					return $smp_si_params;
+				}
 
 				private function _seoUrlImage( $product_id, $seoUrlImage, $filename, $extension, $width, $height, $isHTTPS = false ) {
-					if( $this->config->get( 'smp_si_is_install' ) && NULL != $this->config->get( 'smp_si_params' ) ) {
+					if( $this->config->get( 'smp_si_is_install' ) && NULL != $this->_seoUrlParams() ) {
 						$gn = $this->_smp_gn( $product_id . '-' . $filename );
 				
 						if( ! isset( $this->_smp_cache[$gn] ) ) {
@@ -258,7 +272,7 @@ class ModelToolImage extends Model {
 
 
 				if( __FUNCTION__ == 'resize' ) {
-					$seoUrlImage = $this->_seoUrlImage( $product_id, 'image/' . $new_image, $filename, $extension, $width, $height );			
+					$seoUrlImage = $this->_seoUrlImage( $product_id, 'image/' . ( isset( $image_new ) ? $image_new : $new_image ), $filename, $extension, $width, $height );
 			
 					if ($this->request->server['HTTPS']) {
 						return ( $this->config->get('config_ssl') ? $this->config->get('config_ssl') : HTTPS_SERVER . 'image/' )  . $seoUrlImage;

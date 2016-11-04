@@ -203,6 +203,10 @@ class ControllerCommonMenu extends Controller {
 			'etsy' => $this->config->get('etsy_status'),
 		);
 
-		return $this->load->view('common/menu.tpl', $data);
+        $data['text_pim'] = $this->language->get('text_pim');
+        $data['pim_status'] = $this->config->get('pim_status');
+        $data['pim'] = $this->url->link('common/filemanager/pim', 'token=' . $this->session->data['token'], 'SSL');
+
+        return $this->load->view('common/menu.tpl', $data);
 	}
 }

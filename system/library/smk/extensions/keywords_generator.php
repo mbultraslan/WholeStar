@@ -41,8 +41,12 @@ class SeoMegaPack_KeywordsGenerator extends SeoMegaPack_AbstractProductGenerator
 	/**
 	 * @return int
 	 */
-	public function getParams() {
+	public function getParams( $language_id = null ) {
 		$params = parent::getParams();
+		
+		if( $language_id !== null && is_array( $params ) ) {
+			$params = isset( $params[$language_id] ) ? $params[$language_id] : null;
+		}
 		
 		if( $params === NULL )
 			$params = '{product_name} {category} {brand}';

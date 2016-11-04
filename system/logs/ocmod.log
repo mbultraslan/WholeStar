@@ -2996,3 +2996,2809 @@ LINE: 21
 CODE: <?php
 LINE: 0
 ----------------------------------------------------------------
+2016-11-02 12:18:27 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+LINE: 304
+CODE: $data['breadcrumbs'] = array();
+LINE: 404
+LINE: 836
+CODE: $url = '';
+LINE: 56
+LINE: 114
+LINE: 174
+LINE: 258
+LINE: 359
+LINE: 531
+LINE: 576
+LINE: 798
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 719
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1185
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+LINE: 167
+FILE: admin/view/template/catalog/product_form.tpl
+CODE: <label class="col-sm-2 control-label" for="input-length"><?php echo $entry_dimension; ?></label>
+LINE: 347
+FILE: admin/language/english/catalog/product.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Email Templates
+FILE: catalog/model/account/customer.php
+CODE: $this->load->language('mail/customer');
+LINE: 25
+CODE: $mail->send();
+LINE: 161
+FILE: catalog/controller/account/forgotten.php
+CODE: $mail = new Mail(
+LINE: 46
+CODE: $mail->send();
+LINE: 52
+FILE: catalog/controller/information/contact.php
+CODE: $this->response->redirect($this->url->link('information/contact/success'));
+LINE: 29
+FILE: admin/model/sale/customer.php
+CODE: $message  = sprintf($this->language->get('text_approve_welcome')
+LINE: 191
+CODE: $mail->send();
+LINE: 204
+CODE: $customer_id = $this->db->getLastId();
+LINE: 5
+CODE: $message  = sprintf($this->language->get('text_reward_received')
+LINE: 498
+CODE: $mail->send();
+LINE: 507
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 416
+CODE: $mail->send();
+LINE: 452
+FILE: admin/controller/marketing/contact.php
+CODE: $data['entry_message'] = $this->language->get('entry_message');
+LINE: 28
+CODE: $json['success'] = $this->language->get('text_success');
+NOT FOUND!
+CODE: if ($emails) {
+NOT FOUND!
+CODE: $emails[] = $customer_info['email'];
+NOT FOUND!
+CODE: $emails[$result['customer_id']] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $affiliate_info['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: foreach ($emails as $email) {
+NOT FOUND!
+CODE: $message  = '<html
+LINE: 704
+CODE: <title>' . $this->request->post['subject'] . '</title>'
+NOT FOUND!
+CODE: $mail->setSender($store_name);
+LINE: 718
+CODE: html_entity_decode($this->request->post['message']
+NOT FOUND!
+CODE: $mail->setHtml($message);
+NOT FOUND!
+CODE: $mail->send();
+LINE: 725
+CODE: marketing/contact.tpl
+NOT FOUND!
+FILE: catalog/controller/account/newsletter.php
+CODE: class ControllerAccountNewsletter extends Controller {
+LINE: 1
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrderHistory(
+LINE: 265
+CODE: $subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+LINE: 423
+CODE: $text .= $comment
+LINE: 663
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 320
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 594
+CODE: 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+LINE: 613
+CODE: $data['products'][] = array(
+LINE: 621
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
+LINE: 688
+LINE: 804
+CODE: $html = $this->load->view('default/template/mail/order.tpl', $data);
+LINE: 690
+LINE: 806
+CODE: $mail->setHtml($html);
+LINE: 770
+LINE: 857
+CODE: $mail->send();
+LINE: 772
+CODE: if ($this->config->get('config_order_mail')) {
+LINE: 829
+CODE: $mail->send();
+LINE: 919
+CODE: $message .= $language->get('text_update_footer');
+LINE: 980
+CODE: $mail->send();
+LINE: 1189
+FILE: admin/controller/sale/order.php
+CODE: $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+LINE: 2286
+CODE: public function history(
+LINE: 3983
+CODE: nl2br($result['comment'])
+LINE: 4043
+FILE: admin/view/template/sale/order_info.tpl
+CODE: id="input-notify"
+LINE: 368
+CODE: $('#button-history').on('click', function() {
+LINE: 873
+CODE: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>'
+LINE: 871
+LINE: 914
+CODE: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/order/history&order_id=<?php echo $order_id; ?>'
+LINE: 896
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val())
+LINE: 899
+CODE: $('textarea[name=\'comment\']').val('');
+LINE: 918
+CODE: <?php echo $footer; ?>
+LINE: 1031
+FILE: catalog/model/checkout/voucher.php
+CODE: // HTML Mail
+LINE: 87
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/voucher.tpl', $data);
+LINE: 121
+CODE: $html = $this->load->view('default/template/mail/voucher.tpl', $data);
+LINE: 123
+CODE: $mail->setHtml($html);
+LINE: 131
+CODE: $mail->send();
+LINE: 132
+FILE: admin/model/sale/return.php
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "return_history
+LINE: 169
+CODE: $subject = sprintf($this->language->get('text_subject')
+LINE: 222
+CODE: $mail->send();
+LINE: 242
+CODE: comment = '" . $this->db->escape(strip_tags($data['comment'])) . "'
+LINE: 169
+FILE: admin/controller/sale/return.php
+CODE: $data['entry_notify'] = $this->language->get('entry_notify');
+LINE: 583
+CODE: $data['order_id'] = $return_info['order_id'];
+LINE: 751
+CODE: public function history(
+LINE: 967
+CODE: nl2br($result['comment'])
+LINE: 1018
+FILE: admin/view/template/sale/return_form.tpl
+CODE: <input type="checkbox" name="notify" value="1" id="input-notify" />
+LINE: 214
+CODE: <?php echo $footer; ?>
+LINE: 388
+CODE: $('#button-history').on('click', function(e) {
+LINE: 309
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val())
+LINE: 325
+CODE: $('textarea[name=\'history_comment\']').val('');
+LINE: 337
+FILE: admin/model/sale/voucher.php
+CODE: $mail->setHtml($this->load->view('mail/voucher.tpl', $data));
+LINE: 123
+LINE: 159
+CODE: $voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
+LINE: 106
+LINE: 168
+CODE: $mail->send();
+LINE: 150
+LINE: 212
+FILE: admin/model/marketing/affiliate.php
+CODE: $mail->setSubject(sprintf($this->language->get('text_approve_subject')
+LINE: 157
+CODE: $mail->send();
+LINE: 159
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 259
+CODE: $mail->send();
+LINE: 268
+FILE: catalog/controller/affiliate/forgotten.php
+CODE: $mail = new Mail(
+LINE: 48
+CODE: $mail->send();
+LINE: 54
+FILE: catalog/model/affiliate/affiliate.php
+CODE: $mail = new Mail(
+LINE: 51
+CODE: $mail->send();
+LINE: 57
+CODE: if ($this->config->get('config_account_mail')) {
+LINE: 169
+CODE: $mail->send();
+LINE: 185
+CODE: $mail = new Mail(
+LINE: 29
+CODE: $mail->send();
+LINE: 35
+CODE: $mail->send();
+LINE: 85
+FILE: catalog/model/catalog/review.php
+CODE: $mail = new Mail(
+LINE: 43
+CODE: $mail->send();
+LINE: 49
+FILE: catalog/model/openbay/ebay_order.php
+CODE: $subject = sprintf($language->get('text_new_subject'),
+LINE: 290
+CODE: $text .= $comment
+LINE: 501
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 199
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 460
+CODE: 'value' => (utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value
+LINE: 473
+CODE: $template->data['products'][] = array(
+LINE: 481
+CODE: $html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+LINE: 530
+CODE: $html = $template->fetch('default/template/mail/order.tpl');
+LINE: 532
+CODE: $mail->setHtml($html);
+LINE: 599
+CODE: $mail->send();
+LINE: 601
+CODE: $message .= $language->get('text_update_footer');
+LINE: 230
+CODE: $mail->send();
+LINE: 304
+FILE: system/library/openbay.php
+CODE: $subject = sprintf($language->get('text_new_subject')
+LINE: 251
+CODE: $text .= $order_info['comment'] . "\n\n";
+LINE: 347
+CODE: $mail->send();
+LINE: 478
+----------------------------------------------------------------
+MOD: Email Templates Core
+CODE: $file = DIR_LANGUAGE
+LINE: 17
+LINE: 23
+CODE: private $directory;
+LINE: 3
+CODE: public function get($key
+LINE: 22
+FILE: system/library/mail.php
+CODE: protected $subject;
+LINE: 8
+CODE: protected $subject;
+LINE: 10
+CODE: protected $subject;
+LINE: 12
+CODE: public function send(
+LINE: 70
+CODE: public function send(
+LINE: 74
+CODE: public function send(
+LINE: 78
+CODE: public function send(
+LINE: 83
+CODE: public function send(
+LINE: 99
+CODE: public function send() {
+LINE: 99
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+FILE: admin/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+FILE: catalog/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+CODE: $data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
+LINE: 118
+CODE: <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+LINE: 33
+CODE: $this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET
+LINE: 5
+CODE: => $order_query->row['customer_id'],
+LINE: 191
+CODE: 'customer_id'             => $order_query->row['customer_id'],
+LINE: 191
+FILE: catalog/controller/affiliate/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 95
+FILE: catalog/controller/account/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 150
+----------------------------------------------------------------
+MOD: Email Templates Language - English
+FILE: admin/language/english/common/menu.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/customer.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/order.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/return.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/marketing/contact.php
+CODE: <?php
+LINE: 0
+FILE: catalog/language/english/account/newsletter.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Power Image Manager 2.0
+FILE: admin/controller/common/header.php
+CODE: return $this->load->view('common/header.tpl'
+LINE: 141
+FILE: admin/view/template/common/header.tpl
+CODE: <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+LINE: 28
+FILE: admin/controller/common/filemanager.php
+CODE: public function index() {
+LINE: 29
+CODE: public function index() {
+LINE: 29
+CODE: public function delete() {
+LINE: 518
+CODE: private $error = array();
+LINE: 2
+CODE: function getForm() {
+LINE: 708
+CODE: <td class="text-right"><?php echo $entry_sort_order; ?></td>
+LINE: 912
+CODE: <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]"
+LINE: 926
+CODE: html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]"
+LINE: 1449
+CODE: <?php echo $footer; ?>
+LINE: 1546
+CODE: <button type="button" onclick="addImage();"
+LINE: 935
+FILE: admin/controller/common/footer.php
+CODE: return $this->load->view('common/footer.tpl'
+LINE: 28
+FILE: admin/view/template/common/footer.tpl
+CODE: <footer id="footer">
+LINE: 126
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 56
+LINE: 238
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 62
+LINE: 250
+CODE: foreach ($data['product_image'] as $product_image) {
+LINE: 115
+LINE: 320
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
+LINE: 341
+LINE: 472
+CODE: return $this->load->view('common/menu.tpl', $data);
+LINE: 221
+CODE: <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+LINE: 21
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+2016-11-02 12:34:13 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 679
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1136
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+LINE: 167
+FILE: admin/view/template/catalog/product_form.tpl
+CODE: <label class="col-sm-2 control-label" for="input-length"><?php echo $entry_dimension; ?></label>
+LINE: 453
+FILE: admin/language/english/catalog/product.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Email Templates
+FILE: catalog/model/account/customer.php
+CODE: $this->load->language('mail/customer');
+LINE: 25
+CODE: $mail->send();
+LINE: 161
+FILE: catalog/controller/account/forgotten.php
+CODE: $mail = new Mail(
+LINE: 46
+CODE: $mail->send();
+LINE: 52
+FILE: catalog/controller/information/contact.php
+CODE: $this->response->redirect($this->url->link('information/contact/success'));
+LINE: 29
+FILE: admin/model/sale/customer.php
+CODE: $message  = sprintf($this->language->get('text_approve_welcome')
+LINE: 191
+CODE: $mail->send();
+LINE: 204
+CODE: $customer_id = $this->db->getLastId();
+LINE: 5
+CODE: $message  = sprintf($this->language->get('text_reward_received')
+LINE: 498
+CODE: $mail->send();
+LINE: 507
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 416
+CODE: $mail->send();
+LINE: 452
+FILE: admin/controller/marketing/contact.php
+CODE: $data['entry_message'] = $this->language->get('entry_message');
+LINE: 28
+CODE: $json['success'] = $this->language->get('text_success');
+NOT FOUND!
+CODE: if ($emails) {
+NOT FOUND!
+CODE: $emails[] = $customer_info['email'];
+NOT FOUND!
+CODE: $emails[$result['customer_id']] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $affiliate_info['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: foreach ($emails as $email) {
+NOT FOUND!
+CODE: $message  = '<html
+LINE: 704
+CODE: <title>' . $this->request->post['subject'] . '</title>'
+NOT FOUND!
+CODE: $mail->setSender($store_name);
+LINE: 718
+CODE: html_entity_decode($this->request->post['message']
+NOT FOUND!
+CODE: $mail->setHtml($message);
+NOT FOUND!
+CODE: $mail->send();
+LINE: 725
+CODE: marketing/contact.tpl
+NOT FOUND!
+FILE: catalog/controller/account/newsletter.php
+CODE: class ControllerAccountNewsletter extends Controller {
+LINE: 1
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrderHistory(
+LINE: 265
+CODE: $subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+LINE: 423
+CODE: $text .= $comment
+LINE: 663
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 320
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 594
+CODE: 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+LINE: 613
+CODE: $data['products'][] = array(
+LINE: 621
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
+LINE: 688
+LINE: 804
+CODE: $html = $this->load->view('default/template/mail/order.tpl', $data);
+LINE: 690
+LINE: 806
+CODE: $mail->setHtml($html);
+LINE: 770
+LINE: 857
+CODE: $mail->send();
+LINE: 772
+CODE: if ($this->config->get('config_order_mail')) {
+LINE: 829
+CODE: $mail->send();
+LINE: 919
+CODE: $message .= $language->get('text_update_footer');
+LINE: 980
+CODE: $mail->send();
+LINE: 1189
+FILE: admin/controller/sale/order.php
+CODE: $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+LINE: 2286
+CODE: public function history(
+LINE: 3983
+CODE: nl2br($result['comment'])
+LINE: 4043
+FILE: admin/view/template/sale/order_info.tpl
+CODE: id="input-notify"
+LINE: 368
+CODE: $('#button-history').on('click', function() {
+LINE: 873
+CODE: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>'
+LINE: 871
+LINE: 914
+CODE: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/order/history&order_id=<?php echo $order_id; ?>'
+LINE: 896
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val())
+LINE: 899
+CODE: $('textarea[name=\'comment\']').val('');
+LINE: 918
+CODE: <?php echo $footer; ?>
+LINE: 1031
+FILE: catalog/model/checkout/voucher.php
+CODE: // HTML Mail
+LINE: 87
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/voucher.tpl', $data);
+LINE: 121
+CODE: $html = $this->load->view('default/template/mail/voucher.tpl', $data);
+LINE: 123
+CODE: $mail->setHtml($html);
+LINE: 131
+CODE: $mail->send();
+LINE: 132
+FILE: admin/model/sale/return.php
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "return_history
+LINE: 169
+CODE: $subject = sprintf($this->language->get('text_subject')
+LINE: 222
+CODE: $mail->send();
+LINE: 242
+CODE: comment = '" . $this->db->escape(strip_tags($data['comment'])) . "'
+LINE: 169
+FILE: admin/controller/sale/return.php
+CODE: $data['entry_notify'] = $this->language->get('entry_notify');
+LINE: 583
+CODE: $data['order_id'] = $return_info['order_id'];
+LINE: 751
+CODE: public function history(
+LINE: 967
+CODE: nl2br($result['comment'])
+LINE: 1018
+FILE: admin/view/template/sale/return_form.tpl
+CODE: <input type="checkbox" name="notify" value="1" id="input-notify" />
+LINE: 214
+CODE: <?php echo $footer; ?>
+LINE: 388
+CODE: $('#button-history').on('click', function(e) {
+LINE: 309
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val())
+LINE: 325
+CODE: $('textarea[name=\'history_comment\']').val('');
+LINE: 337
+FILE: admin/model/sale/voucher.php
+CODE: $mail->setHtml($this->load->view('mail/voucher.tpl', $data));
+LINE: 123
+LINE: 159
+CODE: $voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
+LINE: 106
+LINE: 168
+CODE: $mail->send();
+LINE: 150
+LINE: 212
+FILE: admin/model/marketing/affiliate.php
+CODE: $mail->setSubject(sprintf($this->language->get('text_approve_subject')
+LINE: 157
+CODE: $mail->send();
+LINE: 159
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 259
+CODE: $mail->send();
+LINE: 268
+FILE: catalog/controller/affiliate/forgotten.php
+CODE: $mail = new Mail(
+LINE: 48
+CODE: $mail->send();
+LINE: 54
+FILE: catalog/model/affiliate/affiliate.php
+CODE: $mail = new Mail(
+LINE: 51
+CODE: $mail->send();
+LINE: 57
+CODE: if ($this->config->get('config_account_mail')) {
+LINE: 169
+CODE: $mail->send();
+LINE: 185
+CODE: $mail = new Mail(
+LINE: 29
+CODE: $mail->send();
+LINE: 35
+CODE: $mail->send();
+LINE: 85
+FILE: catalog/model/catalog/review.php
+CODE: $mail = new Mail(
+LINE: 43
+CODE: $mail->send();
+LINE: 49
+FILE: catalog/model/openbay/ebay_order.php
+CODE: $subject = sprintf($language->get('text_new_subject'),
+LINE: 290
+CODE: $text .= $comment
+LINE: 501
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 199
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 460
+CODE: 'value' => (utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value
+LINE: 473
+CODE: $template->data['products'][] = array(
+LINE: 481
+CODE: $html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+LINE: 530
+CODE: $html = $template->fetch('default/template/mail/order.tpl');
+LINE: 532
+CODE: $mail->setHtml($html);
+LINE: 599
+CODE: $mail->send();
+LINE: 601
+CODE: $message .= $language->get('text_update_footer');
+LINE: 230
+CODE: $mail->send();
+LINE: 304
+FILE: system/library/openbay.php
+CODE: $subject = sprintf($language->get('text_new_subject')
+LINE: 251
+CODE: $text .= $order_info['comment'] . "\n\n";
+LINE: 347
+CODE: $mail->send();
+LINE: 478
+----------------------------------------------------------------
+MOD: Email Templates Core
+CODE: $file = DIR_LANGUAGE
+LINE: 17
+LINE: 23
+CODE: private $directory;
+LINE: 3
+CODE: public function get($key
+LINE: 22
+FILE: system/library/mail.php
+CODE: protected $subject;
+LINE: 8
+CODE: protected $subject;
+LINE: 10
+CODE: protected $subject;
+LINE: 12
+CODE: public function send(
+LINE: 70
+CODE: public function send(
+LINE: 74
+CODE: public function send(
+LINE: 78
+CODE: public function send(
+LINE: 83
+CODE: public function send(
+LINE: 99
+CODE: public function send() {
+LINE: 99
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+FILE: admin/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+FILE: catalog/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+CODE: $data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
+LINE: 118
+CODE: <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+LINE: 33
+CODE: $this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET
+LINE: 5
+CODE: => $order_query->row['customer_id'],
+LINE: 191
+CODE: 'customer_id'             => $order_query->row['customer_id'],
+LINE: 191
+FILE: catalog/controller/affiliate/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 95
+FILE: catalog/controller/account/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 150
+----------------------------------------------------------------
+MOD: Email Templates Language - English
+FILE: admin/language/english/common/menu.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/customer.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/order.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/return.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/marketing/contact.php
+CODE: <?php
+LINE: 0
+FILE: catalog/language/english/account/newsletter.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Power Image Manager 2.0
+FILE: admin/controller/common/header.php
+CODE: return $this->load->view('common/header.tpl'
+LINE: 141
+FILE: admin/view/template/common/header.tpl
+CODE: <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+LINE: 28
+FILE: admin/controller/common/filemanager.php
+CODE: public function index() {
+LINE: 29
+CODE: public function index() {
+LINE: 29
+CODE: public function delete() {
+LINE: 518
+CODE: private $error = array();
+LINE: 4
+CODE: function getForm() {
+NOT FOUND!
+CODE: <td class="text-right"><?php echo $entry_sort_order; ?></td>
+LINE: 1027
+CODE: <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]"
+LINE: 1046
+CODE: html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]"
+LINE: 1576
+LINE: 1663
+CODE: <?php echo $footer; ?>
+LINE: 1718
+CODE: <button type="button" onclick="addImage();"
+LINE: 1055
+FILE: admin/controller/common/footer.php
+CODE: return $this->load->view('common/footer.tpl'
+LINE: 28
+FILE: admin/view/template/common/footer.tpl
+CODE: <footer id="footer">
+LINE: 126
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 56
+LINE: 238
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 62
+LINE: 250
+CODE: foreach ($data['product_image'] as $product_image) {
+LINE: 115
+LINE: 320
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
+LINE: 341
+LINE: 472
+CODE: return $this->load->view('common/menu.tpl', $data);
+LINE: 221
+CODE: <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+LINE: 21
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+2016-11-02 12:35:14 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+LINE: 167
+FILE: admin/view/template/catalog/product_form.tpl
+CODE: <label class="col-sm-2 control-label" for="input-length"><?php echo $entry_dimension; ?></label>
+LINE: 453
+FILE: admin/language/english/catalog/product.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Email Templates
+FILE: catalog/model/account/customer.php
+CODE: $this->load->language('mail/customer');
+LINE: 25
+CODE: $mail->send();
+LINE: 161
+FILE: catalog/controller/account/forgotten.php
+CODE: $mail = new Mail(
+LINE: 46
+CODE: $mail->send();
+LINE: 52
+FILE: catalog/controller/information/contact.php
+CODE: $this->response->redirect($this->url->link('information/contact/success'));
+LINE: 29
+FILE: admin/model/sale/customer.php
+CODE: $message  = sprintf($this->language->get('text_approve_welcome')
+LINE: 191
+CODE: $mail->send();
+LINE: 204
+CODE: $customer_id = $this->db->getLastId();
+LINE: 5
+CODE: $message  = sprintf($this->language->get('text_reward_received')
+LINE: 498
+CODE: $mail->send();
+LINE: 507
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 416
+CODE: $mail->send();
+LINE: 452
+FILE: admin/controller/marketing/contact.php
+CODE: $data['entry_message'] = $this->language->get('entry_message');
+LINE: 28
+CODE: $json['success'] = $this->language->get('text_success');
+NOT FOUND!
+CODE: if ($emails) {
+NOT FOUND!
+CODE: $emails[] = $customer_info['email'];
+NOT FOUND!
+CODE: $emails[$result['customer_id']] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $affiliate_info['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: foreach ($emails as $email) {
+NOT FOUND!
+CODE: $message  = '<html
+LINE: 704
+CODE: <title>' . $this->request->post['subject'] . '</title>'
+NOT FOUND!
+CODE: $mail->setSender($store_name);
+LINE: 718
+CODE: html_entity_decode($this->request->post['message']
+NOT FOUND!
+CODE: $mail->setHtml($message);
+NOT FOUND!
+CODE: $mail->send();
+LINE: 725
+CODE: marketing/contact.tpl
+NOT FOUND!
+FILE: catalog/controller/account/newsletter.php
+CODE: class ControllerAccountNewsletter extends Controller {
+LINE: 1
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrderHistory(
+LINE: 265
+CODE: $subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+LINE: 423
+CODE: $text .= $comment
+LINE: 663
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 320
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 594
+CODE: 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+LINE: 613
+CODE: $data['products'][] = array(
+LINE: 621
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
+LINE: 688
+LINE: 804
+CODE: $html = $this->load->view('default/template/mail/order.tpl', $data);
+LINE: 690
+LINE: 806
+CODE: $mail->setHtml($html);
+LINE: 770
+LINE: 857
+CODE: $mail->send();
+LINE: 772
+CODE: if ($this->config->get('config_order_mail')) {
+LINE: 829
+CODE: $mail->send();
+LINE: 919
+CODE: $message .= $language->get('text_update_footer');
+LINE: 980
+CODE: $mail->send();
+LINE: 1189
+FILE: admin/controller/sale/order.php
+CODE: $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+LINE: 2286
+CODE: public function history(
+LINE: 3983
+CODE: nl2br($result['comment'])
+LINE: 4043
+FILE: admin/view/template/sale/order_info.tpl
+CODE: id="input-notify"
+LINE: 368
+CODE: $('#button-history').on('click', function() {
+LINE: 873
+CODE: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>'
+LINE: 871
+LINE: 914
+CODE: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/order/history&order_id=<?php echo $order_id; ?>'
+LINE: 896
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val())
+LINE: 899
+CODE: $('textarea[name=\'comment\']').val('');
+LINE: 918
+CODE: <?php echo $footer; ?>
+LINE: 1031
+FILE: catalog/model/checkout/voucher.php
+CODE: // HTML Mail
+LINE: 87
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/voucher.tpl', $data);
+LINE: 121
+CODE: $html = $this->load->view('default/template/mail/voucher.tpl', $data);
+LINE: 123
+CODE: $mail->setHtml($html);
+LINE: 131
+CODE: $mail->send();
+LINE: 132
+FILE: admin/model/sale/return.php
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "return_history
+LINE: 169
+CODE: $subject = sprintf($this->language->get('text_subject')
+LINE: 222
+CODE: $mail->send();
+LINE: 242
+CODE: comment = '" . $this->db->escape(strip_tags($data['comment'])) . "'
+LINE: 169
+FILE: admin/controller/sale/return.php
+CODE: $data['entry_notify'] = $this->language->get('entry_notify');
+LINE: 583
+CODE: $data['order_id'] = $return_info['order_id'];
+LINE: 751
+CODE: public function history(
+LINE: 967
+CODE: nl2br($result['comment'])
+LINE: 1018
+FILE: admin/view/template/sale/return_form.tpl
+CODE: <input type="checkbox" name="notify" value="1" id="input-notify" />
+LINE: 214
+CODE: <?php echo $footer; ?>
+LINE: 388
+CODE: $('#button-history').on('click', function(e) {
+LINE: 309
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val())
+LINE: 325
+CODE: $('textarea[name=\'history_comment\']').val('');
+LINE: 337
+FILE: admin/model/sale/voucher.php
+CODE: $mail->setHtml($this->load->view('mail/voucher.tpl', $data));
+LINE: 123
+LINE: 159
+CODE: $voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
+LINE: 106
+LINE: 168
+CODE: $mail->send();
+LINE: 150
+LINE: 212
+FILE: admin/model/marketing/affiliate.php
+CODE: $mail->setSubject(sprintf($this->language->get('text_approve_subject')
+LINE: 157
+CODE: $mail->send();
+LINE: 159
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 259
+CODE: $mail->send();
+LINE: 268
+FILE: catalog/controller/affiliate/forgotten.php
+CODE: $mail = new Mail(
+LINE: 48
+CODE: $mail->send();
+LINE: 54
+FILE: catalog/model/affiliate/affiliate.php
+CODE: $mail = new Mail(
+LINE: 51
+CODE: $mail->send();
+LINE: 57
+CODE: if ($this->config->get('config_account_mail')) {
+LINE: 169
+CODE: $mail->send();
+LINE: 185
+CODE: $mail = new Mail(
+LINE: 29
+CODE: $mail->send();
+LINE: 35
+CODE: $mail->send();
+LINE: 85
+FILE: catalog/model/catalog/review.php
+CODE: $mail = new Mail(
+LINE: 43
+CODE: $mail->send();
+LINE: 49
+FILE: catalog/model/openbay/ebay_order.php
+CODE: $subject = sprintf($language->get('text_new_subject'),
+LINE: 290
+CODE: $text .= $comment
+LINE: 501
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 199
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 460
+CODE: 'value' => (utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value
+LINE: 473
+CODE: $template->data['products'][] = array(
+LINE: 481
+CODE: $html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+LINE: 530
+CODE: $html = $template->fetch('default/template/mail/order.tpl');
+LINE: 532
+CODE: $mail->setHtml($html);
+LINE: 599
+CODE: $mail->send();
+LINE: 601
+CODE: $message .= $language->get('text_update_footer');
+LINE: 230
+CODE: $mail->send();
+LINE: 304
+FILE: system/library/openbay.php
+CODE: $subject = sprintf($language->get('text_new_subject')
+LINE: 251
+CODE: $text .= $order_info['comment'] . "\n\n";
+LINE: 347
+CODE: $mail->send();
+LINE: 478
+----------------------------------------------------------------
+MOD: Email Templates Core
+CODE: $file = DIR_LANGUAGE
+LINE: 17
+LINE: 23
+CODE: private $directory;
+LINE: 3
+CODE: public function get($key
+LINE: 22
+FILE: system/library/mail.php
+CODE: protected $subject;
+LINE: 8
+CODE: protected $subject;
+LINE: 10
+CODE: protected $subject;
+LINE: 12
+CODE: public function send(
+LINE: 70
+CODE: public function send(
+LINE: 74
+CODE: public function send(
+LINE: 78
+CODE: public function send(
+LINE: 83
+CODE: public function send(
+LINE: 99
+CODE: public function send() {
+LINE: 99
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+FILE: admin/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+FILE: catalog/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+CODE: $data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
+LINE: 118
+CODE: <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+LINE: 33
+CODE: $this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET
+LINE: 5
+CODE: => $order_query->row['customer_id'],
+LINE: 191
+CODE: 'customer_id'             => $order_query->row['customer_id'],
+LINE: 191
+FILE: catalog/controller/affiliate/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 95
+FILE: catalog/controller/account/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 150
+----------------------------------------------------------------
+MOD: Email Templates Language - English
+FILE: admin/language/english/common/menu.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/customer.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/order.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/return.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/marketing/contact.php
+CODE: <?php
+LINE: 0
+FILE: catalog/language/english/account/newsletter.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Power Image Manager 2.0
+FILE: admin/controller/common/header.php
+CODE: return $this->load->view('common/header.tpl'
+LINE: 141
+FILE: admin/view/template/common/header.tpl
+CODE: <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+LINE: 28
+FILE: admin/controller/common/filemanager.php
+CODE: public function index() {
+LINE: 29
+CODE: public function index() {
+LINE: 29
+CODE: public function delete() {
+LINE: 518
+CODE: private $error = array();
+LINE: 4
+CODE: function getForm() {
+NOT FOUND!
+CODE: <td class="text-right"><?php echo $entry_sort_order; ?></td>
+LINE: 1027
+CODE: <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]"
+LINE: 1046
+CODE: html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]"
+LINE: 1576
+LINE: 1663
+CODE: <?php echo $footer; ?>
+LINE: 1718
+CODE: <button type="button" onclick="addImage();"
+LINE: 1055
+FILE: admin/controller/common/footer.php
+CODE: return $this->load->view('common/footer.tpl'
+LINE: 28
+FILE: admin/view/template/common/footer.tpl
+CODE: <footer id="footer">
+LINE: 126
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 56
+LINE: 238
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 62
+LINE: 250
+CODE: foreach ($data['product_image'] as $product_image) {
+LINE: 115
+LINE: 320
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
+LINE: 341
+LINE: 472
+CODE: return $this->load->view('common/menu.tpl', $data);
+LINE: 221
+CODE: <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+LINE: 21
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+2016-11-02 12:41:20 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+LINE: 167
+FILE: admin/view/template/catalog/product_form.tpl
+CODE: <label class="col-sm-2 control-label" for="input-length"><?php echo $entry_dimension; ?></label>
+LINE: 453
+FILE: admin/language/english/catalog/product.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Email Templates
+FILE: catalog/model/account/customer.php
+CODE: $this->load->language('mail/customer');
+LINE: 25
+CODE: $mail->send();
+LINE: 161
+FILE: catalog/controller/account/forgotten.php
+CODE: $mail = new Mail(
+LINE: 46
+CODE: $mail->send();
+LINE: 52
+FILE: catalog/controller/information/contact.php
+CODE: $this->response->redirect($this->url->link('information/contact/success'));
+LINE: 29
+FILE: admin/model/sale/customer.php
+CODE: $message  = sprintf($this->language->get('text_approve_welcome')
+LINE: 191
+CODE: $mail->send();
+LINE: 204
+CODE: $customer_id = $this->db->getLastId();
+LINE: 5
+CODE: $message  = sprintf($this->language->get('text_reward_received')
+LINE: 498
+CODE: $mail->send();
+LINE: 507
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 416
+CODE: $mail->send();
+LINE: 452
+FILE: admin/controller/marketing/contact.php
+CODE: $data['entry_message'] = $this->language->get('entry_message');
+LINE: 28
+CODE: $json['success'] = $this->language->get('text_success');
+NOT FOUND!
+CODE: if ($emails) {
+NOT FOUND!
+CODE: $emails[] = $customer_info['email'];
+NOT FOUND!
+CODE: $emails[$result['customer_id']] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $affiliate_info['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: foreach ($emails as $email) {
+NOT FOUND!
+CODE: $message  = '<html
+LINE: 704
+CODE: <title>' . $this->request->post['subject'] . '</title>'
+NOT FOUND!
+CODE: $mail->setSender($store_name);
+LINE: 718
+CODE: html_entity_decode($this->request->post['message']
+NOT FOUND!
+CODE: $mail->setHtml($message);
+NOT FOUND!
+CODE: $mail->send();
+LINE: 725
+CODE: marketing/contact.tpl
+NOT FOUND!
+FILE: catalog/controller/account/newsletter.php
+CODE: class ControllerAccountNewsletter extends Controller {
+LINE: 1
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrderHistory(
+LINE: 265
+CODE: $subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+LINE: 423
+CODE: $text .= $comment
+LINE: 663
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 320
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 594
+CODE: 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+LINE: 613
+CODE: $data['products'][] = array(
+LINE: 621
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
+LINE: 688
+LINE: 804
+CODE: $html = $this->load->view('default/template/mail/order.tpl', $data);
+LINE: 690
+LINE: 806
+CODE: $mail->setHtml($html);
+LINE: 770
+LINE: 857
+CODE: $mail->send();
+LINE: 772
+CODE: if ($this->config->get('config_order_mail')) {
+LINE: 829
+CODE: $mail->send();
+LINE: 919
+CODE: $message .= $language->get('text_update_footer');
+LINE: 980
+CODE: $mail->send();
+LINE: 1189
+FILE: admin/controller/sale/order.php
+CODE: $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+LINE: 2286
+CODE: public function history(
+LINE: 3983
+CODE: nl2br($result['comment'])
+LINE: 4043
+FILE: admin/view/template/sale/order_info.tpl
+CODE: id="input-notify"
+LINE: 368
+CODE: $('#button-history').on('click', function() {
+LINE: 873
+CODE: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>'
+LINE: 871
+LINE: 914
+CODE: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/order/history&order_id=<?php echo $order_id; ?>'
+LINE: 896
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val())
+LINE: 899
+CODE: $('textarea[name=\'comment\']').val('');
+LINE: 918
+CODE: <?php echo $footer; ?>
+LINE: 1031
+FILE: catalog/model/checkout/voucher.php
+CODE: // HTML Mail
+LINE: 87
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/voucher.tpl', $data);
+LINE: 121
+CODE: $html = $this->load->view('default/template/mail/voucher.tpl', $data);
+LINE: 123
+CODE: $mail->setHtml($html);
+LINE: 131
+CODE: $mail->send();
+LINE: 132
+FILE: admin/model/sale/return.php
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "return_history
+LINE: 169
+CODE: $subject = sprintf($this->language->get('text_subject')
+LINE: 222
+CODE: $mail->send();
+LINE: 242
+CODE: comment = '" . $this->db->escape(strip_tags($data['comment'])) . "'
+LINE: 169
+FILE: admin/controller/sale/return.php
+CODE: $data['entry_notify'] = $this->language->get('entry_notify');
+LINE: 583
+CODE: $data['order_id'] = $return_info['order_id'];
+LINE: 751
+CODE: public function history(
+LINE: 967
+CODE: nl2br($result['comment'])
+LINE: 1018
+FILE: admin/view/template/sale/return_form.tpl
+CODE: <input type="checkbox" name="notify" value="1" id="input-notify" />
+LINE: 214
+CODE: <?php echo $footer; ?>
+LINE: 388
+CODE: $('#button-history').on('click', function(e) {
+LINE: 309
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val())
+LINE: 325
+CODE: $('textarea[name=\'history_comment\']').val('');
+LINE: 337
+FILE: admin/model/sale/voucher.php
+CODE: $mail->setHtml($this->load->view('mail/voucher.tpl', $data));
+LINE: 123
+LINE: 159
+CODE: $voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
+LINE: 106
+LINE: 168
+CODE: $mail->send();
+LINE: 150
+LINE: 212
+FILE: admin/model/marketing/affiliate.php
+CODE: $mail->setSubject(sprintf($this->language->get('text_approve_subject')
+LINE: 157
+CODE: $mail->send();
+LINE: 159
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 259
+CODE: $mail->send();
+LINE: 268
+FILE: catalog/controller/affiliate/forgotten.php
+CODE: $mail = new Mail(
+LINE: 48
+CODE: $mail->send();
+LINE: 54
+FILE: catalog/model/affiliate/affiliate.php
+CODE: $mail = new Mail(
+LINE: 51
+CODE: $mail->send();
+LINE: 57
+CODE: if ($this->config->get('config_account_mail')) {
+LINE: 169
+CODE: $mail->send();
+LINE: 185
+CODE: $mail = new Mail(
+LINE: 29
+CODE: $mail->send();
+LINE: 35
+CODE: $mail->send();
+LINE: 85
+FILE: catalog/model/catalog/review.php
+CODE: $mail = new Mail(
+LINE: 43
+CODE: $mail->send();
+LINE: 49
+FILE: catalog/model/openbay/ebay_order.php
+CODE: $subject = sprintf($language->get('text_new_subject'),
+LINE: 290
+CODE: $text .= $comment
+LINE: 501
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 199
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 460
+CODE: 'value' => (utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value
+LINE: 473
+CODE: $template->data['products'][] = array(
+LINE: 481
+CODE: $html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+LINE: 530
+CODE: $html = $template->fetch('default/template/mail/order.tpl');
+LINE: 532
+CODE: $mail->setHtml($html);
+LINE: 599
+CODE: $mail->send();
+LINE: 601
+CODE: $message .= $language->get('text_update_footer');
+LINE: 230
+CODE: $mail->send();
+LINE: 304
+FILE: system/library/openbay.php
+CODE: $subject = sprintf($language->get('text_new_subject')
+LINE: 251
+CODE: $text .= $order_info['comment'] . "\n\n";
+LINE: 347
+CODE: $mail->send();
+LINE: 478
+----------------------------------------------------------------
+MOD: Email Templates Core
+CODE: $file = DIR_LANGUAGE
+LINE: 17
+LINE: 23
+CODE: private $directory;
+LINE: 3
+CODE: public function get($key
+LINE: 22
+FILE: system/library/mail.php
+CODE: protected $subject;
+LINE: 8
+CODE: protected $subject;
+LINE: 10
+CODE: protected $subject;
+LINE: 12
+CODE: public function send(
+LINE: 70
+CODE: public function send(
+LINE: 74
+CODE: public function send(
+LINE: 78
+CODE: public function send(
+LINE: 83
+CODE: public function send(
+LINE: 99
+CODE: public function send() {
+LINE: 99
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+FILE: admin/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+FILE: catalog/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+CODE: $data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
+LINE: 118
+CODE: <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+LINE: 33
+CODE: $this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET
+LINE: 5
+CODE: => $order_query->row['customer_id'],
+LINE: 191
+CODE: 'customer_id'             => $order_query->row['customer_id'],
+LINE: 191
+FILE: catalog/controller/affiliate/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 95
+FILE: catalog/controller/account/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 150
+----------------------------------------------------------------
+MOD: Email Templates Language - English
+FILE: admin/language/english/common/menu.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/customer.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/order.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/return.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/marketing/contact.php
+CODE: <?php
+LINE: 0
+FILE: catalog/language/english/account/newsletter.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Power Image Manager 2.0
+FILE: admin/controller/common/header.php
+CODE: return $this->load->view('common/header.tpl'
+LINE: 141
+FILE: admin/view/template/common/header.tpl
+CODE: <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+LINE: 28
+FILE: admin/controller/common/filemanager.php
+CODE: public function index() {
+LINE: 29
+CODE: public function index() {
+LINE: 29
+CODE: public function delete() {
+LINE: 518
+CODE: private $error = array();
+LINE: 4
+CODE: function getForm() {
+NOT FOUND!
+CODE: <td class="text-right"><?php echo $entry_sort_order; ?></td>
+LINE: 1027
+CODE: <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]"
+LINE: 1046
+CODE: html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]"
+LINE: 1577
+LINE: 1664
+CODE: <?php echo $footer; ?>
+LINE: 1719
+CODE: <button type="button" onclick="addImage();"
+LINE: 1056
+FILE: admin/controller/common/footer.php
+CODE: return $this->load->view('common/footer.tpl'
+LINE: 28
+FILE: admin/view/template/common/footer.tpl
+CODE: <footer id="footer">
+LINE: 126
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 56
+LINE: 238
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 62
+LINE: 250
+CODE: foreach ($data['product_image'] as $product_image) {
+LINE: 115
+LINE: 320
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
+LINE: 341
+LINE: 472
+CODE: return $this->load->view('common/menu.tpl', $data);
+LINE: 221
+CODE: <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+LINE: 21
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+2016-11-02 15:27:36 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+LINE: 167
+FILE: admin/view/template/catalog/product_form.tpl
+CODE: <label class="col-sm-2 control-label" for="input-length"><?php echo $entry_dimension; ?></label>
+LINE: 453
+FILE: admin/language/english/catalog/product.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Email Templates
+FILE: catalog/model/account/customer.php
+CODE: $this->load->language('mail/customer');
+LINE: 25
+CODE: $mail->send();
+LINE: 161
+FILE: catalog/controller/account/forgotten.php
+CODE: $mail = new Mail(
+LINE: 46
+CODE: $mail->send();
+LINE: 52
+FILE: catalog/controller/information/contact.php
+CODE: $this->response->redirect($this->url->link('information/contact/success'));
+LINE: 29
+FILE: admin/model/sale/customer.php
+CODE: $message  = sprintf($this->language->get('text_approve_welcome')
+LINE: 191
+CODE: $mail->send();
+LINE: 204
+CODE: $customer_id = $this->db->getLastId();
+LINE: 5
+CODE: $message  = sprintf($this->language->get('text_reward_received')
+LINE: 498
+CODE: $mail->send();
+LINE: 507
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 416
+CODE: $mail->send();
+LINE: 452
+FILE: admin/controller/marketing/contact.php
+CODE: $data['entry_message'] = $this->language->get('entry_message');
+LINE: 28
+CODE: $json['success'] = $this->language->get('text_success');
+NOT FOUND!
+CODE: if ($emails) {
+NOT FOUND!
+CODE: $emails[] = $customer_info['email'];
+NOT FOUND!
+CODE: $emails[$result['customer_id']] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: $emails[] = $affiliate_info['email'];
+NOT FOUND!
+CODE: $emails[] = $result['email'];
+NOT FOUND!
+CODE: foreach ($emails as $email) {
+NOT FOUND!
+CODE: $message  = '<html
+LINE: 704
+CODE: <title>' . $this->request->post['subject'] . '</title>'
+NOT FOUND!
+CODE: $mail->setSender($store_name);
+LINE: 718
+CODE: html_entity_decode($this->request->post['message']
+NOT FOUND!
+CODE: $mail->setHtml($message);
+NOT FOUND!
+CODE: $mail->send();
+LINE: 725
+CODE: marketing/contact.tpl
+NOT FOUND!
+FILE: catalog/controller/account/newsletter.php
+CODE: class ControllerAccountNewsletter extends Controller {
+LINE: 1
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrderHistory(
+LINE: 265
+CODE: $subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+LINE: 423
+CODE: $text .= $comment
+LINE: 663
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 320
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 594
+CODE: 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+LINE: 613
+CODE: $data['products'][] = array(
+LINE: 621
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
+LINE: 688
+LINE: 804
+CODE: $html = $this->load->view('default/template/mail/order.tpl', $data);
+LINE: 690
+LINE: 806
+CODE: $mail->setHtml($html);
+LINE: 770
+LINE: 857
+CODE: $mail->send();
+LINE: 772
+CODE: if ($this->config->get('config_order_mail')) {
+LINE: 829
+CODE: $mail->send();
+LINE: 919
+CODE: $message .= $language->get('text_update_footer');
+LINE: 980
+CODE: $mail->send();
+LINE: 1189
+FILE: admin/controller/sale/order.php
+CODE: $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+LINE: 2286
+CODE: public function history(
+LINE: 3983
+CODE: nl2br($result['comment'])
+LINE: 4043
+FILE: admin/view/template/sale/order_info.tpl
+CODE: id="input-notify"
+LINE: 368
+CODE: $('#button-history').on('click', function() {
+LINE: 873
+CODE: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>'
+LINE: 871
+LINE: 914
+CODE: 'index.php?route=sale/order/api&token=<?php echo $token; ?>&api=api/order/history&order_id=<?php echo $order_id; ?>'
+LINE: 896
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val())
+LINE: 899
+CODE: $('textarea[name=\'comment\']').val('');
+LINE: 918
+CODE: <?php echo $footer; ?>
+LINE: 1031
+FILE: catalog/model/checkout/voucher.php
+CODE: // HTML Mail
+LINE: 87
+CODE: $html = $this->load->view($this->config->get('config_template') . '/template/mail/voucher.tpl', $data);
+LINE: 121
+CODE: $html = $this->load->view('default/template/mail/voucher.tpl', $data);
+LINE: 123
+CODE: $mail->setHtml($html);
+LINE: 131
+CODE: $mail->send();
+LINE: 132
+FILE: admin/model/sale/return.php
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "return_history
+LINE: 169
+CODE: $subject = sprintf($this->language->get('text_subject')
+LINE: 222
+CODE: $mail->send();
+LINE: 242
+CODE: comment = '" . $this->db->escape(strip_tags($data['comment'])) . "'
+LINE: 169
+FILE: admin/controller/sale/return.php
+CODE: $data['entry_notify'] = $this->language->get('entry_notify');
+LINE: 583
+CODE: $data['order_id'] = $return_info['order_id'];
+LINE: 751
+CODE: public function history(
+LINE: 967
+CODE: nl2br($result['comment'])
+LINE: 1018
+FILE: admin/view/template/sale/return_form.tpl
+CODE: <input type="checkbox" name="notify" value="1" id="input-notify" />
+LINE: 214
+CODE: <?php echo $footer; ?>
+LINE: 388
+CODE: $('#button-history').on('click', function(e) {
+LINE: 309
+CODE: '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val())
+LINE: 325
+CODE: $('textarea[name=\'history_comment\']').val('');
+LINE: 337
+FILE: admin/model/sale/voucher.php
+CODE: $mail->setHtml($this->load->view('mail/voucher.tpl', $data));
+LINE: 123
+LINE: 159
+CODE: $voucher_theme_info = $this->model_sale_voucher_theme->getVoucherTheme($voucher_info['voucher_theme_id']);
+LINE: 106
+LINE: 168
+CODE: $mail->send();
+LINE: 150
+LINE: 212
+FILE: admin/model/marketing/affiliate.php
+CODE: $mail->setSubject(sprintf($this->language->get('text_approve_subject')
+LINE: 157
+CODE: $mail->send();
+LINE: 159
+CODE: $message  = sprintf($this->language->get('text_transaction_received')
+LINE: 259
+CODE: $mail->send();
+LINE: 268
+FILE: catalog/controller/affiliate/forgotten.php
+CODE: $mail = new Mail(
+LINE: 48
+CODE: $mail->send();
+LINE: 54
+FILE: catalog/model/affiliate/affiliate.php
+CODE: $mail = new Mail(
+LINE: 51
+CODE: $mail->send();
+LINE: 57
+CODE: if ($this->config->get('config_account_mail')) {
+LINE: 169
+CODE: $mail->send();
+LINE: 185
+CODE: $mail = new Mail(
+LINE: 29
+CODE: $mail->send();
+LINE: 35
+CODE: $mail->send();
+LINE: 85
+FILE: catalog/model/catalog/review.php
+CODE: $mail = new Mail(
+LINE: 43
+CODE: $mail->send();
+LINE: 49
+FILE: catalog/model/openbay/ebay_order.php
+CODE: $subject = sprintf($language->get('text_new_subject'),
+LINE: 290
+CODE: $text .= $comment
+LINE: 501
+CODE: $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET
+LINE: 199
+CODE: $order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
+LINE: 460
+CODE: 'value' => (utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value
+LINE: 473
+CODE: $template->data['products'][] = array(
+LINE: 481
+CODE: $html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+LINE: 530
+CODE: $html = $template->fetch('default/template/mail/order.tpl');
+LINE: 532
+CODE: $mail->setHtml($html);
+LINE: 599
+CODE: $mail->send();
+LINE: 601
+CODE: $message .= $language->get('text_update_footer');
+LINE: 230
+CODE: $mail->send();
+LINE: 304
+FILE: system/library/openbay.php
+CODE: $subject = sprintf($language->get('text_new_subject')
+LINE: 251
+CODE: $text .= $order_info['comment'] . "\n\n";
+LINE: 347
+CODE: $mail->send();
+LINE: 478
+----------------------------------------------------------------
+MOD: Email Templates Core
+CODE: $file = DIR_LANGUAGE
+LINE: 17
+LINE: 23
+CODE: private $directory;
+LINE: 3
+CODE: public function get($key
+LINE: 22
+FILE: system/library/mail.php
+CODE: protected $subject;
+LINE: 8
+CODE: protected $subject;
+LINE: 10
+CODE: protected $subject;
+LINE: 12
+CODE: public function send(
+LINE: 70
+CODE: public function send(
+LINE: 74
+CODE: public function send(
+LINE: 78
+CODE: public function send(
+LINE: 83
+CODE: public function send(
+LINE: 99
+CODE: public function send() {
+LINE: 99
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+CODE: $header .= 'Return-Path: ' . $this->from . $this->newline;
+LINE: 157
+FILE: admin/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+FILE: catalog/model/tool/image.php
+CODE: public function resize(
+LINE: 9
+CODE: if ($this->request->server['HTTPS']) {
+LINE: 43
+CODE: $data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
+LINE: 118
+CODE: <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+LINE: 33
+CODE: $this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET
+LINE: 5
+CODE: => $order_query->row['customer_id'],
+LINE: 191
+CODE: 'customer_id'             => $order_query->row['customer_id'],
+LINE: 191
+FILE: catalog/controller/affiliate/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 95
+FILE: catalog/controller/account/login.php
+CODE: $data['email'] = $this->request->post['email'];
+LINE: 150
+----------------------------------------------------------------
+MOD: Email Templates Language - English
+FILE: admin/language/english/common/menu.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/customer.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/order.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/sale/return.php
+CODE: <?php
+LINE: 0
+FILE: admin/language/english/marketing/contact.php
+CODE: <?php
+LINE: 0
+FILE: catalog/language/english/account/newsletter.php
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+MOD: Power Image Manager 2.0
+FILE: admin/controller/common/header.php
+CODE: return $this->load->view('common/header.tpl'
+LINE: 141
+FILE: admin/view/template/common/header.tpl
+CODE: <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+LINE: 28
+FILE: admin/controller/common/filemanager.php
+CODE: public function index() {
+LINE: 29
+CODE: public function index() {
+LINE: 29
+CODE: public function delete() {
+LINE: 518
+CODE: private $error = array();
+LINE: 4
+CODE: function getForm() {
+NOT FOUND!
+CODE: <td class="text-right"><?php echo $entry_sort_order; ?></td>
+LINE: 1027
+CODE: <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]"
+LINE: 1046
+CODE: html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]"
+LINE: 1577
+LINE: 1664
+CODE: <?php echo $footer; ?>
+LINE: 1719
+CODE: <button type="button" onclick="addImage();"
+LINE: 1056
+FILE: admin/controller/common/footer.php
+CODE: return $this->load->view('common/footer.tpl'
+LINE: 28
+FILE: admin/view/template/common/footer.tpl
+CODE: <footer id="footer">
+LINE: 126
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 56
+LINE: 236
+CODE: foreach ($data['product_description'] as $language_id => $value) {
+LINE: 62
+LINE: 248
+CODE: foreach ($data['product_image'] as $product_image) {
+LINE: 115
+LINE: 318
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
+LINE: 339
+LINE: 470
+CODE: return $this->load->view('common/menu.tpl', $data);
+LINE: 221
+CODE: <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+LINE: 21
+CODE: <?php
+LINE: 0
+----------------------------------------------------------------
+2016-11-03 12:43:18 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 12:44:42 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 12:45:36 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 12:45:41 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 12:53:42 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 13:08:00 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-03 13:10:50 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 651
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1108
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-04 13:08:25 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 677
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1134
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!
+2016-11-04 13:33:28 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 58
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 20
+LINE: 37
+LINE: 54
+LINE: 65
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 21
+LINE: 27
+----------------------------------------------------------------
+MOD: KulerThemes CP
+FILE: system/library/response.php
+CODE: if ($this->output) {
+LINE: 58
+FILE: system/engine/front.php
+CODE: $this->registry = $registry;
+LINE: 7
+FILE: catalog/controller/module/kuler_cp.php
+CODE: $this->overrideResponse();
+LINE: 1975
+FILE: catalog/model/design/layout.php
+CODE: return $query->rows;
+LINE: 23
+FILE: admin/controller/design/layout.php
+CODE: $this->response->setOutput($this->load->view('design/layout_form.tpl', $data));
+LINE: 402
+FILE: admin/view/template/design/layout_form.tpl
+CODE: html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';
+LINE: 192
+CODE: <option value="column_right"><?php echo $text_column_right; ?></option>
+LINE: 130
+----------------------------------------------------------------
+MOD: Zorka
+FILE: catalog/controller/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
+LINE: 8
+----------------------------------------------------------------
+MOD: Admin Advanced Products Filter
+FILE: admin/controller/common/menu.php
+CODE: $this->load->language('common/menu');
+LINE: 3
+FILE: admin/view/template/common/menu.tpl
+CODE: <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+LINE: 5
+FILE: admin/controller/catalog/product.php
+CODE: protected function getList() {
+NOT FOUND!
+----------------------------------------------------------------
+MOD: Date Added
+CODE: $data['entry_date_available'] = $this->language->get('entry_date_available');
+LINE: 677
+CODE: if (isset($this->request->post['date_available'])) {
+LINE: 1134
+FILE: admin/model/catalog/product.php
+CODE: function editProduct($product_id, $data) {
+NOT FOUND!
+ABORTING!

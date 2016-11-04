@@ -1,0 +1,233 @@
+---------- Date: 2016-11-02 13:08:02 ~ IP : 66.249.66.170 ----------
+REQUEST URI : /v-neck-sleeveless-jumpsuit.html
+VQMod::_parseMods - INVALID XML FILE: : Document is empty in /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_seo_image.xml, line: 1
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/module/latest.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/0_out_of_stock_for_options_v2000_to_v2011.xml
+   id        : Out of Stock for Options v2.0.0.0 to v2.0.1.1
+   version   : 
+   vqmver    : 
+   author    : GoGo OpenCart
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 13:08:24 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /image/catalog/yeni%20logo%20%205.png
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 13:09:06 ~ IP : 66.249.66.170 ----------
+REQUEST URI : /stand-up-collar-front-frill-blouse.html
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/module/latest.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/0_out_of_stock_for_options_v2000_to_v2011.xml
+   id        : Out of Stock for Options v2.0.0.0 to v2.0.1.1
+   version   : 
+   vqmver    : 
+   author    : GoGo OpenCart
+
+File Name    : catalog/view/theme/*/template/product/product.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 13:11:41 ~ IP : 66.249.66.170 ----------
+REQUEST URI : /product/search?tag=Detail
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack.xml
+   id        : SEO Mega KIT
+   version   : 2.0.0.0
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['search']);
+
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/search.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 13:11:47 ~ IP : 66.249.66.166 ----------
+REQUEST URI : /tops
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_titles_generator.xml
+   id        : SEO Mega KIT - Products - Titles Generator
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/controller/product/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 'product_id'  => $result['product_id'],
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:09:18 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /product/list/latest
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:15:02 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /product/list/latest
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:16:13 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /product/list/latest
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:17:46 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /account/logout
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:19:02 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /account/account
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:19:32 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /account/account
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:19:51 ~ IP : 151.237.238.126 ----------
+REQUEST URI : /account/account
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-11-02 15:20:04 ~ IP : 80.44.161.133 ----------
+REQUEST URI : /image/catalog/yeni%20logo%20%205.png
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack.xml
+   id        : SEO Mega KIT
+   version   : 2.0.0.0
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): </head>
+
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/_seo_mega_pack_extras.xml
+   id        : SEO Mega KIT - Extras
+   version   : 1.5.x
+   vqmver    : 2.X
+   author    : marsilea15@gmail.com
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): </head>
+MOD DETAILS:
+   modFile   : /home/glamorous/public_html/vqmod/xml/all.install.ocmod.xml
+   id        : 
+   version   : OC 1.5 and OC 2
+   vqmver    : 2.0.0
+   author    : Equotix
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <ul class="nav navbar-nav">
+----------------------------------------------------------------------
+
+

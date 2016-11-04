@@ -7,7 +7,7 @@ class ControllerCommonSeoUrl extends Controller {
 				
 				private function _initSeoMegaPackProUrl() {
 					if( $this->config->get( 'smp_is_install' ) ) {
-						require_once VQMod::modCheck(realpath(DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php'));
+						require_once VQMod::modCheck(modification(realpath(DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php')));
 					
 						$this->_seoMegaPackProUrl = new ControllerCommonSeoMegaPackProUrl( $this->registry );
 					}

@@ -94,8 +94,12 @@ class SeoMegaPack_SeoImagesGenerator extends SeoMegaPack_AbstractGenerator {
 	/**
 	 * @return int
 	 */
-	public function getParams() {
+	public function getParams( $language_id = null ) {
 		$params = parent::getParams();
+		
+		if( $language_id !== null && is_array( $params ) ) {
+			$params = isset( $params[$language_id] ) ? $params[$language_id] : null;
+		}
 		
 		return $params;
 	}

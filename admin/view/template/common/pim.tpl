@@ -1,5 +1,5 @@
 <?php echo $header; ?>
-<?php if (!isset($cke) || !$cke) { echo $column_left; }?>
+<?php if (!isset($cke) || !$cke && isset($column_left)) { echo $column_left; }?>
 <?php if (isset($cke) && $cke && !$header) {?>
   <!DOCTYPE html>
   <html dir="<?php echo isset($direction)?$direction:'ltr'; ?>" lang="<?php echo isset($lang)?$lang:''; ?>">
@@ -62,6 +62,9 @@ $().ready(function() {
   <?php if (isset($cke) && $cke<>'') {?>
     funcNum = getUrlParam('CKEditorFuncNum');
   <?php }  ?>
+  <?php if (isset($CKEditorFuncNum) && $CKEditorFuncNum<>'') {?>
+    funcNum = <?php echo $CKEditorFuncNum;?>
+  <?php }  ?>  
     
 		var elf = $('#pim').elfinder({
 			url : 'index.php?route=common/filemanager/connector&token=<?php echo $token; ?>',  // connector URL (REQUIRED)
@@ -95,13 +98,34 @@ $().ready(function() {
           $('#modal-image').remove();
           
         }, 
-      <?php } 
-      if (isset($cke) && $cke<>'') { ?>
+      <?php } ?>
+      <?php if ( (isset($cke) && $cke<>'')) { ?>
         getFileCallback : function(file) {
           window.opener.CKEDITOR.tools.callFunction(funcNum, file.url)
           self.close();	
         },
         <?php } ?>
+      <?php if (isset($CKEditorFuncNum) && $CKEditorFuncNum<>'') { ?>
+        getFileCallback : function(file) {
+          window.CKEDITOR.tools.callFunction(funcNum,file.url);
+          self.close();	
+      		delete CKEditorFuncNum;
+      		$('#modal-image').modal('hide');
+      		$('#modal-image').remove();          
+        },
+        <?php } ?>        
+        
+        
+				<?php if (isset($productmanager) && $productmanager<>'') { ?>
+						getFileCallback : function(file) {
+							var pr_id = $('body').attr('data-current-product-id');
+							a = file.url;
+							b = a.replace('<?php echo HTTPS_CATALOG."image/";?>','');	
+							b = b.replace('<?php echo HTTP_CATALOG."image/";?>','');								
+							doSave(pr_id, 'image',b );
+							$('#modal-image').modal('hide');								
+						},
+				<?php } ?>
         commandsOptions : {
           getfile : {
             oncomplete : 'close',
@@ -112,6 +136,7 @@ $().ready(function() {
 
 
   });
+  
 //--></script>
 <?php echo $footer; ?>
 <?php if (isset($cke) && $cke<>'' && !$footer) {?>

@@ -66,7 +66,7 @@
           <?php
         }
 
-        if ($product['sinleQty'] !== 0) {
+        if ($product['singleQty'] !== 0) {
           ?>
           <?php echo $product['eachPrice']; ?>/each for single
           <?php

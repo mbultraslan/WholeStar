@@ -293,7 +293,7 @@
 		</operation>
 	</file>
 	
-	<file path="catalog/controller/" name="module/bestseller.php,module/latest.php,module/special.php,product/product.php,product/category.php,product/manufacturer.php,product/search.php" error="skip">
+	<file path="catalog/controller/" name="module/bestseller.php,module/latest.php,module/special.php,product/product.php,product/category.php,product/manufacturer.php,product/search.php,extension/module/bestseller.php,extension/module/latest.php,extension/module/special.php" error="skip">
 		<operation>
 			<search position="after"><![CDATA['product_id'  => $result['product_id'],]]></search>
 			<add><![CDATA[
@@ -303,7 +303,7 @@
 		</operation>
 	</file>
 	
-	<file name="catalog/controller/module/featured.php">
+	<file name="catalog/controller/module/featured.php,catalog/controller/extension/module/featured.php" error="skip">
 		<operation>
 			<search position="after"><![CDATA['product_id'  => $product_info['product_id'],]]></search>
 			<add><![CDATA[
@@ -326,7 +326,7 @@
 	</file>
 	
 	<!-- View -->
-	<file path="catalog/view/theme/*/template/" name="product/search.tpl,product/category.tpl,product/manufacturer_info.tpl,product/special.tpl,module/bestseller.tpl,module/latest.tpl,module/special.tpl,module/featured.tpl" error="skip">
+	<file path="catalog/view/theme/*/template/" name="product/search.tpl,product/category.tpl,product/manufacturer_info.tpl,product/special.tpl,module/bestseller.tpl,module/latest.tpl,module/special.tpl,module/featured.tpl,extension/module/bestseller.tpl,extension/module/latest.tpl,extension/module/special.tpl,extension/module/featured.tpl" error="skip">
 		<operation error="skip">
 			<search position="replace"><![CDATA[alt="<?php echo $product['name']; ?>"]]></search>
 			<add><![CDATA[alt="<?php echo empty( $product['smp_alt_images'] ) ? $product['name'] : $product['smp_alt_images']; ?>"]]></add>

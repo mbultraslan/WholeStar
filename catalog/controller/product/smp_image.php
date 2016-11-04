@@ -108,7 +108,7 @@ class ControllerProductSmpImage extends Controller {
 			
 			list( $width, $height ) = $this->_size( $size );
 			
-			$this->model_tool_image->resize('no_image.jpg', $width, $height);
+			$this->model_tool_image->resize('placeholder.png', $width, $height);
 			
 			$file	= DIR_IMAGE . 'cache/no_image-' . $width . 'x' . $height;
 			
@@ -135,7 +135,10 @@ class ControllerProductSmpImage extends Controller {
 		//if( function_exists( 'flush' ) )
 		//	flush();
 		
-		readfile($file);
+		if( file_exists( $file ) ) {
+			readfile($file);
+		}
+		
 		exit;
 	}
 	

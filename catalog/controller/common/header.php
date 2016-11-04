@@ -131,6 +131,11 @@ class ControllerCommonHeader extends Controller {
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 
+
+
+            $data['telephone'] = $this->config->get('config_telephone');
+            $data['email']  = $this->config->get('config_email');
+
 		// For page specific css
 		if (isset($this->request->get['route'])) {
 			if (isset($this->request->get['product_id'])) {

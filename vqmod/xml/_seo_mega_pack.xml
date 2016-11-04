@@ -55,7 +55,7 @@
 	</file>
 
 	<!-- Languages -->
-	<file name="catalog/controller/common/language.php,catalog/controller/module/blog_language.php" error="skip">
+	<file name="catalog/controller/common/language.php,catalog/controller/module/blog_language.php,catalog/controller/extension/module/blog_language.php" error="skip">
 		<operation>
 			<search position="before"><![CDATA[function index() {]]></search>
 			<add><![CDATA[
@@ -82,7 +82,7 @@
 
 						if( $languages ) {
 							$url_info = parse_url( defined( HTTPS_SERVER ) ? HTTPS_SERVER : HTTP_SERVER );
-
+				
 							if( empty( $url_info['path'] ) ) {
 								$url_info['path'] = '';
 							}
@@ -113,6 +113,13 @@
 									$path_info['path'] = $url_info['path'] . implode( '/', $path );
 
 									break;
+								} else if( $lang == $path[1] ) {
+									unset( $path[0] );
+									unset( $path[1] );
+									
+									$path_info['path'] = $url_info['path'] . implode( '/', $path );
+
+									break;
 								}
 							}
 				
@@ -121,12 +128,12 @@
 							if( isset( $path_info['scheme'] ) && isset( $path_info['host'] ) ) {
 								$this->request->post['redirect'] .= $path_info['scheme'] . '://' . $path_info['host'] . ( isset( $path_info['port'] ) ? ':' . $path_info['port'] : '' );
 							}
-
+				
 							if( $language != $this->session->data['language'] ) {
 								$path_info['path'] = $url_info['path'] . $this->session->data['language'] . '/' .
 									mb_substr( $path_info['path'], mb_strlen( $url_info['path'], 'utf-8' ), mb_strlen( $path_info['path'], 'utf-8' ), 'utf-8' );
 							}
-
+				
 							$this->request->post['redirect'] .= $path_info['path'];
 
 							if( $this->config->get( 'smp_trans_urls_when_change_langs' ) ) {
@@ -200,13 +207,6 @@
 			<add><![CDATA[
 				if( $this->config->get( 'smp_is_install' ) && isset( $this->request->get['route'] ) ) {
 					switch( $this->request->get['route'] ) {
-						case 'product/category' : {
-							if( ! empty( $this->request->get['path'] ) ) {
-								$data['smp_canonical_url'] = $this->url->link('product/category', 'path=' . $this->request->get['path'], 'SSL' );
-							}
-
-							break;
-						}
 						case 'product/manufacturer/info' : {
 							if( ! empty( $this->request->get['manufacturer_id'] ) ) {
 								$data['smp_canonical_url'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'], 'SSL' );
@@ -313,9 +313,9 @@
 	</file>
 
 	<!-- Admin/Header -->
-	<file name="admin/controller/common/menu.php">
+	<file name="admin/controller/common/menu.php,admin/controller/common/column_left.php" error="skip">
 		<operation>
-			<search position="after"><![CDATA[$this->load->language('common/menu');]]></search>
+			<search position="after"><![CDATA[function index() {]]></search>
 			<add><![CDATA[
 				if( $this->config->get( 'smp_is_install' ) && isset( $this->session->data['token'] ) ) {
 					$data['text_seo_mega_pack'] = $this->language->get('text_seo_mega_pack');
@@ -336,9 +336,21 @@
 				}
 			]]></add>
 		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[if ($extension) {]]></search>
+			<add><![CDATA[
+				if( $this->config->get( 'smp_is_install' ) && isset( $this->session->data['token'] ) ) {
+					$extension[] = array(
+						'name'	   => $data['text_seo_mega_pack'],
+						'href'     => $this->url->link('module/seo_mega_pack', 'token=' . $this->session->data['token'], true),
+						'children' => array()		
+					);
+				}
+			]]></add>
+		</operation>
 	</file>
 
-	<file name="admin/view/template/common/menu.tpl">
+	<file name="admin/view/template/common/menu.tpl" error="skip">
 		<operation>
 			<search position="after"><![CDATA[<li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>]]></search>
 			<add><![CDATA[
@@ -375,7 +387,7 @@
 				
 				private function _initSeoMegaPackProUrl() {
 					if( $this->config->get( 'smp_is_install' ) ) {
-						require_once VQMod::modCheck(realpath(DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php'));
+						require_once VQMod::modCheck(modification(realpath(DIR_SYSTEM . '../catalog/controller/common/seo_mega_pack_pro_url.php')));
 					
 						$this->_seoMegaPackProUrl = new ControllerCommonSeoMegaPackProUrl( $this->registry );
 					}
@@ -471,6 +483,25 @@
 		<operation error="skip">
 			<search position="replace"><![CDATA[public function _part_3() {]]></search>
 			<add><![CDATA[public function _part_3( $part, $parts, $params ) {]]></add>
+		</operation>
+	</file>
+	
+	<file path="admin/controller/extension/extension/module.php" error="skip">
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->load->controller('extension/module/' . $this->request->get['extension'] . '/install');]]></search>
+			<add><![CDATA[
+				if( $this->request->get['extension'] == 'seo_mega_pack' ) {
+					$this->load->controller('module/seo_mega_pack/install');
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[$this->load->controller('extension/module/' . $this->request->get['extension'] . '/uninstall');]]></search>
+			<add><![CDATA[
+				if( $this->request->get['extension'] == 'seo_mega_pack' ) {
+					$this->load->controller('module/seo_mega_pack/uninstall');
+				}
+			]]></add>
 		</operation>
 	</file>
 

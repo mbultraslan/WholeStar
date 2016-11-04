@@ -20,9 +20,7 @@
       <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
       <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
       <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
-
-        <?php if (isset($pim_status) && $pim_status){?><li><a href="<?php echo $pim; ?>"><?php echo $text_pim; ?></a></li> <?php } ?>
-      
+      <li><a href="<?php echo $pim; ?>">Image Manager</a></li>
     </ul>
   </li>
   <li id="extension"><a class="parent"><i class="fa fa-puzzle-piece fa-fw"></i> <span><?php echo $text_extension; ?></span></a>
@@ -44,7 +42,6 @@
       <li><a href="<?php echo $shipping; ?>"><?php echo $text_shipping; ?></a></li>
       <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
       <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
-<?php if (isset($module_emailtemplate)) { ?><li><a href="<?php echo $module_emailtemplate; ?>"><?php echo $text_emailtemplate; ?></a></li><?php } ?>
       <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
 
           <li><a href="<?php echo $vqmod_manager; ?>"><?php echo $text_vqmod_manager; ?></a></li>
@@ -97,13 +94,6 @@
       <?php } ?>
     </ul>
   </li>
-
-			 <li id="sale"><a class="parent"><i class="fa fa-sitemap fa-fw"></i> <span>Channels</span></a>
-        		<ul>
-          			<li><a href="<?php echo $channel_ebay; ?>">Sell on eBay</a></li>
-        		</ul>
-      		 </li>
-			
   <li id="sale"><a class="parent"><i class="fa fa-shopping-cart fa-fw"></i> <span><?php echo $text_sale; ?></span></a>
     <ul>
       <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>

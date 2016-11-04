@@ -130,9 +130,9 @@ class SeoMegaPack_SeoUrlsGenerator extends SeoMegaPack_AbstractGenerator {
 	}
 	
 	protected function _clearIfOn( $str ) {
-		require_once VQMod::modCheck(realpath( 
+		require_once VQMod::modCheck(modification(realpath( 
 			DIR_APPLICATION . '../catalog/controller/common/seo_mega_pack_pro_url.php'
-		));
+		)));
 		
 		return ControllerCommonSeoMegaPackProUrl::_clear( $str, $this->config->get( 'smp_clear_on' ) );
 	}
@@ -257,7 +257,11 @@ class SeoMegaPack_SeoUrlsGenerator extends SeoMegaPack_AbstractGenerator {
 		}
 				
 		$params = $this->getParams();
-		$params = isset( $params[$table] ) ? $params[$table] : array();
+		$params = isset( $params[$table] ) ? $params[$table] : '';
+		
+		if( is_array( $params ) ) {
+			$params = isset( $params[$lang['language_id']] ) ? $params[$lang['language_id']] : '';
+		}
 		
 		if( $table == 'product' ) {
 			$label_name .= ', i.model, i.sku, i.upc';
@@ -539,12 +543,31 @@ class SeoMegaPack_SeoUrlsGenerator extends SeoMegaPack_AbstractGenerator {
 		/* @var $params array */
 		$params = $this->getParams();
 		
+		/* @var $value string */
+		$value = $default;
+		
+		if( strpos( $name, '][' ) !== false ) {
+			$n = explode( '][', $name );
+			
+			if( isset( $params[$n[0]] ) ) {
+				if( is_array( $params[$n[0]] ) ) {
+					if( isset( $params[$n[0]][$n[1]] ) ) {
+						$value = $params[$n[0]][$n[1]];
+					}
+				} else {
+					$value = $params[$n[0]];
+				}
+			}
+		} else if( isset( $params[$name] ) ) {
+			$value = $params[$name];
+		}
+		
 		return '<input 
 			type="text" 
 			class="form-control" 
-			value="' . ( isset( $params[$name] ) ? $params[$name] : $default ) . '" 
+			value="' . $value . '" 
 			name="extensions[' . $this->name() . '][' . $name . ']" 
-			data-name="' . $this->name() . '-' . $name . '" />';
+			data-name="' . $this->name() . '-' . str_replace( '][', '-', $name ) . '" />';
 	}
 	
 	/**
@@ -552,27 +575,92 @@ class SeoMegaPack_SeoUrlsGenerator extends SeoMegaPack_AbstractGenerator {
 	 * 
 	 * @return string
 	 */
-	public function description() {		
+	public function description() {
+		$languages	= $this->_languages( true );
+		
 		/* @var $desc string */
 		$desc = '';
 		
 		$desc .= 'Use this extension to generate friendly URLs for products, categories, manufacturiers and information pages.';
 		
-		$desc .= '<br />Set URL structure for products - ';
-		$desc .= $this->printTags('', '{product_name},{model},{sku},{upc}', '-product');
-		$desc .= $this->createInput( 'product', '{product_name}' );
+		$desc .= '<br /><br />Set URL structure for <strong>products</strong>:<br />';
 		
-		$desc .= '<br />Set URL structure for categories - ';
-		$desc .= $this->printTags('', '{name}', '-category');
-		$desc .= $this->createInput( 'category', '{name}' );
+		foreach( $languages as $language ) {
+			$img = 'view/image/flags/' . $language['image'];
+			
+			if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+				$img = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
+			}
+			
+			$desc .= '<br />';
+			$desc .= $this->printTags('', '{product_name},{model},{sku},{upc}', '-product-' . $language['language_id']);
+			$desc .= '<div class="input-group">';
+			$desc .= $this->createInput( 'product][' . $language['language_id'], '{product_name}' );
+			$desc .= '<div class="input-group-addon">';
+			$desc .= '<img src="' . $img . '" />';
+			$desc .= '</div>';
+			$desc .= '</div>';
+		}
 		
-		$desc .= '<br />Set URL structure for manufacturers - ';
-		$desc .= $this->printTags('', '{name}', '-manufacturer');
-		$desc .= $this->createInput( 'manufacturer', '{name}' );
+		$desc .= '<hr />';
+		$desc .= 'Set URL structure for <strong>categories</strong>:<br />';
 		
-		$desc .= '<br />Set URL structure for information pages - ';
-		$desc .= $this->printTags('', '{name}', '-information');
-		$desc .= $this->createInput( 'information', '{name}' );
+		foreach( $languages as $language ) {
+			$img = 'view/image/flags/' . $language['image'];
+			
+			if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+				$img = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
+			}
+			
+			$desc .= '<br />';
+			$desc .= $this->printTags('', '{name}', '-category-' . $language['language_id']);
+			$desc .= '<div class="input-group">';
+			$desc .= $this->createInput( 'category][' . $language['language_id'], '{name}' );
+			$desc .= '<div class="input-group-addon">';
+			$desc .= '<img src="' . $img . '" />';
+			$desc .= '</div>';
+			$desc .= '</div>';
+		}
+		
+		$desc .= '<hr />';
+		$desc .= 'Set URL structure for <strong>manufacturers</strong>:<br />';
+		
+		foreach( $languages as $language ) {
+			$img = 'view/image/flags/' . $language['image'];
+			
+			if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+				$img = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
+			}
+			
+			$desc .= '<br />';
+			$desc .= $this->printTags('', '{name}', '-manufacturer-' . $language['language_id']);
+			$desc .= '<div class="input-group">';
+			$desc .= $this->createInput( 'manufacturer][' . $language['language_id'], '{name}' );
+			$desc .= '<div class="input-group-addon">';
+			$desc .= '<img src="' . $img . '" />';
+			$desc .= '</div>';
+			$desc .= '</div>';
+		}
+		
+		$desc .= '<hr />';
+		$desc .= 'Set URL structure for <strong>information pages</strong>:<br />';
+		
+		foreach( $languages as $language ) {
+			$img = 'view/image/flags/' . $language['image'];
+			
+			if( version_compare( VERSION, '2.2.0.0', '>=' ) ) {
+				$img = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
+			}
+			
+			$desc .= '<br />';
+			$desc .= $this->printTags('', '{name}', '-information-' . $language['language_id']);
+			$desc .= '<div class="input-group">';
+			$desc .= $this->createInput( 'information][' . $language['language_id'], '{name}' );
+			$desc .= '<div class="input-group-addon">';
+			$desc .= '<img src="' . $img . '" />';
+			$desc .= '</div>';
+			$desc .= '</div>';
+		}
 		
 		
 		return $desc;

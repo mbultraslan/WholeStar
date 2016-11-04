@@ -24,7 +24,7 @@ class ControllerCommonLanguage extends Controller {
 
 						if( $languages ) {
 							$url_info = parse_url( defined( HTTPS_SERVER ) ? HTTPS_SERVER : HTTP_SERVER );
-
+				
 							if( empty( $url_info['path'] ) ) {
 								$url_info['path'] = '';
 							}
@@ -55,6 +55,13 @@ class ControllerCommonLanguage extends Controller {
 									$path_info['path'] = $url_info['path'] . implode( '/', $path );
 
 									break;
+								} else if( $lang == $path[1] ) {
+									unset( $path[0] );
+									unset( $path[1] );
+									
+									$path_info['path'] = $url_info['path'] . implode( '/', $path );
+
+									break;
 								}
 							}
 				
@@ -63,12 +70,12 @@ class ControllerCommonLanguage extends Controller {
 							if( isset( $path_info['scheme'] ) && isset( $path_info['host'] ) ) {
 								$this->request->post['redirect'] .= $path_info['scheme'] . '://' . $path_info['host'] . ( isset( $path_info['port'] ) ? ':' . $path_info['port'] : '' );
 							}
-
+				
 							if( $language != $this->session->data['language'] ) {
 								$path_info['path'] = $url_info['path'] . $this->session->data['language'] . '/' .
 									mb_substr( $path_info['path'], mb_strlen( $url_info['path'], 'utf-8' ), mb_strlen( $path_info['path'], 'utf-8' ), 'utf-8' );
 							}
-
+				
 							$this->request->post['redirect'] .= $path_info['path'];
 
 							if( $this->config->get( 'smp_trans_urls_when_change_langs' ) ) {

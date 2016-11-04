@@ -11,6 +11,18 @@ class ControllerCommonFooter extends Controller {
 			$data['text_version'] = '';
 		}
 
-		return $this->load->view('common/footer.tpl', $data);
+        $data['width'] = 800;
+        $data['height'] = 600;
+        $data['lang'] = 'en';
+        if ($this->config->get('pim_status')) {
+            $data['width'] = $this->config->get('pim_width');
+            $data['height'] = $this->config->get('pim_height');
+
+            if ($this->config->get('pim_language')) {
+                $data['lang'] = $this->config->get('pim_language');
+            }
+        }
+        $data['pim_status'] = $this->config->get('pim_status');
+        return $this->load->view('common/footer.tpl', $data);
 	}
 }

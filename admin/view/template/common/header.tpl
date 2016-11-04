@@ -13,6 +13,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+
+  <?php if ($pim_status) {?>
+    <!-- Power Image Manager -->
+    <link rel="stylesheet" href="view/javascript/jquery/jquery-ui-1.11.4.custom/jquery-ui.css" />
+    <script src="view/javascript/jquery/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="view/javascript/pim/pim.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="view/stylesheet/pim/pim.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="view/stylesheet/pim/theme.css">
+  <?php if ($lang) { ?>
+    <script type="text/javascript" src="view/javascript/pim/i18n/<?php echo $lang;?>.js"></script>
+  <?php } ?>
+    <!-- Power Image Manager -->
+  <?php } ?>
+
 <link href="view/javascript/bootstrap/less/bootstrap.less" rel="stylesheet/less" />
 <script src="view/javascript/bootstrap/less-1.7.4.min.js"></script>
 <link href="view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />

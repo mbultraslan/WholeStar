@@ -110,13 +110,6 @@ class ControllerCommonMenu extends Controller {
 		$data['text_openbay_report_price'] = $this->language->get('text_openbay_report_price');
 		$data['text_openbay_order_import'] = $this->language->get('text_openbay_order_import');
 
-$data['channel_ebay'] = $this->url->link('module/ebay_channel/dashboard', 'token=' . $this->session->data['token'], 'SSL');
-		$result = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension` WHERE `code` = 'emailtemplate'");
-		if ($result->num_rows) {
-			$data['text_emailtemplate'] = $this->language->get('text_emailtemplate');
-			$data['module_emailtemplate'] = $this->url->link('module/emailtemplate', 'token=' . $this->session->data['token'], 'SSL');
-		}
-            
 		$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
 		$data['affiliate'] = $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'], 'SSL');
 		$data['api'] = $this->url->link('user/api', 'token=' . $this->session->data['token'], 'SSL');
@@ -215,11 +208,10 @@ $data['channel_ebay'] = $this->url->link('module/ebay_channel/dashboard', 'token
 			'etsy' => $this->config->get('etsy_status'),
 		);
 
-
         $data['text_pim'] = $this->language->get('text_pim');
         $data['pim_status'] = $this->config->get('pim_status');
-        $data['pim'] = $this->url->link('common/filemanager/pim', 'token=' . $this->session->data['token'], 'SSL');           
-      
-		return $this->load->view('common/menu.tpl', $data);
+        $data['pim'] = $this->url->link('common/filemanager/pim', 'token=' . $this->session->data['token'], 'SSL');
+
+        return $this->load->view('common/menu.tpl', $data);
 	}
 }

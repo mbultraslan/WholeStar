@@ -99,7 +99,7 @@ class SeoMegaPack_AbstractManufacturerGenerator extends SeoMegaPack_AbstractGene
 		$params	= $this->convertParamsToConfig( $language_id );
 		
 		foreach( $this->db->query( $query )->rows as $item ) {
-			$generate = $this->getParams();
+			$generate = $this->getParams( $language_id );
 			
 			if( is_array( $generate ) )
 				$generate = isset( $generate[$language_id] ) ? $generate[$language_id] : '';

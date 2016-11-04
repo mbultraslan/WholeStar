@@ -1,8 +1,6 @@
 <?php
 class ControllerCommonMenu extends Controller {
 	public function index() {
-		
-	$this->load->language('common/menu');
 
 				if( $this->config->get( 'smp_is_install' ) && isset( $this->session->data['token'] ) ) {
 					$data['text_seo_mega_pack'] = $this->language->get('text_seo_mega_pack');
@@ -22,6 +20,8 @@ class ControllerCommonMenu extends Controller {
 					$data['smp_manager'] = $this->url->link('module/seo_mega_pack/manager', 'token=' . $this->session->data['token'], 'SSL');
 				}
 			
+		
+	$this->load->language('common/menu');
     	$this->load->language('catalog/advprodfilter');
 	$data['apftxt_menu']=$this->language->get('apftxt_menu');
 	$data['advprodfilter_href']=$this->url->link('catalog/advprodfilter', 'token=' . $this->session->data['token'] . '&resetadvpfil=1', 'SSL');
@@ -132,13 +132,6 @@ class ControllerCommonMenu extends Controller {
 		$data['text_openbay_report_price'] = $this->language->get('text_openbay_report_price');
 		$data['text_openbay_order_import'] = $this->language->get('text_openbay_order_import');
 
-$data['channel_ebay'] = $this->url->link('module/ebay_channel/dashboard', 'token=' . $this->session->data['token'], 'SSL');
-		$result = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension` WHERE `code` = 'emailtemplate'");
-		if ($result->num_rows) {
-			$data['text_emailtemplate'] = $this->language->get('text_emailtemplate');
-			$data['module_emailtemplate'] = $this->url->link('module/emailtemplate', 'token=' . $this->session->data['token'], 'SSL');
-		}
-            
 		$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
 		$data['affiliate'] = $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'], 'SSL');
 		$data['api'] = $this->url->link('user/api', 'token=' . $this->session->data['token'], 'SSL');
@@ -240,11 +233,10 @@ $data['channel_ebay'] = $this->url->link('module/ebay_channel/dashboard', 'token
 			'etsy' => $this->config->get('etsy_status'),
 		);
 
-
         $data['text_pim'] = $this->language->get('text_pim');
         $data['pim_status'] = $this->config->get('pim_status');
-        $data['pim'] = $this->url->link('common/filemanager/pim', 'token=' . $this->session->data['token'], 'SSL');           
-      
-		return $this->load->view('common/menu.tpl', $data);
+        $data['pim'] = $this->url->link('common/filemanager/pim', 'token=' . $this->session->data['token'], 'SSL');
+
+        return $this->load->view('common/menu.tpl', $data);
 	}
 }

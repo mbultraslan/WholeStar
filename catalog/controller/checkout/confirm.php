@@ -197,7 +197,6 @@ class ControllerCheckoutConfirm extends Controller {
 			$order_data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
-			//	print_r($product);
                 $option_data = array();
 
 				foreach ($product['option'] as $option) {
@@ -231,6 +230,7 @@ class ControllerCheckoutConfirm extends Controller {
 
 				);
 			}
+
 
 			// Gift Voucher
 			$order_data['vouchers'] = array();
@@ -316,7 +316,7 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 
 			$this->load->model('checkout/order');
-//print_r($order_data);
+
 			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
 
 			$data['text_recurring_item'] = $this->language->get('text_recurring_item');

@@ -81,17 +81,36 @@
 												<div class="<?php if( $group != 'auto' ) { ?>hide <?php } ?>ext-description" data-group="<?php echo $group; ?>">
 													<?php echo $item->description(); ?>
 
-													<?php if( $item->hasDefaultSetParams() && ! is_array( $item->getParams() ) ) { ?>
+													<?php if( $item->hasDefaultSetParams() && strpos( get_class( $item ), 'SeoUrlsGenerator' ) === false && $item->name() != 'auto_generator' ) { ?>
 														<?php if( $item->description() ) { ?>
 															<br /><br />
 														<?php } ?>
+															
+														<?php if( strpos( get_class( $item ), 'Related' ) === false ) { ?>
+															<?php $klang = 0; foreach ($languages as $key => $language) { ?>
+																<?php
 
-														<?php if( $item->tags() ) { ?>
-															<?php echo $item->printTags(); ?>
-														<?php } ?>
-														<input type="text" class="form-control" value="<?php echo $item->getParams(); ?>" name="extensions[<?php echo $item->name(); ?>]" data-name="<?php echo $item->name(); ?>" />
-														<?php if( false && $item->tags() ) { ?>
-															<div style="float:right; padding-right: 5px;"><?php echo $help_autocomplete; ?></div>
+																	$flag = version_compare(VERSION, '2.2.0.0', '>=') ? 'language/' . $language['code'] . '/' . $language['code'] . '.png' : 'view/image/flags/' . $language['image'];
+
+																?>
+																<?php if( $item->tags() ) { ?>
+																	<?php echo $item->printTags( '', array(), '-' . $language['language_id'] ); ?>
+																<?php } ?>
+																<div class="input-group">
+																	<input type="text" class="form-control" value="<?php echo $item->getParams( $language['language_id'] ); ?>" name="extensions[<?php echo $item->name(); ?>][<?php echo $language['language_id']; ?>]" data-name="<?php echo $item->name(); ?>-<?php echo $language['language_id']; ?>" />
+																	<div class="input-group-addon">
+																		<img src="<?php echo $flag; ?>" title="<?php echo $language['name']; ?>" />
+																	</div>
+																</div>
+																<?php if( $klang < count( $languages ) - 1 ) { ?>
+																	<hr />
+																<?php } ?>
+															<?php $klang++; } ?>
+														<?php } else { ?>
+																<?php if( $item->tags() ) { ?>
+																	<?php echo $item->printTags( '', array() ); ?>
+																<?php } ?>
+																<input type="text" class="form-control" value="<?php echo $item->getParams(); ?>" name="extensions[<?php echo $item->name(); ?>]" data-name="<?php echo $item->name(); ?>" />
 														<?php } ?>
 													<?php } ?>
 

@@ -313,7 +313,6 @@ class ControllerProductProduct extends Controller {
 		$this->load->model('catalog/product');
 
 
-
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 				if( $product_info && $this->config->get( 'smp_at_is_install' ) ) {
@@ -324,8 +323,6 @@ class ControllerProductProduct extends Controller {
 				}
 			
 			
-
-
 
 		if ($product_info) {
 
@@ -556,6 +553,20 @@ class ControllerProductProduct extends Controller {
 
 			$data['points'] = $product_info['points'];
 
+			$data['ratio'] = $product_info['ratio'];
+
+			$data['ratioScale'] = $product_info['ratioScale'];
+
+
+			$data['material'] = $product_info['material'];
+
+			$data['madeIn'] = $product_info['madeIn'];
+
+			$data['packQty'] = array_sum(explode('-', $product_info['ratio']));
+
+
+
+
 
 
 			if ($product_info['quantity'] <= 0) {
@@ -627,7 +638,8 @@ class ControllerProductProduct extends Controller {
 			if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
 
 				$data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
-
+                $data['eachPrice'] = $this->currency->format($this->tax->calculate($product_info['eachPrice'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+                $data['packPrice'] = $this->currency->format($this->tax->calculate($product_info['packPrice'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 
 				$data['price'] = false;
@@ -639,6 +651,8 @@ class ControllerProductProduct extends Controller {
 			if ((float)$product_info['special']) {
 
 				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+				$data['specialEach'] = $this->currency->format($this->tax->calculate($product_info['specialEach'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+				$data['specialPack'] = $this->currency->format($this->tax->calculate($product_info['specialPack'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 
 			} else {
 
@@ -947,6 +961,38 @@ class ControllerProductProduct extends Controller {
 
 			}
 
+
+
+
+			$data['productColours'] = array();
+
+
+
+			$results = $this->model_catalog_product->getProductColours($this->request->get['product_id']);
+
+
+
+			foreach ($results as $result) {
+
+
+
+
+				$data['productColours'][] = array(
+
+					'id'       => $result['id'],
+
+					'name'       => $result['name'],
+
+					'colour'        => $result['colour'],
+
+					'pack'       => $result['pack'],
+
+					'quantity'     => $result['quantity'],
+
+					'singleQuantity'     => $result['single_quantity']
+				);
+
+			}
 
 
 			$data['tags'] = array();

@@ -4,13 +4,6 @@ class ControllerCommonHeader extends Controller {
 
 				if( $this->config->get( 'smp_is_install' ) && isset( $this->request->get['route'] ) ) {
 					switch( $this->request->get['route'] ) {
-						case 'product/category' : {
-							if( ! empty( $this->request->get['path'] ) ) {
-								$data['smp_canonical_url'] = $this->url->link('product/category', 'path=' . $this->request->get['path'], 'SSL' );
-							}
-
-							break;
-						}
 						case 'product/manufacturer/info' : {
 							if( ! empty( $this->request->get['manufacturer_id'] ) ) {
 								$data['smp_canonical_url'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'], 'SSL' );

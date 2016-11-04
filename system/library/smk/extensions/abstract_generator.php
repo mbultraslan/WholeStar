@@ -297,7 +297,7 @@ abstract class SeoMegaPack_AbstractGenerator {
 	 * @return array
 	 */
 	protected function convertParamsToConfig( $language_id = NULL ) {
-		$config		= $this->getParams();
+		$config		= $this->getParams( $language_id );
 		
 		if( is_array( $config ) )
 			$config = isset( $config[$language_id] ) ? $config[$language_id] : '';

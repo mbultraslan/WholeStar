@@ -199,12 +199,17 @@
           </div>
 
           <br />
-
-          <div class="row">
+<div class="row" id="loading">
+    <div style="text-align: center"><img src="image/templates/loading.gif" />
+        <hr/>
+        <h2>Loading Products</h2>
+    </div>
+</div>
+          <div class="row product_row" style="display: none;">
 
             <?php foreach ($products as $product) { ?>
 
-              <div class="product-layout product-list col-lg-12 col-xs-12">
+              <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
                 <div class="product-wrapper">
 
@@ -473,7 +478,7 @@
 //print_r($product['otherImages']);
                 foreach ($product['otherImages'] as $oi){ ?>
 
-                <div class="product-layout product-list col-lg-12 col-xs-12">
+                <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
                     <div class="product-wrapper">
 
@@ -764,5 +769,23 @@
       <?php echo $column_right; ?></div>
 
   </div>
+
+    <script>
+
+        $(function () {
+            <?php if($_SERVER['REQUEST_URI'] !== '/product/list/latest'){ ?>
+            var parent = $('.product_row');
+            var divs = parent.children();
+            while (divs.length) {
+                parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+            }
+
+            <?php } ?>
+
+            $('#loading').remove();
+            $('.product_row').show();
+
+        });
+    </script>
 
 <?php echo $footer; ?>

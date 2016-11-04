@@ -1,11 +1,52 @@
 <h3><?php echo $heading_title; ?> <div style="text-transform: none; padding-right: 10px; float: right"><a href="index.php?route=product/list/latest">View All</a></div></h3>
 <div class="row product-layout">
   <?php foreach ($products as $product) { ?>
-  <div >
-    <div class="product-thumb transition">
-      <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo empty( $product['smp_alt_images'] ) ? $product['name'] : $product['smp_alt_images']; ?>" title="<?php echo empty( $product['smp_title_images'] ) ? $product['name'] : $product['smp_title_images']; ?>" class="img-responsive" /></a></div>
-      <div class="caption">
-        <h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+
+
+    <div class="product-wrapper">
+    <div class="product-thumb__primary">
+
+      <a href="<?php echo $product['href']; ?>">
+
+        <img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" />
+        <div class="category-product-info" style="position: absolute; margin-top: -60px; display: none;">Style : <?php echo $product['model']; ?><br>Size : <?php echo $product['ratioScale']; ?><br>Ratio : <?php echo $product['ratio']; ?></div>
+      </a>
+
+    </div>
+
+    <script>
+      $(function() {
+        $('.product-wrapper').hover(function() {
+          $(this).find($('.category-product-info')).show();
+        }, function() {
+          // on mouseout, reset the background colour
+          $(this).find($('.category-product-info')).hide();
+        });
+      });
+    </script>
+    <div>
+
+          <h4 class="product-name" style="margin-bottom: 0px; border: none;    width: 100%; text-align: center;">
+
+            <a href="<?php echo $product['href']; ?>">
+
+              <?php echo $product['name']; ?>
+
+            </a>
+
+      <div style="padding-top: 5px;">
+        <?php
+
+        foreach ($product['colours'] as $colour) {
+          ?>
+
+          <span style="border: 1px solid #000000; min-width:40px; min-height:40px; background-color: #<?php echo $colour['colour'];?>" data-toggle="tooltip" title="<?php echo $colour['name']; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+          <?php
+        }
+        ?>
+      </div>
+          </h4>
         <p><?php echo $product['description']; ?></p>
         <?php if ($product['rating']) { ?>
         <div class="rating">
@@ -18,23 +59,66 @@
           <?php } ?>
         </div>
         <?php } ?>
-      
-      </div>
+
+
       <div class="button-group">
         <?php if ($product['price']) { ?>
-        <h4 class="price" style="float:left; margin-top:15px; margin-right:10px">
-          <?php if (!$product['special']) { ?>
-          <?php echo $product['price']; ?>
+        <h4 class="price product-name" style="width: 100%">
+          <?php
+
+          if (!$product['special']) { ?>
+
+            <table class="table" style="margin-bottom: 0;">
+              <?php if ($product['price']) { ?>
+              <tr>
+                <td  style="text-align: center;">
+                  PACK<br>
+                  <span class="price-new price-tag"><?php echo $product['price']; ?></span>
+                </td>
+                <td  style="text-align: center;">
+                  PIECE <br>
+                  <span class="price-new price-tag"><?php echo $product['eachPrice']; ?></span>
+                </td>
+              </tr>
+              <tr>
+                <?php } ?>
+
+                <td colspan="2"  style="text-align: center;">
+                  1 PACK = <?php echo $product['packQty']; ?> UNITS
+                </td>
+              </tr>
+            </table>
+
           <?php } else { ?>
-          <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
+
+
+            <table class="table" style="margin-bottom: 0;">
+              <?php if ($product['price']) { ?>
+              <tr>
+                <td  style="text-align: center;">
+                  PACK<br>
+                  <span class="product-price--old"><?php echo $product['price']; ?></span>
+                  <span class="price-new price-tag"><?php echo $product['special']; ?></span>
+                </td>
+                <td  style="text-align: center;">
+                  PIECE <br>
+                  <span class="product-price--old"><?php echo $product['eachPrice']; ?></span>
+                  <span class="price-new price-tag"><?php echo $product['specialEach']; ?></span>
+                </td>
+              </tr>
+              <tr>
+                <?php } ?>
+
+                <td colspan="2"  style="text-align: center;">
+                  1 PACK = <?php echo $product['packQty']; ?> UNITS
+                </td>
+              </tr>
+            </table>
+
           <?php } ?>
-          
+
         </h4>
         <?php } ?>
-        <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span class="hidden-lg hidden-xlg"><i class="fa fa-shopping-cart"></i></span> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
-        <!--<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>-->
-        <!--<button type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-heart"></i></button>-->
-        <!--<button type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-exchange"></i></button>-->
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost:8888/gf/admin/');
-define('HTTP_CATALOG', 'http://localhost:8888/gf/');
+define('HTTP_SERVER', 'http://localhost:8888/glamorous/admin/');
+define('HTTP_CATALOG', 'http://localhost:8888/glamorous/');
 
 // HTTPS
 define('HTTPS_SERVER', 'https://localhost:8888/gf/admin/');

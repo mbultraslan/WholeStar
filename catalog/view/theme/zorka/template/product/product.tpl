@@ -859,8 +859,8 @@ global $config;
                                 }
 
                                 ?>
-                                <a class="share-icon" title="<?php echo $button_wishlist; ?>"
-                                   onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></a>
+<!--                                <a class="share-icon" title="--><?php //echo $button_wishlist; ?><!--"-->
+<!--                                   onclick="wishlist.add('--><?php //echo $product_id; ?>//');"><i class="fa fa-heart"></i></a>
                                 <?php if ($kuler->getSkinOption('default_sharing')) { ?>
                                     <a class="share-icon"
                                        href="http://pinterest.com/pin/create/bookmarklet/?media=[MEDIA]&amp;url=[URL]&amp;is_video=false&amp;description=[TITLE]"><i

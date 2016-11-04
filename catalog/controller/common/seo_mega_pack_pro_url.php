@@ -291,6 +291,8 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 						if( isset( $parts[1][0] ) && isset( $parts[1][2] ) && $parts[1][0] == $this->_alias['category'] )
 							$this->request->get['path']	= $parts[1][1];
 					}
+				} else {
+					$this->request->get['route'] = 'error/not_found';
 				}
 				
 				break;
@@ -304,6 +306,8 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 						$this->request->get['path'] = $params[1];
 					else
 						$this->request->get['path']	.= '_' . $params[1];
+				} else {
+					$this->request->get['route'] = 'error/not_found';
 				}
 				
 				break;
@@ -322,6 +326,8 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 				if( isset( $params[1] ) ) {
 					$this->request->get['route']			= 'information/information';
 					$this->request->get['information_id']	= $params[1];
+				} else {
+					$this->request->get['route'] = 'error/not_found';
 				}
 				
 				break;
@@ -380,7 +386,7 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 							}
 						}
 					} else {
-						$this->request->get['route'] = 'error/not_found';	
+						$this->request->get['route'] = 'error/not_found';
 					}			
 
 					/*if( isset( $this->request->get['product_id'] ) ) {
@@ -550,15 +556,25 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 			}
 		}
 		
-		if( isset( $_SERVER['REQUEST_URI'] ) ) {			
+		if( isset( $_SERVER['REQUEST_URI'] ) ) {
+			$fullPageUrl = self::getFullPageUrl();
+			$pathOfFullPageUrl = $this->__createPath( $fullPageUrl );
+			$pathOfRequestUri = $this->__createPath( $_SERVER['REQUEST_URI'] );
+			
 			$redirect = $this->db->query("
 				SELECT
 					new_link
 				FROM
 					" . DB_PREFIX . "redirects_smp
 				WHERE
-					broken_link LIKE '" . $this->db->escape( $this->__createPath( self::getFullPageUrl() ) ) . "' OR
-					broken_link LIKE '" . $this->db->escape( $this->__createPath( $_SERVER['REQUEST_URI'] ) ) . "'
+					broken_link LIKE '" . $this->db->escape( $pathOfFullPageUrl ) . "' OR
+					broken_link LIKE '" . $this->db->escape( $pathOfRequestUri ) . "' OR
+					broken_link LIKE '" . $this->db->escape( urldecode( $pathOfFullPageUrl ) ) . "' OR
+					broken_link LIKE '" . $this->db->escape( urldecode( $pathOfRequestUri ) ) . "' OR
+					broken_link LIKE '" . $this->db->escape( htmlentities( $pathOfFullPageUrl, ENT_QUOTES, 'UTF-8' ) ) . "' OR
+					broken_link LIKE '" . $this->db->escape( htmlentities( $pathOfRequestUri, ENT_QUOTES, 'UTF-8' ) ) . "' OR
+					broken_link LIKE '" . $this->db->escape( htmlentities( urldecode( $pathOfFullPageUrl ), ENT_QUOTES, 'UTF-8') ) . "' OR
+					broken_link LIKE '" . $this->db->escape( htmlentities( urldecode( $pathOfRequestUri ), ENT_QUOTES, 'UTF-8') ) . "'
 				LIMIT 1
 			");
 			
@@ -661,7 +677,7 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 				}
  				
 				if( ! $this->_initHreflang ) {
-					if( $this->config->get( 'smp_auto_redirect_to_canonical_urls' ) && ! $this->isPost() && ! $this->isAjax() && ! $this->skipURLs() ) {
+					if( $this->config->get( 'smp_auto_redirect_to_canonical_urls' ) && ! $this->isPost() && ! $this->isAjax() && ! $this->skipURLs() && ! isset( $this->request->get['mfp_seo_alias'] ) ) {
 						$canonical = '';
 						$parameters = array(
 							'product/product' => array( 'product_id', 'path' )
@@ -945,7 +961,9 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 								$url .= ',' . $manufacturer;
 						}
 
-						$url .= '.html';
+						if( ! preg_match( '/\.html$/', $url ) ) {
+							$url .= '.html';
+						}
 					}
 					
 					unset( $url_data['product_id'] );
@@ -1067,7 +1085,7 @@ class ControllerCommonSeoMegaPackProUrl extends Controller {
 		if( ! isset( $url_info['path'] ) )
 			$url_info['path'] = '';
 		
-		$return .= str_replace( array( '/index.php', 'index.php' ), '', $url_info['path'] );
+		$return .= str_replace( '/index.php', '', $url_info['path'] );
 		
 		// init langugaes
 		if( $this->_language === NULL )

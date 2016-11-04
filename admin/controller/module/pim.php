@@ -58,9 +58,13 @@ class ControllerModulePim extends Controller {
     
  		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
+		} else if (isset($this->session->data['error_warning'])) {
+			$data['error_warning'] = $this->session->data['error_warning'];
+
+			unset($this->session->data['error_warning']);
 		} else {
 			$data['error_warning'] = '';
-		}
+		}    
 		
  		if (isset($this->error['folder'])) {
 			$data['error_folder'] = $this->error['folder'];
@@ -92,19 +96,8 @@ class ControllerModulePim extends Controller {
 		
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
-		if (isset($this->error['warning'])) {
-			$data['error_warning'] = $this->error['warning'];
-		} else {
-			$data['error_warning'] = '';
-		}
 
-		if (isset($this->session->data['error_warning'])) {
-			$data['error_warning'] = $this->session->data['error_warning'];
-
-			unset($this->session->data['error_warning']);
-		} else {
-			$data['error_warning'] = '';
-		}    
+		
 		
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -194,7 +187,10 @@ class ControllerModulePim extends Controller {
         $names = explode('/', $file);
       
         $extension =  basename(dirname($file));
-				$this->load->language('module/' . $extension);
+         $code = strtolower($extension);
+         if (file_exists(DIR_LANGUAGE . 'english/module/pim_'.$code.'.php')) {
+          $this->load->language('module/pim_' . $code);
+         }
        
 				$module_data = array();				
 				$data['extensions'][] = array(
@@ -305,6 +301,12 @@ class ControllerModulePim extends Controller {
 		if (!$this->user->hasPermission('modify', 'module/pim')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
+    $this->load->model('extension/modification');
+    $mui = $this->model_extension_modification->getModificationByCode('L69NKY2UE1Jkef4NI');
+    
+    if ($this->request->post['pim_miu'] && empty($mui)) {
+      $this->error['warning'] = $this->language->get('error_mui');
+    }
 		
 		if (!$this->error) {
 			return true;

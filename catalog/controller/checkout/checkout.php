@@ -1,7 +1,29 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
 	public function index() {
-		// Validate cart has products and has stock.
+
+        $this->load->model('setting/setting');
+        $mmos_checkout_extra = $this->model_setting_setting->getSetting('mmos_checkout', $this->config->get('config_store_id'));
+
+        $mmos_checkout = !empty($mmos_checkout_extra['mmos_checkout']) ? $mmos_checkout_extra['mmos_checkout'] : false ;
+
+        if ($mmos_checkout && $mmos_checkout['status']) {
+
+            if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+                $urls = $this->url->link('/checkout_onepage', '', true);
+            } else {
+                $urls = $this->url->link('/checkout_onepage');
+            }
+            /*Fixed Mijoshop*/
+            if(defined('JPATH_MIJOSHOP_OC')) {
+                $urls = $this->url->link('/checkout').'_onepage';
+            }
+
+            /* redirect to checkout One */
+            $this->response->redirect($urls);
+        }
+
+        // Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart'));
 		}

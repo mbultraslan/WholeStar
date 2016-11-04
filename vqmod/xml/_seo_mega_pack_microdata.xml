@@ -47,7 +47,7 @@
 						<?php } ?>
 
 						<span itemscope itemprop="offers" itemtype="http://schema.org/Offer">
-							<meta itemprop="price" content="<?php if( ! empty( $special ) ) { echo preg_replace( '/[^0-9.]/', '', $special ); } else { echo preg_replace( '/[^0-9.]/', '', $price ); } ?>">
+							<meta itemprop="price" content="<?php if( ! empty( $special ) ) { echo preg_replace( '/[^0-9.]/', '', str_replace( ',', '.', $special ) ); } else { echo preg_replace( '/[^0-9.]/', '', str_replace( ',', '.', $price ) ); } ?>">
 							<meta itemprop="priceCurrency" content="<?php echo $smp_currency; ?>">
 							<link itemprop="availability" href="http://schema.org/<?php if( $smp_in_stock ) { ?>InStock<?php } else { ?>OutOfStock<?php } ?>">
 						</span>

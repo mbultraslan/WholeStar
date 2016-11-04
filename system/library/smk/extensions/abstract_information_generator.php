@@ -91,7 +91,7 @@ class SeoMegaPack_AbstractInformationGenerator extends SeoMegaPack_AbstractGener
 		$params	= $this->convertParamsToConfig( $language_id );
 		
 		foreach( $this->db->query( $query )->rows as $item ) {
-			$generate = $this->getParams();
+			$generate = $this->getParams( $language_id );
 			
 			foreach( $params as $search => $param ) {
 				if( ! isset( $this->_tags['{'.$param['tag'].'}'] ) ) continue;

@@ -1,9 +1,9 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost:8888/gf/');
+define('HTTP_SERVER', 'http://localhost:8888/glamorous/');
 
 // HTTPS
-define('HTTPS_SERVER', 'https://localhost:8888/gf/');
+define('HTTPS_SERVER', 'https://localhost:8888/glamorous/');
 
 // DIR
 define('DIR_APPLICATION', '/Applications/MAMP/htdocs/gf/catalog/');
